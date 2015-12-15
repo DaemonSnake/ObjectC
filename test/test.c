@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Mon Dec 14 17:58:27 2015 penava_b
+** Last update Tue Dec 15 00:11:29 2015 penava_b
 */
 
 #include <stdio.h>
@@ -14,7 +14,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "test.h"
-
 
 void	new_method(FileD, close)
 {

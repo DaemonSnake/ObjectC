@@ -1,25 +1,24 @@
 /*
-** test.c for  in /home/penava_b/perso/test
+** Object.h for  in /home/penava_b/perso/Obj/Obj4/inc
 ** 
 ** Made by penava_b
 ** Login   <penava_b@epitech.net>
 ** 
-** Started on  Sat Dec 12 17:42:16 2015 penava_b
-** Last update Mon Dec 14 07:24:58 2015 penava_b
+** Started on  Mon Dec 14 23:43:01 2015 penava_b
+** Last update Tue Dec 15 02:12:51 2015 penava_b
 */
 
 #pragma once
 
-#include "for_each_va_args_macro.h"
-#include "__object_macro_tools.h"
-#include "__object_userfront_macro.h"
-#include "__object_type_type.h"
+#define M(var, name, ...) (var)->_virtual->name((var)->this, ##__VA_ARGS__)
 
 typedef struct Object Object;
 
 struct	__virtual_Object
 {
   void	(*dtor)(void *);
+  const char *(*toString)(const void *);
+  const Type *(*getType)(const void *);
 };
 
 struct	__data_Object
@@ -29,7 +28,7 @@ struct	__data_Object
 
 struct	Object
 {
-  void *this;
+  Object *this;
   const struct __virtual_Object *_virtual;
   struct __data_Object;
 };

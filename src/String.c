@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 07:42:19 2015 penava_b
-** Last update Mon Dec 14 17:56:51 2015 penava_b
+** Last update Tue Dec 15 01:08:25 2015 penava_b
 */
 
 #include <string.h>
@@ -61,7 +61,12 @@ char		new_method(String, set, int i, char newVal)
   return tmp;
 }
 
+const char	*new_method(String, toString)
+{
+  return $.c_str;
+}
+
 implement(String, Object)
 {
-  push_methods(String, c_str, size, get, set);
+  push_methods(String, c_str, size, get, set, toString);
 }

@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Tue Dec  8 20:35:08 2015 penava_b
-## Last update Mon Dec 14 07:52:47 2015 penava_b
+## Last update Tue Dec 15 00:58:09 2015 penava_b
 ##
 
 CC =		gcc
@@ -15,11 +15,14 @@ RM =		rm -f
 NAME =		libObject.so
 
 SRC =		src/class.c	\
-		src/String.c
+		src/String.c	\
+		src/yield.c	\
+		src/new_delete.c\
+		src/exceptions.c
 
 OBJ =		$(SRC:.c=.o)
 
-COMMON =	-fplan9-extensions
+COMMON =	-W -Wall -Wextra -Werror -fplan9-extensions
 
 CFLAGS =	$(COMMON) -fPIC -Iinc
 

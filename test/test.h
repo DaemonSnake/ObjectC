@@ -5,10 +5,9 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:16:21 2015 penava_b
-** Last update Mon Dec 14 17:42:04 2015 penava_b
+** Last update Mon Dec 14 23:46:50 2015 penava_b
 */
 
-#include "class.h"
 #include "String.h"
 
 interface(IClosable)

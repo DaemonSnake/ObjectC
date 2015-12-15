@@ -1,0 +1,118 @@
+/*
+1;2802;0c** gctest.c for  in /home/penava_b/perso/test
+**
+** Made by penava_b
+** Login   <penava_b@epitech.net>
+**
+** Started on  Sat Nov 28 02:32:38 2015 penava_b
+** Last update Mon Dec 14 23:28:00 2015 penava_b
+*/
+
+#include <stdlib.h>
+#include "Generator.h"
+
+new_tor(Generator, ctor)
+{
+  superCtor(Object, ctor);
+  $.label = NULL;
+  $.stack = NULL;
+  $.func = NULL;
+  $.alive = 0;
+  $.init = 0;
+  $.size = 0;
+}
+
+new_tor(Generator, dtor)
+{
+  M(this, clean);
+  superDtor();
+}
+
+int		new_method(Generator, __setjmp)
+{
+  if (this == NULL)
+    return -1;
+  $.label = __builtin_return_address(0);
+  return 0;
+}
+
+void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
+{
+  size_t       	i;
+
+  if (this == NULL || rsp == NULL || rbp == NULL)
+    return ;
+  if ($.size != 0)
+    free($.stack);
+  $.stack = NULL;
+  $.size = 0;
+  if (($.stack = malloc(rbp - rsp)) == NULL)
+    return ;
+  $.size = rbp - rsp;
+  for (i = 0; i < $.size; i++)
+    $.stack[i] = rsp[i];
+}
+
+void		new_method(Generator, restore, const char *rsp)
+{
+  size_t       	i;
+
+  if (this == NULL || $.stack == NULL || rsp == NULL)
+    return ;
+  for (i = 0; i < $.size; i++)
+    ((char *)rsp)[i] = $.stack[i];
+  free($.stack);
+  $.stack = 0;
+  $.size = 0;
+}
+
+int		__yield_editRet(void)
+{
+  return 42;
+}
+
+Generator	*new_method(Generator, reset, void *func)
+{
+  if (this == NULL)
+    return this;
+  $.label = 0;
+  $.func = func;
+  $.size = 0;
+  $.stack = 0;
+  $.alive = 42;
+  $.init = 0;
+  return this;
+}
+
+void	        new_method(Generator, clean)
+{
+  if (this == NULL)
+    return ;
+  if ($.size != 0 || $.stack != NULL)
+    {
+      free($.stack);
+      $.stack = NULL;
+      $.size = 0;
+    }
+  $.label = NULL;
+  $.func = NULL;
+  $.alive = 0;
+  $.init = 0;
+}
+
+char	        new_method(Generator, __continue)
+{
+  if (this != NULL && $.label != NULL && $.alive)
+    return 42;
+  if (this == NULL)
+    return 0;
+  M(this, clean);
+  return 0;
+}
+
+
+implement(Generator, Object)
+{
+  push_methods(Generator, __setjmp, saveStack, restore,
+	       reset, __continue, clean);
+}

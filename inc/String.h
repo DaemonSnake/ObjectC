@@ -5,12 +5,12 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 07:40:39 2015 penava_b
-** Last update Mon Dec 14 16:52:30 2015 penava_b
+** Last update Mon Dec 14 23:45:56 2015 penava_b
 */
 
 #pragma once
 
-#include "class.h"
+#include "Class.h"
 
 class(String, Object)
 {
