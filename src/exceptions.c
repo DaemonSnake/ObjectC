@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Tue Dec 15 00:49:36 2015 penava_b
+** Last update Fri Dec 18 08:01:04 2015 penava_b
 */
 
 #include <stdio.h>
@@ -36,6 +36,7 @@ struct	       	s_node
   Object 	*obj;
   info_node    	*origin;
   char		catchTool;
+  void		*rbp_try;
   List	       	*next;
 };
 
@@ -66,7 +67,6 @@ static void    	pop_current()
   tmp = list;
   list = list->next;
   clean_node(tmp);
-  free(tmp);
 }
 
 static void    	trace_back(const char *file, const char *func, int line)
@@ -145,12 +145,10 @@ int    		__except_dispatcher(const char *file, const char *func, int line)
   return 0;
 }
 
-int    		__except_initializer()
+void   		__except_initializer(List *node)
 {
-  List 		*tmp = malloc(sizeof(List));
+  List 		*tmp = node;
 
-  if (tmp == NULL)
-    exit(fprintf(stderr, "!!Bad alloc in try!!\n"));
   tmp->type = NULL;
   tmp->next = list;
   tmp->status = 0;
@@ -158,8 +156,8 @@ int    		__except_initializer()
   tmp->obj = NULL;
   tmp->origin = NULL;
   tmp->catchTool = 0;
+  tmp->rbp_try = __builtin_frame_address(0);
   list = tmp;
-  return 42;
 }
 
 int    		__except_catch_func(const Type *type)

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Tue Dec 15 00:45:06 2015 penava_b
+** Last update Fri Dec 18 08:02:25 2015 penava_b
 */
 
 #pragma once
@@ -14,7 +14,7 @@
 #include "tools/new_delete.h"
 
 jmp_buf		*__except_get_front();
-int	       	__except_initializer();
+void	       	__except_initializer(void *);
 int	       	__except_dispatcher(const char *, const char *, int);
 void	       	__except_throw_func(const void *, void *, const char *,
 				    const char *, int);
@@ -22,8 +22,17 @@ int	       	__except_catch_func(const void *);
 void		*__except_get_data();
 char		__except_get_catch_tool();
 
+struct	       	__false_except_list
+{
+  void		*_1[5];
+  int	       	_2;
+  char		_3;
+  jmp_buf      	_4;
+};
+
 #define try								\
-  for (__except_initializer(); __except_dispatcher(__FILE__, __FUNCTION__, __LINE__) ;)	\
+  for (__except_initializer((struct __false_except_list[1]){});		\
+       __except_dispatcher(__FILE__, __FUNCTION__, __LINE__) ;)		\
     if (setjmp(*__except_get_front()) == 0)
 
 #define catch(type, name)						\
