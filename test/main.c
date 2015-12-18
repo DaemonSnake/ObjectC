@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Dec 15 02:29:03 2015 penava_b
+** Last update Fri Dec 18 03:46:31 2015 penava_b
 */
 
 #include <stdio.h>
@@ -24,10 +24,9 @@ String	*yieldList(Generator *this)
 
 void		yieldTest()
 {
-  local Generator tmp;
+  Generator tmp _def(Generator);
   String	*str;
 
-  __init__(Generator, &tmp, ctor);
   printf("YIELD::\n");
   for_yield(&tmp, yieldList, str)
     {
@@ -67,9 +66,9 @@ void		new_delete(void)
 
 void		invoke_test(void)
 {
-  Object       	*tmp;
+  void       	*tmp;
 
-  tmp = static_cast(Object, new(String, ctorS, "Invoke print this"));
+  tmp = new(String, ctorS, "Invoke print this");
   printf("INVOKE::\n");
   try {
     printf("%s\n", invoke(char *, tmp, "c_str"));
@@ -82,9 +81,8 @@ void		invoke_test(void)
 
 void	string_test()
 {
-  local String tmp;
+  String tmp _init(String, ctorS, "Hello");
 
-  __init__(String, &tmp, ctorS, "Hello");
   printf("%s\n", M(&tmp, c_str));
 }
 
@@ -103,7 +101,6 @@ void		exceptions()
   }
 }
 
-
 void	func(const IClosable *tmp)
 {
   FileD	*tmp2 = dynamic_cast(FileD, tmp);
@@ -118,9 +115,8 @@ void	func(const IClosable *tmp)
 
 int	main()
 {
-  local FileD tmp;
+  FileD tmp _def(FileD);
 
-  __init__(FileD, &tmp, ctor);
   printf("true:%p\n", &tmp);
   func(static_cast(IClosable, &tmp));
   M(&tmp, open, "lol");
@@ -129,6 +125,8 @@ int	main()
   exceptions();
   type();
   invoke_test();
-  throw(String, ctorS, "EXCEPTION!!");
+  try {
+    throw(String, ctorS, "EXCEPTION!!");
+  }
   return 0;
 }

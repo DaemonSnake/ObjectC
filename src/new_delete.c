@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 14:40:19 2015 bastien penavayre
-** Last update Tue Dec 15 00:10:08 2015 penava_b
+** Last update Thu Dec 17 19:58:46 2015 penava_b
 */
 
 #include <stdlib.h>
@@ -93,4 +93,9 @@ void	__delete_func(void *obj, ...)
   while ((obj = va_arg(ap, void *)) != 0)
     __delete__(obj);
   va_end(ap);
+}
+
+void	*__new_push_tmp(void *obj)
+{
+  return push_on_stack(obj);
 }

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Tue Dec 15 00:11:29 2015 penava_b
+** Last update Fri Dec 18 03:56:57 2015 penava_b
 */
 
 #include <stdio.h>
@@ -27,7 +27,7 @@ void	new_method(FileD, open, const char *name)
   if ($.fd == -1)
     return ;
   $.opened = 42;
- }
+}
 
 int	new_const_method(FileD, read, int size, char *buff)
 {
