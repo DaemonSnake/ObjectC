@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 04:16:53 2015 penava_b
-** Last update Fri Dec 18 04:51:07 2015 penava_b
+** Last update Fri Dec 18 19:27:27 2015 penava_b
 */
 
 struct	t_node
@@ -24,7 +24,6 @@ typedef	struct
 static __thread
 list _list = {0};
 
-__attribute__((no_instrument_function))
 void	*__push_front(void *data, void *node, void (*dtor)(void *))
 {
   struct t_node *tmp;
@@ -38,15 +37,12 @@ void	*__push_front(void *data, void *node, void (*dtor)(void *))
   return data;
 }
 
-__attribute__((no_instrument_function))
 void	__pop_nodes(const void *from)
 {
   struct t_node *prev = 0;
   struct t_node *tmp;
 
-  // instead of == use something like <= or >= , when calling throw this function
-  // must be called with the rbp of the first try in the list of jmp_buf
-  for (tmp = _list.begin; tmp != 0 && (tmp->from == from || tmp->from == 0); )
+  for (tmp = _list.begin; tmp != 0 && (tmp->from <= from || tmp->from == 0); )
     {
       if (prev == 0)
 	{
@@ -64,7 +60,6 @@ void	__pop_nodes(const void *from)
     }
 }
 
-__attribute__((no_instrument_function))
 void	__cyg_profile_func_enter(void *from, void *caller)
 {
   (void)from, (void)caller;
@@ -72,7 +67,6 @@ void	__cyg_profile_func_enter(void *from, void *caller)
     tmp->from = __builtin_frame_address(0);
 }
 
-__attribute__((no_instrument_function))
 void	__cyg_profile_func_exit(void *from, void *caller)
 {
   (void)from, (void)caller;

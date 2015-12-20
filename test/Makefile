@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Mon Dec 14 05:36:42 2015 penava_b
+## Last update Fri Dec 18 18:47:58 2015 penava_b
 ##
 
 CC =		gcc
@@ -34,6 +34,7 @@ clean:
 		$(RM) $(OBJ)
 
 fclean: 	clean
+		$(MAKE) -C ../ clean
 		$(RM) $(NAME)
 
 re: 		fclean all

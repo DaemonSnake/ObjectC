@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Fri Dec 18 08:01:04 2015 penava_b
+** Last update Fri Dec 18 19:16:45 2015 penava_b
 */
 
 #include <stdio.h>
@@ -32,10 +32,10 @@ struct	       	s_node
 {
   int	       	status;
   jmp_buf      	buff;
+  char		catchTool;
   const Type   	*type;
   Object 	*obj;
   info_node    	*origin;
-  char		catchTool;
   void		*rbp_try;
   List	       	*next;
 };

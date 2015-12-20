@@ -5,17 +5,17 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Dec 18 03:23:09 2015 penava_b
-** Last update Fri Dec 18 03:24:43 2015 penava_b
+** Last update Fri Dec 18 18:53:49 2015 penava_b
 */
 
 #pragma once
 
-struct	t_node
+struct  __false_node
 {
-  void	*data;
-  const void	*from;
-  void	(*dtor)(void *);
-  struct t_node *next;
+  void	*_1;
+  void	*_2;
+  void	*_3;
+  void	*_4;
 };
 
 extern
@@ -27,10 +27,13 @@ void	*__set_tmp(void *);
 extern
 void	*__get_tmp(void);
 
+extern
+void	__pop_nodes(const void *);
+
 #define lvref(type, ctor, ...)						\
   ((type *)								\
    __push_front((type ## _ ## ctor(__set_tmp((type[1]){}),		\
 				   ##__VA_ARGS__),			\
 		 __get_tmp()),						\
-		(struct t_node[1]){},					\
+		(struct __false_node[1]){},				\
 		(void*)type ## _ ## dtor))
