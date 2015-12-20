@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sat Dec 19 00:03:07 2015 penava_b
+** Last update Sun Dec 20 05:38:24 2015 penava_b
 */
 
 #include <stdio.h>
@@ -113,20 +113,37 @@ void	func(const IClosable *tmp)
   printf("first func in IClosable vbtable %p\n", &tmp2->_virtual->close);
 }
 
-int	main()
+void	castTest()
 {
   FileD tmp _def(FileD);
 
   printf("true:%p\n", &tmp);
   func(static_cast(IClosable, &tmp));
   M(&tmp, open, "lol");
-  string_test();
-  yieldTest();
-  exceptions();
-  type();
-  invoke_test();
+}
+
+void	trace_back_test()
+{
   try {
     throw(String, ctorS, "EXCEPTION!!");
+  }
+}
+
+int	main()
+{
+  void	(*tests[])() = {
+    castTest,
+    string_test,
+    yieldTest,
+    exceptions,
+    type,
+    invoke_test,
+    trace_back_test
+  };
+  
+  for (unsigned i = 0; i < sizeof(tests) / sizeof(void *); i++) {
+    tests[i]();
+    printf("\n");
   }
   return 0;
 }
