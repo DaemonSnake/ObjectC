@@ -5,13 +5,14 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Tue Dec 15 01:59:06 2015 penava_b
+** Last update Mon Dec 21 22:10:16 2015 penava_b
 */
 
 #pragma once
 
 #define implement(name, extends, ...)					\
 									\
+  __attribute__((no_instrument_function))				\
   static void *__pre_ctor_ ## name(name *this)				\
   {									\
     unsigned long offset = sizeof(struct __virtual_ ## extends);	\
@@ -46,7 +47,7 @@
   static void __hidden_implement_function_for_ ## name();		\
   void __implement_function_for_ ## extends();				\
   									\
-  __attribute__((constructor))						\
+  __attribute__((constructor, no_instrument_function))		        \
   void __implement_function_for_ ## name()				\
   {									\
     static char implemented = 0;					\
@@ -73,7 +74,8 @@
     __hidden_implement_function_for_ ## name();				\
     __true_vtable_instance_ ## name.dtor = (void *)name ## _ ## dtor;	\
   }									\
-  									\
+      									\
+  __attribute__((no_instrument_function))				\
   static void __hidden_implement_function_for_ ## name()
 
 #define superCtor(type, name, ...)		\

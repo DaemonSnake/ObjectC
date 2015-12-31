@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Fri Dec 18 04:02:53 2015 penava_b
+** Last update Mon Dec 21 16:15:40 2015 penava_b
 */
 
 #pragma once
@@ -31,10 +31,7 @@ void	*__get_assign_addr(void *);
     (type ## _ ## ctor							\
      (type ## _type_instance->pre_ctor					\
       (__new_push_tmp							\
-       (__get_assign_addr						\
-	(__builtin_frame_address(0))					\
-	)								\
-       ),								\
+       (__get_assign_addr(__builtin_frame_address(0)))),		\
       ##__VA_ARGS__),							\
      *(type *)__new_get_ptor())
  

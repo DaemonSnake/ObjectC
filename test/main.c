@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sun Dec 20 05:38:24 2015 penava_b
+** Last update Sat Dec 26 05:26:32 2015 penava_b
 */
 
 #include <stdio.h>
@@ -58,6 +58,7 @@ void		new_delete(void)
   Object	*tmp;
   Object	*tmp2;
 
+  printf("NEW DELETE::\n");
   delete(new(String, ctorS, "Hello"));
   tmp = static_cast(Object, new(String, ctorS, "Lol"));
   tmp2 = static_cast(Object, new(FileD, ctor));
@@ -66,9 +67,8 @@ void		new_delete(void)
 
 void		invoke_test(void)
 {
-  void       	*tmp;
-
-  tmp = new(String, ctorS, "Invoke print this");
+  void       	*tmp = new(String, ctorS, "Invoke print this");
+  
   printf("INVOKE::\n");
   try {
     printf("%s\n", invoke(char *, tmp, "c_str"));
@@ -83,6 +83,7 @@ void	string_test()
 {
   String tmp _init(String, ctorS, "Hello");
 
+  printf("STRING TEST::\n");
   printf("%s\n", M(&tmp, c_str));
 }
 
@@ -101,32 +102,38 @@ void		exceptions()
   }
 }
 
-void	func(const IClosable *tmp)
+void	dynamic_func(const IClosable *tmp)
 {
   FileD	*tmp2 = dynamic_cast(FileD, tmp);
   Object *tmp3 = dynamic_cast(Object, tmp);
 
   printf("IClosable:%p\nB:%p\nObject:%p\n", tmp, tmp2, tmp3);
-  printf("\n");
   printf("IClosable vtable %p\n", tmp->_virtual);
   printf("Start vtable %p\n", tmp2->_virtual);
-  printf("first func in IClosable vbtable %p\n", &tmp2->_virtual->close);
+  printf("first dynamic_func in IClosable vbtable %p\n", &tmp2->_virtual->close);
 }
 
 void	castTest()
 {
   FileD tmp _def(FileD);
 
+  printf("CAST::\n");
   printf("true:%p\n", &tmp);
-  func(static_cast(IClosable, &tmp));
+  dynamic_func(static_cast(IClosable, &tmp));
   M(&tmp, open, "lol");
 }
 
 void	trace_back_test()
 {
+  printf("TRACEBACK::\n");
   try {
     throw(String, ctorS, "EXCEPTION!!");
   }
+}
+
+void	lreferencevalue_test()
+{
+  printf("LEFT REFERENCE VALUE::\n");
 }
 
 int	main()
@@ -138,12 +145,13 @@ int	main()
     exceptions,
     type,
     invoke_test,
+    lreferencevalue_test,
     trace_back_test
   };
   
   for (unsigned i = 0; i < sizeof(tests) / sizeof(void *); i++) {
     tests[i]();
-    printf("\n");
+    (i + 1) < sizeof(tests) / sizeof(tests[0]) ? printf("\n") : 0;
   }
   return 0;
 }

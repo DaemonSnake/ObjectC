@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Thu Dec 17 20:02:29 2015 penava_b
+** Last update Mon Dec 21 21:51:36 2015 penava_b
 */
 
 #pragma once
@@ -43,5 +43,3 @@ void	Object_ctor(void *);
 
 extern const Type * const Object_type_instance;
 extern const struct __virtual_Object * const __vtable_instance_Object;
-
-void	__object_clean_up(void *);
