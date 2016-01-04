@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:11:54 2016 penava_b
-** Last update Fri Jan  1 10:22:17 2016 penava_b
+** Last update Mon Jan  4 09:45:37 2016 penava_b
 */
 
 #include <stdio.h>
@@ -39,6 +39,9 @@ void	int_ctor(int *this, int val)
 void	default_behaviour()
 {
   local(int, tmp, 1);
+
+  printf("\nDEFAULT BEHAVIOUR::\n");
+  printf("--END--::\n");
 }
 
 /*------------------------yield------------------------------*/
@@ -47,7 +50,9 @@ void	yield_case()
 {
   local(int, tmp, 2);
 
+  printf("\nYIELD CASE::\n");
   __prevent_clean_up();
+  printf("--END--::\n");
   return;
 }
 
@@ -79,42 +84,63 @@ void	except_case(struct except_buf *buf)
   throwing(buf);
 }
 
-/*-----------------------left reference value-------------------------------*/
+void	exception_test()
+{
+  new_except(buff);
 
-#define lrvalue(type, ctor, ...)				\
-  (type ## _ ## ctor(__push_var((struct s_node[1])		\
-				{{ (type[1]){},			\
-				    (void *)type ## _dtor,	\
-				      __get_current_level(),	\
-				      (void *)0			\
-				      }}), ##__VA_ARGS__),	\
-   __delayed_level_encrementation(),				\
-   (type *)__get_front())
+  printf("\nEXCEPTIONS TEST::\n");
+  if (setjmp(buff.buff) == 0)
+    except_case(&buff);
+  else
+    printf("Exception Caught\n");
+  printf("--END--::\n");
+}
+
+/*-----------------------left reference value-------------------------------*/
 
 void	lrvalue_func(int *tmp)
 {
+  printf("::left reference func::\n");
   printf("Value %d\n", *tmp);
   printf("Other value %d\n", *lrvalue(int, ctor, 5));
-  printf("End of lrvalue_func\n");
+  printf("::end::\n");
 }
 
 void	calling_lrvalue()
 {
+  printf("\nLEFT REFERENCE TEST::\n");
   lrvalue_func(lrvalue(int, ctor, 6));
+  printf("--END--::\n");
+}
+
+/*-----------------------return object-------------------------------*/
+
+int	return_object()
+{
+  local(int, tmp, 7);
+
+  return stdmove(tmp);
+}
+
+void	return_object_test()
+{
+  printf("\nRETURN OBJECT DELETION::\n");
+  printf("Return of return_object function %p\n", rvalue(return_object()));
+  rvalue(return_object());
+  printf("--END--::\n");
 }
 
 /*-----------------------main test-------------------------------*/
 
 int		main()
 {
-  local(int, tmp, 7);
-  new_except(buff);
+  local(int, tmp, 8);
 
+  printf("MAIN::\n");
   default_behaviour();
   yield_case();
-  if (setjmp(buff.buff) == 0)
-    except_case(&buff);
-  else
-    printf("Exception Caught\n");
+  exception_test();
   calling_lrvalue();
+  return_object_test();
+  printf("\n--MAIN--END--::\n");
 }

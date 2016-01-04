@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Fri Jan  1 10:15:38 2016 penava_b
-## Last update Fri Jan  1 10:15:53 2016 penava_b
+## Last update Fri Jan  1 11:37:54 2016 penava_b
 ##
 
 CC =		gcc
@@ -21,11 +21,14 @@ OBJ =		$(SRC:.c=.o)
 
 COMMON =	-W -Wall -Werror -Wextra
 
-CFLAGS =	$(COMMON) -finstrument-functions
+CFLAGS =	$(COMMON)
 
 LDFLAGS =	$(COMMON)
 
 all: 		$(NAME)
+
+test.o:		test.c
+		gcc $(CFLAGS) -finstrument-functions -c -o $@ $<
 
 $(NAME): 	$(OBJ)
 		$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)

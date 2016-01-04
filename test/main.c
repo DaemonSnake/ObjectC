@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sat Dec 26 05:26:32 2015 penava_b
+** Last update Fri Jan  1 10:27:19 2016 penava_b
 */
 
 #include <stdio.h>
@@ -14,6 +14,10 @@
 #include "String.h"
 #include "yield.h"
 
+/* 
+   __attribute__((yield_func))
+   would be a way to go around the initYield() issue!
+*/
 String	*yieldList(Generator *this)
 {
   initYield();
@@ -33,7 +37,7 @@ void		yieldTest()
       printf("Yield : '%s'\n", M(str, c_str));
       delete(str);
     }
-  printf("Returned string %s\n", M(str, c_str));
+  printf("Returned string '%s'\n", M(str, c_str));
   delete(str);  
 }
 
