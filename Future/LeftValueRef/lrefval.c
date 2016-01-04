@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Wed Dec 30 03:47:42 2015 penava_b
-** Last update Mon Jan  4 09:17:49 2016 penava_b
+** Last update Mon Jan  4 10:36:54 2016 penava_b
 */
 
 #include <stdio.h>
@@ -95,6 +95,13 @@ void		*__prevent_clean_up_var(void *arg)
 void		(*__get_return_dtor())(void *)
 {
   return __stack_list.return_dtor;
+}
+
+__attribute__((destructor))
+static inline
+void		__clean_for_exit()
+{
+  __end_func(-1);
 }
 
 /*-----------------------instrument functions-------------------------------*/

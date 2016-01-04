@@ -5,9 +5,10 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:11:54 2016 penava_b
-** Last update Mon Jan  4 09:45:37 2016 penava_b
+** Last update Mon Jan  4 11:05:25 2016 penava_b
 */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include "lrefval.h"
 
@@ -143,4 +144,30 @@ int		main()
   calling_lrvalue();
   return_object_test();
   printf("\n--MAIN--END--::\n");
+  exit(0);
 }
+
+/*---------------------global var---------------------------------*/
+
+#define glocal(attr, type, var, ...)					\
+  attr type var;							\
+									\
+  __attribute__((constructor, no_instrument_function))			\
+  static inline void	__ctor_gvar_ ## var()				\
+  {									\
+    static struct s_node node = {					\
+      &var,								\
+      (void *)type ## _dtor,						\
+      0,								\
+      (void *)0								\
+    };									\
+									\
+    type ## _ctor(&var, __VA_ARGS__);					\
+    __push_var(&node);							\
+  }									\
+									\
+  attr type var
+
+glocal(, int, i, 11);
+glocal(, int, j, 10) = 0; // Will be equals to 10 but initilized at 0
+glocal(static, int, k, j - 1);
