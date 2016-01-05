@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Jan  5 15:14:27 2016 penava_b
+** Last update Tue Jan  5 15:40:21 2016 penava_b
 */
 
 #include <stdio.h>
@@ -21,10 +21,9 @@
 */
 String	*yieldList(Generator *this)
 {
-  Debug	tmp;
-
   initYield();
-  _def(Debug, tmp);
+  Debug	tmp _def(Debug, tmp);
+
   yield(new(String, ctorS, "First yield"));
   yield(new(String, ctorS, "Second yield"));
   return new(String, ctorS, "After last yield");
@@ -32,10 +31,9 @@ String	*yieldList(Generator *this)
 
 void		yieldTest()
 {
-  Generator	tmp;
+  Generator	tmp _def(Generator, tmp);
   String	*str;
 
-  _def(Generator, tmp);
   printf("YIELD::\n");
   for_yield(&tmp, yieldList, str)
     {
@@ -90,18 +88,16 @@ void		invoke_test(void)
 
 void	string_test()
 {
-  String tmp;
+  String tmp _init(String, ctorS, tmp, "Hello");
 
-  _init(String, ctorS, tmp, "Hello");
   printf("STRING TEST::\n");
   printf("%s\n", M(&tmp, c_str));
 }
 
 void		throwing()
 {
-  String	tmp;
-  
-  _init(String, ctorS, tmp, "Not a leak as previously");
+  String	tmp _init(String, ctorS, tmp, "Not a leak as previously");
+
   throw(String, ctorS, "Throwing");
 }
 
@@ -128,9 +124,8 @@ void	dynamic_func(const IClosable *tmp)
 
 void	castTest()
 {
-  FileD tmp;
+  FileD tmp _def(FileD, tmp);
 
-  _def(FileD, tmp);
   printf("CAST::\n");
   printf("true:%p\n", &tmp);
   dynamic_func(static_cast(IClosable, &tmp));
@@ -158,10 +153,9 @@ void	lreferencevalue_test()
 
 Debug	return_instance_debug()
 {
-  Debug	tmp;
+  Debug	tmp _def(Debug, tmp);
 
   printf("begining of returning function\n");
-  _def(Debug, tmp);
   printf("before return\n");
   return stdmove(tmp);
 }
