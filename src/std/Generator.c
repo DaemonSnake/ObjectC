@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Tue Jan  5 13:08:50 2016 penava_b
+** Last update Tue Jan  5 13:43:50 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -36,9 +36,6 @@ int		new_method(Generator, __setjmp)
   return 0;
 }
 
-void		*__get_front_node_private();
-int		printf(const char *, ...);
-
 void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
 {
   size_t       	i;
@@ -49,7 +46,7 @@ void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
     free($.stack);
   $.stack = NULL;
   $.size = 0;
-  $.stack_node = (void *)rbp - __get_front_node_private();
+  $.stack_node = __get_front_node_diff(rbp);
   if (($.stack = malloc(rbp - rsp)) == NULL)
     return ;
   $.size = rbp - rsp;
@@ -57,19 +54,17 @@ void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
     $.stack[i] = rsp[i];
 }
 
-void		new_method(Generator, restore, const char *rsp)
+void		new_method(Generator, restore, const char *rbp)
 {
   size_t       	i;
 
-  if (this == NULL || $.stack == NULL || rsp == NULL)
+  if (this == NULL || $.stack == NULL || rbp == NULL)
     return ;
   for (i = 0; i < $.size; i++)
-    ((char *)rsp)[i] = $.stack[i];
+    ((char *)rbp - $.size)[i] = $.stack[i];
   free($.stack);
   if ($.stack_node > 0)
-    {
-      // add old nodes to current tree
-    }
+    __push_back_on_stack((void *)rbp - $.stack_node, __get_current_level() - 1);
   $.stack = 0;
   $.size = 0;
 }

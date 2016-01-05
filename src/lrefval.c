@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Wed Dec 30 03:47:42 2015 penava_b
-** Last update Tue Jan  5 13:02:07 2016 penava_b
+** Last update Tue Jan  5 14:54:38 2016 penava_b
 */
 
 #include <stdio.h>
@@ -28,9 +28,11 @@ struct
   }		*begin;
 }	        __stack_list = {0, 0, 0};
 
-void		*__get_front_node_private()
+long		__get_front_node_diff(const char *rbp)
 {
-  return __stack_list.begin;
+  if (__stack_list.begin == 0)
+    return -1;
+  return (void *)rbp - (void *)__stack_list.begin;
 }
 
 static
@@ -49,6 +51,18 @@ void		*__push_var(struct s_node *new_node)
   new_node->next = __stack_list.begin;
   __stack_list.begin = new_node;
   return new_node->data;
+}
+
+void		__push_back_on_stack(struct s_node *begin, int level)
+{
+  struct s_node	*node;
+  int		start_level = begin->level;
+  
+  for (node = begin; node != 0 && node->level == start_level; node = node->next)
+    {
+      node->level = level;
+      __push_var(node);
+    }
 }
 
 void		*__get_front_var_list()

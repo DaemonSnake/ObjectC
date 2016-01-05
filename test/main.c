@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Jan  5 13:21:40 2016 penava_b
+** Last update Tue Jan  5 14:56:52 2016 penava_b
 */
 
 #include <stdio.h>
@@ -24,7 +24,7 @@ String	*yieldList(Generator *this)
   Debug	tmp;
 
   initYield();
-  _def(Debug, tmp); //leak!! to resolve
+  _def(Debug, tmp);
   yield(new(String, ctorS, "First yield"));
   yield(new(String, ctorS, "Second yield"));
   return new(String, ctorS, "After last yield");
@@ -145,7 +145,7 @@ void	trace_back_test()
   }
 }
 
-void	Debug_printer(Debug *tmp)
+void	debug_printer(Debug *tmp)
 {
   printf("Debug object %p\n", tmp);
 }
@@ -153,7 +153,7 @@ void	Debug_printer(Debug *tmp)
 void	lreferencevalue_test()
 {
   printf("LEFT REFERENCE VALUE::\n");
-  Debug_printer(lrvalue(Debug, ctor));
+  debug_printer(lrvalue(Debug, ctor));
 }
 
 Debug	return_instance_debug()

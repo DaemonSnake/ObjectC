@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:12:30 2016 penava_b
-** Last update Tue Jan  5 13:18:06 2016 penava_b
+** Last update Tue Jan  5 13:42:20 2016 penava_b
 */
 
 #pragma once
@@ -29,6 +29,8 @@ void		__reset_clean_up();
 void		__delayed_level_encrementation();
 void		*__prevent_clean_up_var(void *);
 void		(*__get_return_dtor())(void *);
+long		__get_front_node_diff(const char *);
+void		__push_back_on_stack(void *, int);
 
 #define lrvalue(type, ctor, ...)					\
   (type ## _ ## ctor							\

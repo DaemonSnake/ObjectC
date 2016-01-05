@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec  5 16:24:38 2015 penava_b
-** Last update Tue Jan  5 12:54:18 2016 penava_b
+** Last update Tue Jan  5 13:32:48 2016 penava_b
 */
 
 #pragma once
@@ -47,7 +47,7 @@ void		__reset_clean_up();
     {									\
       if (this != NULL)							\
 	{								\
-	  M(this, restore, alloca(0));					\
+	  M(this, restore, __builtin_frame_address(0));			\
 	  __reset_clean_up();						\
 	  this->alive = 0;						\
 	}								\
