@@ -5,34 +5,37 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Mon Dec 21 16:15:40 2015 penava_b
+** Last update Tue Jan  5 12:46:31 2016 penava_b
 */
 
 #pragma once
 
 #include <stddef.h>
+#include "lrefval.h"
 
 void	*__new_push_ptor(size_t);
 void	*__new_get_ptor();
 void	*__new_push_tmp(void *);
 void	__delete_func(void *, ...);
-void	*__get_assign_addr(void *);
 
 #define new(type, ctor, ...)						\
-  (type *)(type ## _ ## ctor(type ## _type_instance->pre_ctor(__new_push_ptor(sizeof(type))), ##__VA_ARGS__), __new_get_ptor())
+  (type ## _ ## ctor							\
+   (type ## _type_instance->pre_ctor(__new_push_ptor(sizeof(type))), ##__VA_ARGS__), \
+   (type *)__new_get_ptor())
 
 #define newDef(type, ...) new(type, ctor, ##__VA_ARGS__)
 
 #define delete(obj, ...) __delete_func(obj, ##__VA_ARGS__, 0)
 
-#define _init(type, ctor, ...)						\
-  __attribute__((cleanup(type ## _ ## dtor)))				\
-  =									\
-    (type ## _ ## ctor							\
-     (type ## _type_instance->pre_ctor					\
-      (__new_push_tmp							\
-       (__get_assign_addr(__builtin_frame_address(0)))),		\
-      ##__VA_ARGS__),							\
-     *(type *)__new_get_ptor())
+#define _init(type, ctor, var, ...)					\
+  type ## _ ## ctor							\
+  (type ## _type_instance->pre_ctor					\
+   (__push_var((struct s_node[1])					\
+	       {{ &var,							\
+		     (void *)type ## _dtor,				\
+		     42,						\
+		     __get_current_level(),				\
+		     (void *)0						\
+		     }})), ##__VA_ARGS__)
  
-#define _def(type) _init(type, ctor)
+#define _def(type, var) _init(type, ctor, var)

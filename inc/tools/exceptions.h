@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Fri Dec 18 18:52:35 2015 penava_b
+** Last update Tue Jan  5 12:36:44 2016 penava_b
 */
 
 #pragma once
@@ -24,14 +24,14 @@ char		__except_get_catch_tool();
 
 struct	       	__false_except_list
 {
-  void		*_1;
   int	       	_2;
+  jmp_buf      	_6;
+  char		_8;
+  void		*_1;
   void	       	*_3;
   void   	*_4;
+  int		_7;
   void	 	*_5;
-  jmp_buf      	_6;
-  void    	*_7;
-  char		_8;
 };
 
 

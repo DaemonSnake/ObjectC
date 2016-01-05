@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Fri Jan  1 10:27:19 2016 penava_b
+** Last update Tue Jan  5 13:21:40 2016 penava_b
 */
 
 #include <stdio.h>
@@ -17,10 +17,14 @@
 /* 
    __attribute__((yield_func))
    would be a way to go around the initYield() issue!
+   With the attribute being a custom attribute
 */
 String	*yieldList(Generator *this)
 {
+  Debug	tmp;
+
   initYield();
+  _def(Debug, tmp); //leak!! to resolve
   yield(new(String, ctorS, "First yield"));
   yield(new(String, ctorS, "Second yield"));
   return new(String, ctorS, "After last yield");
@@ -28,9 +32,10 @@ String	*yieldList(Generator *this)
 
 void		yieldTest()
 {
-  Generator tmp _def(Generator);
+  Generator	tmp;
   String	*str;
 
+  _def(Generator, tmp);
   printf("YIELD::\n");
   for_yield(&tmp, yieldList, str)
     {
@@ -38,7 +43,7 @@ void		yieldTest()
       delete(str);
     }
   printf("Returned string '%s'\n", M(str, c_str));
-  delete(str);  
+  delete(str);
 }
 
 void		type(void)
@@ -85,14 +90,18 @@ void		invoke_test(void)
 
 void	string_test()
 {
-  String tmp _init(String, ctorS, "Hello");
+  String tmp;
 
+  _init(String, ctorS, tmp, "Hello");
   printf("STRING TEST::\n");
   printf("%s\n", M(&tmp, c_str));
 }
 
 void		throwing()
 {
+  String	tmp;
+  
+  _init(String, ctorS, tmp, "Not a leak as previously");
   throw(String, ctorS, "Throwing");
 }
 
@@ -119,8 +128,9 @@ void	dynamic_func(const IClosable *tmp)
 
 void	castTest()
 {
-  FileD tmp _def(FileD);
+  FileD tmp;
 
+  _def(FileD, tmp);
   printf("CAST::\n");
   printf("true:%p\n", &tmp);
   dynamic_func(static_cast(IClosable, &tmp));
@@ -135,9 +145,31 @@ void	trace_back_test()
   }
 }
 
+void	Debug_printer(Debug *tmp)
+{
+  printf("Debug object %p\n", tmp);
+}
+
 void	lreferencevalue_test()
 {
   printf("LEFT REFERENCE VALUE::\n");
+  Debug_printer(lrvalue(Debug, ctor));
+}
+
+Debug	return_instance_debug()
+{
+  Debug	tmp;
+
+  printf("begining of returning function\n");
+  _def(Debug, tmp);
+  printf("before return\n");
+  return stdmove(tmp);
+}
+
+void	return_object_test()
+{
+  printf("RETURN OBJECT BY VALUE::\n");
+  printf("Return object %p\n", rvalue(return_instance_debug()));
 }
 
 int	main()
@@ -150,6 +182,7 @@ int	main()
     type,
     invoke_test,
     lreferencevalue_test,
+    return_object_test,
     trace_back_test
   };
   

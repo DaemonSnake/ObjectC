@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec  5 15:43:48 2015 penava_b
-** Last update Mon Dec 14 23:46:01 2015 penava_b
+** Last update Tue Jan  5 13:08:18 2016 penava_b
 */
 
 #pragma once
@@ -17,6 +17,7 @@ class(Generator, Object)
   void		*label;
   char		*stack;
   void		*func;
+  long		stack_node;
   char		alive;
   char		init;
   unsigned long	size;

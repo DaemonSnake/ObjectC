@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Fri Dec 18 03:56:57 2015 penava_b
+** Last update Tue Jan  5 12:50:11 2016 penava_b
 */
 
 #include <stdio.h>
@@ -58,4 +58,20 @@ new_tor(FileD, dtor)
 implement(FileD, Object, IClosable)
 {
   push_methods(FileD, close, open, read);
+}
+
+new_tor(Debug, ctor)
+{
+  superCtor(Object, ctor);
+  printf("Birth of %p\n", this);
+}
+
+new_tor(Debug, dtor)
+{
+  superDtor();
+  printf("Death of %p\n", this);
+}
+
+implement(Debug, Object)
+{
 }

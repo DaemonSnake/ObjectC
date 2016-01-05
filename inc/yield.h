@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec  5 16:24:38 2015 penava_b
-** Last update Mon Dec 14 23:20:02 2015 penava_b
+** Last update Tue Jan  5 12:54:18 2016 penava_b
 */
 
 #pragma once
@@ -14,6 +14,8 @@
 #include "Generator.h"
 
 void    	__yield_editRet();
+void            __prevent_clean_up();
+void		__reset_clean_up();
 
 #define initYield()						\
   if (this != NULL && this->label != NULL)			\
@@ -38,6 +40,7 @@ void    	__yield_editRet();
 	  M(this, saveStack, alloca(0), __builtin_frame_address(0));	\
 	  this->alive = 42;						\
 	}								\
+      __prevent_clean_up();						\
       return val;							\
     }									\
   else									\
@@ -45,6 +48,7 @@ void    	__yield_editRet();
       if (this != NULL)							\
 	{								\
 	  M(this, restore, alloca(0));					\
+	  __reset_clean_up();						\
 	  this->alive = 0;						\
 	}								\
     }

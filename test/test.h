@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:16:21 2015 penava_b
-** Last update Mon Dec 14 23:46:50 2015 penava_b
+** Last update Tue Jan  5 12:47:36 2016 penava_b
 */
 
 #include "String.h"
@@ -29,4 +29,12 @@ virtual(FileD)
 
 new_tor(FileD, ctorS, const char *name);
 
-end_decl(FileD);
+class(Debug, Object)
+{
+};
+
+virtual(Debug)
+{
+};
+
+end_decl(FileD, Debug);

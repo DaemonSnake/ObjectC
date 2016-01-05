@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Tue Dec  8 20:35:08 2015 penava_b
-## Last update Mon Dec 21 22:07:43 2015 penava_b
+## Last update Tue Jan  5 12:28:39 2016 penava_b
 ##
 
 CC =		gcc
@@ -16,13 +16,9 @@ NAME =		libObject.so
 
 SRC =		src/class.c			\
 		src/yield.c			\
-		src/get_addr.c			\
 		src/new_delete.c		\
 		src/exceptions.c		\
-		src/asm_mess/decode.c		\
-		src/asm_mess/itab.c		\
-		src/asm_mess/syn.c		\
-		src/asm_mess/udis86.c		\
+		src/lrefval.c			\
 						\
 		src/std/Object.c		\
 		src/std/String.c		\

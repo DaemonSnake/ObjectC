@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Mon Dec 21 22:07:18 2015 penava_b
+** Last update Tue Jan  5 13:08:50 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -36,6 +36,9 @@ int		new_method(Generator, __setjmp)
   return 0;
 }
 
+void		*__get_front_node_private();
+int		printf(const char *, ...);
+
 void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
 {
   size_t       	i;
@@ -46,6 +49,7 @@ void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
     free($.stack);
   $.stack = NULL;
   $.size = 0;
+  $.stack_node = (void *)rbp - __get_front_node_private();
   if (($.stack = malloc(rbp - rsp)) == NULL)
     return ;
   $.size = rbp - rsp;
@@ -62,6 +66,10 @@ void		new_method(Generator, restore, const char *rsp)
   for (i = 0; i < $.size; i++)
     ((char *)rsp)[i] = $.stack[i];
   free($.stack);
+  if ($.stack_node > 0)
+    {
+      // add old nodes to current tree
+    }
   $.stack = 0;
   $.size = 0;
 }

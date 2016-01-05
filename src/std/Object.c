@@ -5,14 +5,17 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Mon Dec 21 22:23:15 2015 penava_b
+** Last update Tue Jan  5 11:56:58 2016 penava_b
 */
 
 #include "Class.h"
 #include "String.h"
 #include <string.h>
 
+__attribute__((no_instrument_function))
 void		Object_ctor(void *this __attribute__((unused))) {}
+
+__attribute__((no_instrument_function))
 void		Object_dtor(void *this __attribute__((unused))) {}
 
 const char	*Object_toString(void *this __attribute__((unused)))
