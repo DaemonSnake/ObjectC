@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Tue Jan  5 12:46:31 2016 penava_b
+** Last update Tue Jan  5 15:12:16 2016 penava_b
 */
 
 #pragma once
@@ -39,3 +39,21 @@ void	__delete_func(void *, ...);
 		     }})), ##__VA_ARGS__)
  
 #define _def(type, var) _init(type, ctor, var)
+
+#define _ginit(type, ctor, var, ...)					\
+  __attribute__((no_instrument_function, constructor))			\
+  static inline void	__global_ctor_ ## var()				\
+  {									\
+    static								\
+      struct s_node	tmp = {						\
+      &var,								\
+      (void *)type ## _dtor,						\
+      42,								\
+      0,								\
+      (void *)0								\
+    };									\
+    									\
+    type ## _ ## ctor							\
+      (type ## _type_instance->pre_ctor					\
+       (__push_var(&tmp)), ##__VA_ARGS__);				\
+  }

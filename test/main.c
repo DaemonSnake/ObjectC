@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Jan  5 14:56:52 2016 penava_b
+** Last update Tue Jan  5 15:14:27 2016 penava_b
 */
 
 #include <stdio.h>
@@ -171,6 +171,10 @@ void	return_object_test()
   printf("RETURN OBJECT BY VALUE::\n");
   printf("Return object %p\n", rvalue(return_instance_debug()));
 }
+
+static Debug static_test;
+
+_ginit(Debug, ctor, static_test);
 
 int	main()
 {

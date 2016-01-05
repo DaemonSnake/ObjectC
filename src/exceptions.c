@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Tue Jan  5 12:37:03 2016 penava_b
+** Last update Tue Jan  5 15:18:32 2016 penava_b
 */
 
 #include <stdio.h>
@@ -107,7 +107,7 @@ void		__except_throw_func(const Type *type, Object *obj, const char *file, const
       fprintf(stderr, "Uncaught exception: in file '%s' in func '%s' at line '%d'\n\
 (%s): '%s'\n", file, func, line, type->name, M(obj, toString));
       __delete_func(obj, 0, 0);
-      __exit_end_func(0);
+      __exit_end_func(-1);
       exit(42);
     }
   list->status = 2;
@@ -160,7 +160,7 @@ void   		__except_initializer(List *node)
   tmp->obj = NULL;
   tmp->origin = NULL;
   tmp->catchTool = 0;
-  tmp->level = __get_current_level();
+  tmp->level = __get_current_level() + 1;
   list = tmp;
 }
 
@@ -168,7 +168,7 @@ int    		__except_catch_func(const Type *type)
 {
   if (list == NULL)
     {
-      __exit_end_func(0);
+      __exit_end_func(-1);
       exit(fprintf(stderr, "[Exception Module] LOL, Wat u fink U R dooing?\n"));
     }
   if (__is_same_kind_type(type, list->type))
@@ -183,7 +183,7 @@ void		*__except_get_data()
 {
   if (list == NULL || list->status != 3)
     {
-      __exit_end_func(0);
+      __exit_end_func(-1);
       exit(fprintf(stderr, "[Exception Module] LOL, Wat u fink U R dooing?\n"));
     }
   return list->obj;
