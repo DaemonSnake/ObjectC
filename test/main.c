@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Jan  5 15:40:21 2016 penava_b
+** Last update Wed Jan  6 16:07:45 2016 penava_b
 */
 
 #include <stdio.h>
@@ -98,7 +98,12 @@ void		throwing()
 {
   String	tmp _init(String, ctorS, tmp, "Not a leak as previously");
 
-  throw(String, ctorS, "Throwing");
+  try {
+    throw(String, ctorS, "Throwing");
+  }
+  finally {
+    printf("Finally!!\n");
+  }
 }
 
 void		exceptions()

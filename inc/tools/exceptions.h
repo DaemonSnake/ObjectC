@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Tue Jan  5 12:36:44 2016 penava_b
+** Last update Wed Jan  6 16:07:43 2016 penava_b
 */
 
 #pragma once
@@ -47,3 +47,5 @@ struct	       	__false_except_list
 #define throw(type, ctor, ...)						\
   __except_throw_func(type ## _type_instance, new(type, ctor, ##__VA_ARGS__), \
 		      __FILE__, __FUNCTION__, __LINE__)
+
+#define finally else
