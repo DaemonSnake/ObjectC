@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Wed Jan  6 16:07:45 2016 penava_b
+** Last update Wed Jan  6 16:09:41 2016 penava_b
 */
 
 #include <stdio.h>
@@ -96,13 +96,13 @@ void	string_test()
 
 void		throwing()
 {
-  String	tmp _init(String, ctorS, tmp, "Not a leak as previously");
+  String	tmp _init(String, ctorS, tmp, "Not a leak");
 
   try {
     throw(String, ctorS, "Throwing");
   }
   finally {
-    printf("Finally!!\n");
+    printf("Is going to be deleted %p of value '%s'\n", &tmp, tmp.c_str);
   }
 }
 
