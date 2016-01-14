@@ -1,11 +1,11 @@
 /*
-** delete_new.h for  in /home/penava_b/perso/ObjLang3/Lib
+1;2802;0c** delete_new.h for  in /home/penava_b/perso/ObjLang3/Lib
 ** 
 ** Made by bastien penavayre
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Fri Jan  8 14:00:46 2016 penava_b
+** Last update Thu Jan 14 18:16:42 2016 penava_b
 */
 
 #pragma once
@@ -42,7 +42,7 @@ void	__delete_func(void *, ...);
  
 #define _def(type, var) _init(type, ctor, var)
 
-#define _ginit(type, ctor, var, ...)					\
+#define Ginit(type, ctor, var, ...)					\
   __attribute__((no_instrument_function, constructor))			\
   static inline void	__global_ctor_ ## var()				\
   {									\
@@ -58,4 +58,7 @@ void	__delete_func(void *, ...);
     type ## _ ## ctor							\
       (type ## _type_instance->pre_ctor					\
        (__push_var(&tmp)), ##__VA_ARGS__);				\
-  }
+  }									\
+									\
+  __attribute__((no_instrument_function, constructor))			\
+  static inline void __user_code_gctor_ ## var()

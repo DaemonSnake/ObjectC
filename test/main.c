@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Thu Jan 14 17:47:14 2016 penava_b
+** Last update Thu Jan 14 18:16:27 2016 penava_b
 */
 
 #include <stdio.h>
@@ -179,7 +179,9 @@ void	return_object_test()
 
 static Debug static_test;
 
-_ginit(Debug, ctor, static_test);
+Ginit(Debug, ctor, static_test)
+{
+}
 
 int	main()
 {
