@@ -5,13 +5,17 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 14:40:19 2015 bastien penavayre
-** Last update Thu Dec 17 19:58:46 2015 penava_b
+** Last update Thu Jan 14 18:57:35 2016 penava_b
 */
 
 #include <stdlib.h>
 #include <stdarg.h>
 #include "tools/Type.h"
 #include "tools/Object.h"
+#include "String.h"
+#include "tools/exceptions.h"
+
+typedef struct s_node t_node;
 
 struct		s_node
 {
@@ -20,14 +24,19 @@ struct		s_node
   s_node	*next;
 };
 
-typedef struct s_node t_node;
-
 typedef		struct
 {
   t_node	*begin;
 }		List;
 
 static __thread List	stack = {NULL};
+
+void		*__malloc(size_t size)
+{
+  if ((size = (size_t)malloc(size)) == 0)
+    throw(String, ctorS, "[Error] Alloction failure!");
+  return (void *)size;
+}
 
 static void	*push_on_stack(const void *addr)
 {

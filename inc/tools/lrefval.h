@@ -5,23 +5,23 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:12:30 2016 penava_b
-** Last update Tue Jan  5 13:42:20 2016 penava_b
+** Last update Thu Jan 14 18:53:22 2016 penava_b
 */
 
 #pragma once
 
-struct		s_node
+struct		s_left_reference_value_node
 {
   void		*data;
   void		(*dtor)(void *);
   char		toclean;
   int		level;
   struct
-  s_node	*next;
+  s_left_reference_value_node	*next;
 };
 
 int		__get_current_level();
-void		*__push_var(struct s_node *);
+void		*__push_var(struct s_left_reference_value_node *);
 void		*__get_front_var_list();
 void		__exit_end_func(int);
 void		__prevent_clean_up();
@@ -35,7 +35,7 @@ void		__push_back_on_stack(void *, int);
 #define lrvalue(type, ctor, ...)					\
   (type ## _ ## ctor							\
    (type ## _type_instance->pre_ctor					\
-    (__push_var((struct s_node[1])					\
+    (__push_var((struct s_left_reference_value_node[1])			\
 		{{ (type[1]){},						\
 		      (void *)type ## _dtor,				\
 			42,						\
@@ -49,7 +49,7 @@ void		__push_back_on_stack(void *, int);
 
 #define rvalue(x)						\
   ((__typeof__(x) *)						\
-   __push_var((struct s_node[1])				\
+   __push_var((struct s_left_reference_value_node[1])		\
 	      {{						\
 		  (__typeof__(x)[1]){(x)},			\
 		    __get_return_dtor(),			\
