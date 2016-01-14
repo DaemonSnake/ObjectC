@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Wed Jan 13 17:18:48 2016 penava_b
+** Last update Thu Jan 14 17:47:14 2016 penava_b
 */
 
 #include <stdio.h>
@@ -99,7 +99,13 @@ void		throwing()
   String	tmp _init(String, ctorS, tmp, "Not a leak");
 
   try {
-    throw(String, ctorS, "Throwing");
+    try {
+      printf("Does not except!\n");
+    }
+    finally {
+      printf("Is called anyway.\n");
+      throw(String, ctorS, "Throwing");
+    }
   }
   finally {
     printf("Is going to be deleted %p of value '%s'\n", &tmp, tmp.c_str);
