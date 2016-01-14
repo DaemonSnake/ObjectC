@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Wed Jan  6 16:09:41 2016 penava_b
+** Last update Wed Jan 13 17:18:48 2016 penava_b
 */
 
 #include <stdio.h>
@@ -74,7 +74,7 @@ void		new_delete(void)
 
 void		invoke_test(void)
 {
-  void       	*tmp = new(String, ctorS, "Invoke print this");
+  void		*tmp = new(String, ctorS, "Invoke print this");
   
   printf("INVOKE::\n");
   try {

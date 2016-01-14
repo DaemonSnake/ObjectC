@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Tue Jan  5 15:18:32 2016 penava_b
+** Last update Thu Jan 14 17:36:00 2016 penava_b
 */
 
 #include <stdio.h>
@@ -20,6 +20,21 @@ void		__delete_func(void *, ...);
 int             __get_current_level();
 void            __exit_end_func(int);
 
+enum
+  {
+    BEFORE_TRY = 0,
+    IN_TRY = 1,
+    IN_FINALLY = 2,
+    END = 3
+  };
+
+enum
+  {
+    NOT_THROWN = 0,
+    UNCAUGHT = 1,
+    CAUGHT = 2
+  };
+
 typedef struct 	s_info_node
 {
   const char	*file;
@@ -32,7 +47,8 @@ typedef struct s_node List;
 
 struct	       	s_node
 {
-  int	       	status;
+  char	       	status;
+  char		caught;
   jmp_buf      	buff;
   char		catchTool;
   const Type   	*type;
@@ -94,7 +110,7 @@ void		__except_throw_func(const Type *type, Object *obj, const char *file, const
 {
   info_node	*node;
 
-  while (list != NULL && list->status == 3)
+  while (list != NULL && list->caught == CAUGHT)
     {
       if (list->next == NULL)
 	trace_back(file, func, line);
@@ -110,7 +126,7 @@ void		__except_throw_func(const Type *type, Object *obj, const char *file, const
       __exit_end_func(-1);
       exit(42);
     }
-  list->status = 2;
+  list->caught = UNCAUGHT;
   list->type = type;
   list->obj = obj;
   if ((node = malloc(sizeof(info_node))) != NULL)
@@ -127,12 +143,9 @@ void		__except_throw_func(const Type *type, Object *obj, const char *file, const
 
 int    		__except_dispatcher(const char *file, const char *func, int line)
 {
-  if (list->status == 0)
-    {
-      list->status = 1;
-      return 42;
-    }
-  if (list->status == 2)
+  if (list->status == BEFORE_TRY)
+    return 42;
+  if (list->caught == UNCAUGHT)
     {
       if (list->next == NULL)
 	trace_back(file, func, line);
@@ -149,13 +162,26 @@ int    		__except_dispatcher(const char *file, const char *func, int line)
   return 0;
 }
 
+int		__except_try_n_finally()
+{
+  if (++list->status < END)
+    return 42;
+  return 0;
+}
+
+int		__except_is_try()
+{
+  return list->status == IN_TRY;
+}
+
 void   		__except_initializer(List *node)
 {
   List 		*tmp = node;
 
   tmp->type = NULL;
   tmp->next = list;
-  tmp->status = 0;
+  tmp->status = BEFORE_TRY;
+  tmp->caught = NOT_THROWN;
   tmp->type = NULL;
   tmp->obj = NULL;
   tmp->origin = NULL;
@@ -173,7 +199,7 @@ int    		__except_catch_func(const Type *type)
     }
   if (__is_same_kind_type(type, list->type))
     {
-      list->status = 3;
+      list->caught = CAUGHT;
       return 42;
     }
   return 0;
@@ -181,7 +207,7 @@ int    		__except_catch_func(const Type *type)
 
 void		*__except_get_data()
 {
-  if (list == NULL || list->status != 3)
+  if (list == NULL || list->caught != CAUGHT)
     {
       __exit_end_func(-1);
       exit(fprintf(stderr, "[Exception Module] LOL, Wat u fink U R dooing?\n"));

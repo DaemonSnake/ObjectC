@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Wed Jan  6 17:04:47 2016 penava_b
+** Last update Thu Jan 14 17:39:11 2016 penava_b
 */
 
 #pragma once
@@ -21,10 +21,15 @@ void	       	__except_throw_func(const void *, void *, const char *,
 int	       	__except_catch_func(const void *);
 void		*__except_get_data();
 char		__except_get_catch_tool();
+int		__except_try_n_finally();
+int		__except_is_try();
+
+#pragma GCC diagnostic ignored "-Wparentheses"
 
 struct	       	__false_except_list
 {
-  int	       	_2;
+  char	       	_2;
+  char		_9;
   jmp_buf      	_6;
   char		_8;
   void		*_1;
@@ -34,19 +39,23 @@ struct	       	__false_except_list
   void	 	*_5;
 };
 
-
 #define try								\
   for (__except_initializer((struct __false_except_list[1]){});		\
        __except_dispatcher(__FILE__, __FUNCTION__, __LINE__) ;)		\
-    if (setjmp(*__except_get_front()) == 0)
+    for (; __except_try_n_finally();)					\
+      if (__except_is_try())						\
+	if (setjmp(*__except_get_front()) == 0)
 
 #define catch(type, name)						\
   else if (__except_catch_func(type ## _type_instance))				\
     for (type *name __attribute__((unused)) = __except_get_data(); __except_get_catch_tool(); )
 
 #define throw(type, ctor, ...)						\
-  __except_throw_func(type ## _type_instance, new(type, ctor, ##__VA_ARGS__), \
+  __except_throw_func(type ## _type_instance,				\
+		      new(type, ctor, ##__VA_ARGS__),			\
 		      __FILE__, __FUNCTION__, __LINE__)
 
-//is not the real finally though, but close enough!
-#define finally else
+#define finally					\
+  else {					\
+  }						\
+  else
