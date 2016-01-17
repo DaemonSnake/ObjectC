@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Tue Jan  5 13:43:50 2016 penava_b
+** Last update Sun Jan 17 21:37:01 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -108,8 +108,4 @@ char	        new_method(Generator, __continue)
   return 0;
 }
 
-implement(Generator, Object)
-{
-  push_methods(Generator, __setjmp, saveStack, restore,
-	       reset, __continue, clean);
-}
+implement(Generator, Object) {}

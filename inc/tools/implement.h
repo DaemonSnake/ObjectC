@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sun Jan 17 02:19:10 2016 penava_b
+** Last update Sun Jan 17 21:33:24 2016 penava_b
 */
 
 #pragma once
@@ -73,10 +73,23 @@
 	((void **)&__true_vtable_instance_ ## name)[i] = 0;		\
 	true_ ## name ## _type_instance.methodsName[i] = 0;		\
       }									\
-    __hidden_implement_function_for_ ## name();				\
     __true_vtable_instance_ ## name.dtor = (void *)name ## _ ## dtor;	\
   }									\
       									\
+  void		__push_method_ ## name(void *arg, const char *name_m,	\
+				       size_t offset)			\
+  {									\
+    ((void **)&__true_vtable_instance_ ## name)				\
+      [offset / sizeof(void *)] = arg;					\
+    true_ ## name ## _type_instance.methodsName				\
+      [offset / sizeof(void *)] = name_m;				\
+    for (size_t i = 0; i < sizeof(struct __virtual_ ## name)		\
+	   / sizeof(void *); i++)					\
+      if (((void **)__vtable_instance_ ## name)[i] == 0)		\
+	return ;							\
+    __hidden_implement_function_for_ ## name();				\
+  }									\
+									\
   __attribute__((no_instrument_function))				\
   static void __hidden_implement_function_for_ ## name()
 
@@ -85,7 +98,5 @@
 
 #define superDtor()				\
   this->__class_type->super->dtor(this);
-
-#define push_methods(type, name, ...) APPLY_MACRO_VAR_TWO(__true_push_method__, type, name, ##__VA_ARGS__)
 
 #define $ (*this)

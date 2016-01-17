@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sun Jan 17 16:17:35 2016 penava_b
+** Last update Sun Jan 17 21:41:04 2016 penava_b
 */
 
 #include <stdio.h>
@@ -49,9 +49,9 @@ void		type(void)
   Object	*tmp;
 
   printf("TYPE::\n");
-  tmp = static_cast(Object, new(FileD, ctor));
+  tmp = static_cast(Object, new(String, ctor));
   printf("%s\n", M(tmp, getType)->name);
-  if (isInstanceOf(Object, tmp))
+  if (isInstanceOf(String, tmp))
     printf("Is a String\n");
   delete(tmp);
   tmp = new(Object, ctor);
@@ -63,12 +63,12 @@ void		type(void)
 void		new_delete(void)
 {
   Object	*tmp;
-  Object	*tmp2;
+  I		*tmp2;
 
   printf("NEW DELETE::\n");
   delete(new(String, ctorS, "Hello"));
   tmp = static_cast(Object, new(String, ctorS, "Lol"));
-  tmp2 = static_cast(Object, new(FileD, ctor));
+  tmp2 = static_cast(I, new(Debug, ctor));
   delete(tmp, tmp2);
 }
 
@@ -122,25 +122,24 @@ void		exceptions()
   }
 }
 
-void	dynamic_func(const IClosable *tmp)
+void		dynamic_func(const I *tmp)
 {
-  FileD	*tmp2 = dynamic_cast(FileD, tmp);
-  Object *tmp3 = dynamic_cast(Object, tmp);
+  Debug		*tmp2 = dynamic_cast(Debug, tmp);
 
-  printf("IClosable:%p\nB:%p\nObject:%p\n", tmp, tmp2, tmp3);
-  printf("IClosable vtable %p\n", tmp->_virtual);
+  printf("Object:%p\nB:%p\n", tmp, tmp2);
+  printf("Object vtable %p\n", tmp->_virtual);
   printf("Start vtable %p\n", tmp2->_virtual);
-  printf("first dynamic_func in IClosable vbtable %p\n", &tmp2->_virtual->close);
+  M(tmp, print);
+  M(tmp2, print);
 }
 
 void	castTest()
 {
-  FileD tmp _def(FileD, tmp);
+  Debug	tmp _def(Debug, tmp);
 
   printf("CAST::\n");
   printf("true:%p\n", &tmp);
-  dynamic_func(static_cast(IClosable, &tmp));
-  M(&tmp, open, "lol");
+  dynamic_func(static_cast(I, &tmp));
 }
 
 void	trace_back_test()
@@ -202,7 +201,6 @@ int	main()
   };
 
   for (unsigned i = 0; i < sizeof(tests) / sizeof(void *); i++) {
-    break;
     tests[i]();
     (i + 1) < sizeof(tests) / sizeof(tests[0]) ? printf("\n") : 0;
   }

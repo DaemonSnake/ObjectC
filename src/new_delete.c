@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 14:40:19 2015 bastien penavayre
-** Last update Thu Jan 14 18:57:35 2016 penava_b
+** Last update Sun Jan 17 21:20:41 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -104,7 +104,7 @@ void	__delete_func(void *obj, ...)
   va_end(ap);
 }
 
-void	*__new_push_tmp(void *obj)
+void	*__new_push_tmp(const void *obj)
 {
   return push_on_stack(obj);
 }

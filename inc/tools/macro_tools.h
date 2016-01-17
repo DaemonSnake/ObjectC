@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:21:22 2015 penava_b
-** Last update Tue Dec 15 02:07:04 2015 penava_b
+** Last update Sun Jan 17 21:37:40 2016 penava_b
 */
 
 #pragma once
@@ -13,6 +13,7 @@
 #include <stddef.h>
 
 #define __virtualize__(name) struct __virtual_ ## name;
+
 #define __true_end_decl(name)						\
   struct __virtual_ ## name						\
   {									\
@@ -20,7 +21,8 @@
     struct __weak_virtual_ ## name;					\
   };									\
 									\
-  extern const struct __virtual_ ## name * const __vtable_instance_ ## name; \
+  extern								\
+  const struct __virtual_ ## name * const __vtable_instance_ ## name;	\
   									\
   struct __data_ ## name						\
   {									\
@@ -45,8 +47,3 @@
   this->__true_this_ ## name = (void *)this;			\
   this->_virtual_ ## name = (void *)this->_virtual + offset;	\
   offset += sizeof(struct __virtual_ ## name);
-
-#define __true_push_method__(type, name)				\
-  true_ ## type ## _type_instance.methodsName				\
-  [offsetof(struct __virtual_ ## type, name) / sizeof(void *)] = #name;	\
-  __true_vtable_instance_ ## type.name = (void *)type ## _ ## name;

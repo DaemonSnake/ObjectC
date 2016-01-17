@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Mon Dec 21 21:51:36 2015 penava_b
+** Last update Sun Jan 17 21:13:42 2016 penava_b
 */
 
 #pragma once
@@ -14,7 +14,7 @@
   ((typeof(var))__new_push_tmp(var))->_virtual->name			\
   (((typeof(var))__new_get_ptor())->this, ##__VA_ARGS__)
 
-void	*__new_push_tmp(void *);
+void	*__new_push_tmp(const void *);
 void	*__new_get_ptor();
 
 typedef struct Object Object;
