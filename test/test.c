@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Tue Jan  5 12:50:11 2016 penava_b
+** Last update Sun Jan 17 16:16:22 2016 penava_b
 */
 
 #include <stdio.h>
@@ -74,4 +74,5 @@ new_tor(Debug, dtor)
 
 implement(Debug, Object)
 {
+  // global constructor of Debug
 }

@@ -1,0 +1,4 @@
+1-Dynamic cast with interface
+2-public/private for data
+3-remove push_methods -> replace with at new_method creation of constructor function
+4-Stream type and IToStream interface

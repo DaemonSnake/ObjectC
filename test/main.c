@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sun Jan 17 02:29:48 2016 penava_b
+** Last update Sun Jan 17 16:17:35 2016 penava_b
 */
 
 #include <stdio.h>
@@ -149,6 +149,9 @@ void	trace_back_test()
   try {
     throw(String, ctorS, "EXCEPTION!!");
   }
+  finally {
+    printf("traceback!\n");
+  }
 }
 
 void	debug_printer(Debug *tmp)
@@ -181,6 +184,7 @@ static Debug static_test;
 
 Ginit(Debug, ctor, static_test)
 {
+  // gloabal constructor of static_test
 }
 
 int	main()
