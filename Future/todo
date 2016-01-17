@@ -1,0 +1,17 @@
+//
+// todo for  in /home/penava_b/perso/Obj/Obj4/Future
+// 
+// Made by penava_b
+// Login   <penava_b@epitech.net>
+// 
+// Started on  Sun Jan 17 02:11:03 2016 penava_b
+// Last update Sun Jan 17 02:26:06 2016 penava_b
+//
+
+TODO
+{
+  ifimpl(IClosable, this)
+    {
+      invokeI(IClosable)(this);
+    }
+}

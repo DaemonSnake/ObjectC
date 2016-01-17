@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Mon Dec 21 22:10:16 2015 penava_b
+** Last update Sun Jan 17 02:19:10 2016 penava_b
 */
 
 #pragma once
@@ -40,7 +40,9 @@
 									\
   const Type * const name ## _type_instance =				\
     &true_ ## name ## _type_instance;					\
+									\
   static struct __virtual_ ## name __true_vtable_instance_ ## name;	\
+									\
   const struct __virtual_ ## name * const __vtable_instance_ ## name =	\
     &__true_vtable_instance_ ## name;					\
 									\

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Thu Jan 14 18:16:27 2016 penava_b
+** Last update Sun Jan 17 02:29:48 2016 penava_b
 */
 
 #include <stdio.h>
@@ -196,8 +196,9 @@ int	main()
     return_object_test,
     trace_back_test
   };
-  
+
   for (unsigned i = 0; i < sizeof(tests) / sizeof(void *); i++) {
+    break;
     tests[i]();
     (i + 1) < sizeof(tests) / sizeof(tests[0]) ? printf("\n") : 0;
   }
