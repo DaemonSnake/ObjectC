@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Thu Jan 14 17:36:00 2016 penava_b
+** Last update Sun Jan 17 01:55:22 2016 penava_b
 */
 
 #include <stdio.h>
@@ -50,7 +50,7 @@ struct	       	s_node
   char	       	status;
   char		caught;
   jmp_buf      	buff;
-  char		catchTool;
+  char		catchTool[2];
   const Type   	*type;
   Object 	*obj;
   info_node    	*origin;
@@ -185,7 +185,8 @@ void   		__except_initializer(List *node)
   tmp->type = NULL;
   tmp->obj = NULL;
   tmp->origin = NULL;
-  tmp->catchTool = 0;
+  tmp->catchTool[0] = 0;
+  tmp->catchTool[1] = 0;
   tmp->level = __get_current_level() + 1;
   list = tmp;
 }
@@ -220,9 +221,9 @@ void	       	*__except_get_front()
   return &list->buff;
 }
 
-char		__except_get_catch_tool()
+char		__except_get_catch_tool(int index)
 {
   if (list == NULL)
     return 0;
-  return (list->catchTool ^= 1);
+  return (list->catchTool[index] ^= 1);
 }

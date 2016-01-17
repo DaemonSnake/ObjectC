@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Thu Jan 14 17:39:11 2016 penava_b
+** Last update Sun Jan 17 01:57:54 2016 penava_b
 */
 
 #pragma once
@@ -20,35 +20,34 @@ void	       	__except_throw_func(const void *, void *, const char *,
 				    const char *, int);
 int	       	__except_catch_func(const void *);
 void		*__except_get_data();
-char		__except_get_catch_tool();
+char		__except_get_catch_tool(int);
 int		__except_try_n_finally();
 int		__except_is_try();
 
-#pragma GCC diagnostic ignored "-Wparentheses"
-
-struct	       	__false_except_list
+struct	       	__except_list_node
 {
-  char	       	_2;
-  char		_9;
-  jmp_buf      	_6;
-  char		_8;
-  void		*_1;
-  void	       	*_3;
-  void   	*_4;
-  int		_7;
-  void	 	*_5;
+  char	       	status;
+  char		caught;
+  jmp_buf      	buff;
+  char		catchTool[2];
+  const void   	*type;
+  void	 	*obj;
+  void    	*origin;
+  int		level;
+  void	       	*next;
 };
 
 #define try								\
-  for (__except_initializer((struct __false_except_list[1]){});		\
+  for (__except_initializer((struct __except_list_node[1]){0});		\
        __except_dispatcher(__FILE__, __FUNCTION__, __LINE__) ;)		\
     for (; __except_try_n_finally();)					\
       if (__except_is_try())						\
-	if (setjmp(*__except_get_front()) == 0)
+	for (; __except_get_catch_tool(1);)				\
+	  if (setjmp(*__except_get_front()) == 0)
 
 #define catch(type, name)						\
   else if (__except_catch_func(type ## _type_instance))				\
-    for (type *name __attribute__((unused)) = __except_get_data(); __except_get_catch_tool(); )
+    for (type *name __attribute__((unused)) = __except_get_data(); __except_get_catch_tool(0); )
 
 #define throw(type, ctor, ...)						\
   __except_throw_func(type ## _type_instance,				\
