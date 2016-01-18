@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Sun Jan 17 21:37:01 2016 penava_b
+** Last update Mon Jan 18 16:22:17 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -30,8 +30,6 @@ new_tor(Generator, dtor)
 
 int		new_method(Generator, __setjmp)
 {
-  if (this == NULL)
-    return -1;
   $.label = __builtin_return_address(0);
   return 0;
 }
@@ -40,7 +38,7 @@ void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
 {
   size_t       	i;
 
-  if (this == NULL || rsp == NULL || rbp == NULL)
+  if (rsp == NULL || rbp == NULL)
     return ;
   if ($.size != 0)
     free($.stack);
@@ -52,6 +50,33 @@ void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
   $.size = rbp - rsp;
   for (i = 0; i < $.size; i++)
     $.stack[i] = rsp[i];
+  $.alive = 42;
+}
+
+char		new_const_method(Generator, isLabelOk)
+{
+  return ($.label != NULL);
+}
+
+void		*new_const_method(Generator, getLabel)
+{
+  return $.label;
+}
+
+void		new_method(Generator, beforeYield)
+{
+  $.alive = 0;
+  $.init = 42;
+}
+
+char		new_method(Generator, isInitialized)
+{
+  return $.init;
+}
+
+void		*new_const_method(Generator, getFunc)
+{
+  return $.func;
 }
 
 void		new_method(Generator, restore, const char *rbp)
@@ -67,25 +92,21 @@ void		new_method(Generator, restore, const char *rbp)
     __push_back_on_stack((void *)rbp - $.stack_node, __get_current_level() - 1);
   $.stack = 0;
   $.size = 0;
+  $.alive = 0;
 }
 
-Generator	*new_method(Generator, reset, void *func)
+void		new_method(Generator, reset, void *func)
 {
-  if (this == NULL)
-    return this;
   $.label = 0;
   $.func = func;
   $.size = 0;
   $.stack = 0;
   $.alive = 42;
   $.init = 0;
-  return this;
 }
 
 void	        new_method(Generator, clean)
 {
-  if (this == NULL)
-    return ;
   if ($.size != 0 || $.stack != NULL)
     {
       free($.stack);
@@ -100,7 +121,7 @@ void	        new_method(Generator, clean)
 
 char	        new_method(Generator, __continue)
 {
-  if (this != NULL && $.label != NULL && $.alive)
+  if ($.label != NULL && $.alive)
     return 42;
   if (this == NULL)
     return 0;

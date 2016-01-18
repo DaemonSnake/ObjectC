@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec  5 16:24:38 2015 penava_b
-** Last update Tue Jan  5 13:32:48 2016 penava_b
+** Last update Mon Jan 18 16:31:19 2016 penava_b
 */
 
 #pragma once
@@ -18,28 +18,22 @@ void            __prevent_clean_up();
 void		__reset_clean_up();
 
 #define initYield()						\
-  if (this != NULL && this->label != NULL)			\
+  if (this != NULL && M(this, isLabelOk))			\
     {								\
       __yield_editRet();					\
-      goto *this->label;					\
+      goto *M(this, getLabel);					\
     }								\
   else								\
     {								\
       if (this != NULL)						\
-	{							\
-	  this->alive = 0;					\
-	  this->init = 42;					\
-	}							\
+	M(this, beforeYield);					\
     }
 
 #define yield(val)							\
-  if (M(this, __setjmp) == 0)						\
+  if (this != NULL && M(this, __setjmp) == 0)				\
     {									\
-      if (this->init)							\
-	{								\
-	  M(this, saveStack, alloca(0), __builtin_frame_address(0));	\
-	  this->alive = 42;						\
-	}								\
+      if (M(this, isInitialized))					\
+	M(this, saveStack, alloca(0), __builtin_frame_address(0));	\
       __prevent_clean_up();						\
       return val;							\
     }									\
@@ -49,13 +43,12 @@ void		__reset_clean_up();
 	{								\
 	  M(this, restore, __builtin_frame_address(0));			\
 	  __reset_clean_up();						\
-	  this->alive = 0;						\
 	}								\
     }
 
 #define for_yield(x, Func, ret, ...)					\
-  for (ret = Func(M(x, reset, Func), ##__VA_ARGS__);			\
+  for (M(x, reset, Func), ret = Func(x, ##__VA_ARGS__);			\
        M(x, __continue);						\
-       ret = ((__typeof__(ret)(*)(Generator *,...))(((Generator *)x)->func))(x))
+       ret = ((__typeof__(ret)(*)(Generator *,...))(M(x, getFunc)))(x))
 
 #define yield_interupt(x) if ((M(x, clean), 42))
