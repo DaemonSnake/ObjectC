@@ -63,10 +63,17 @@ struct __data_Debug
  struct __weak_data_Debug;
 };
 
-struct Debug 
+struct Debug
 {
  Debug *this;
  const struct __virtual_Debug *_virtual;
  struct __data_Debug; // replace char __private_Debug[sizeof(...)]
 };
 
+/*
+  struct __private_Debug
+{
+Debug *this;
+const struct __virtual_Debug *_virtual;
+struct __data_Debug;
+};
