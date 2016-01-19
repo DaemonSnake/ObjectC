@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Tue Jan  5 11:44:01 2016 penava_b
+## Last update Tue Jan 19 07:08:21 2016 penava_b
 ##
 
 CC =		gcc
@@ -32,11 +32,19 @@ $(NAME): 	$(OBJ)
 		$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
 clean:
 		$(RM) $(OBJ)
+		$(RM) layout.c
 
 fclean: 	clean
 		$(RM) $(NAME)
 
 re: 		fclean all
+
+layout.c:	clean
+		@echo "...Building layout.c"
+		@for file in $(SRC);						\
+		do								\
+			./debug/structDump $$file $(CFLAGS) > layout.c;		\
+		done;
 
 cleanlib:
 		@$(MAKE) -C ../ clean
