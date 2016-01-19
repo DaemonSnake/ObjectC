@@ -1,3 +1,4 @@
 1-Dynamic cast with interface / runtime check of implementation of interface & cast
 2-make all data private except pointers to parents
 3-Stream type and IToStream interface
+4-easy creation and generation of (get/set)ors : see axors.c
