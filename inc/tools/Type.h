@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Tue Dec 15 19:02:30 2015 penava_b
+** Last update Tue Jan 19 10:29:03 2016 penava_b
 */
 
 #pragma once
@@ -32,10 +32,12 @@ const void		*__typeGetMethod(const Type * const, const void * const * const, con
 
 #define isInstanceOf(type, pointer) (pointer != NULL && __is_same_kind_type(M(pointer->this, getType), type ## _type_instance))
 
-# define	getMethod(obj, name) (__typeGetMethod((const void *)(((const Object * const )obj)->this)->__class_type, (const void *)(((const Object * const )obj)->this)->_virtual, name))
+# define	getMethod(obj, name)					\
+  (__typeGetMethod((const void *)(((const Object * const )obj)->this)->__class_type, \
+		   (const void *)(((const Object * const )obj)->this)->_virtual, name))
 
 # define	invoke(ret, obj, name, ...)				\
   (((ret (*)(const void*, ...))getMethod(obj, name))((const void*)(((const Object * const)obj)->this), ##__VA_ARGS__))
 
-# define	invokeM(ret, method, obj, ...)				\
-  (((ret (*)(const void*, ...))(const void *)method)((const void*)(((const Object * const)obj)->this), ##__VA_ARGS__))
+# define	invokeM(method, obj, ...)				\
+  (method)((void *)(((const Object * const)obj)->this), ##__VA_ARGS__)

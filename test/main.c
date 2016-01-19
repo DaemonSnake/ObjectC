@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sun Jan 17 21:41:04 2016 penava_b
+** Last update Tue Jan 19 10:31:28 2016 penava_b
 */
 
 #include <stdio.h>
@@ -74,7 +74,8 @@ void		new_delete(void)
 
 void		invoke_test(void)
 {
-  void		*tmp = new(String, ctorS, "Invoke print this");
+  const void   	*tmp = new(String, ctorS, "Invoke print this");
+  char		*method(c_str);
   
   printf("INVOKE::\n");
   try {
@@ -83,6 +84,10 @@ void		invoke_test(void)
   } catch(String, exp) {
     printf("%s\n", M(exp, c_str));
   }
+  if ((c_str = getMethod(tmp, "c_str")) != NULL)
+    {
+      printf("Second invoke : %s\n", invokeM(c_str, tmp));
+    }
   delete(tmp);
 }
 

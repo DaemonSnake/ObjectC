@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Sun Jan 17 21:14:05 2016 penava_b
+** Last update Tue Jan 19 10:31:38 2016 penava_b
 */
 
 #pragma once
@@ -16,7 +16,7 @@
 void	*__new_push_ptor(size_t);
 void	*__new_get_ptor();
 void	*__new_push_tmp(const void *);
-void	__delete_func(void *, ...);
+void	__delete_func(const void *, ...);
 void	*__malloc(size_t);
 
 #define new(type, ctor, ...)						\
