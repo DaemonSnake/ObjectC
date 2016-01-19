@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sun Jan 17 21:33:24 2016 penava_b
+** Last update Tue Jan 19 07:29:07 2016 penava_b
 */
 
 #pragma once
@@ -76,9 +76,14 @@
     __true_vtable_instance_ ## name.dtor = (void *)name ## _ ## dtor;	\
   }									\
       									\
+  __attribute__((no_instrument_function))				\
   void		__push_method_ ## name(void *arg, const char *name_m,	\
 				       size_t offset)			\
   {									\
+   int		__get_current_level();					\
+									\
+   if (__get_current_level() > 0)					\
+     return;								\
     ((void **)&__true_vtable_instance_ ## name)				\
       [offset / sizeof(void *)] = arg;					\
     true_ ## name ## _type_instance.methodsName				\
