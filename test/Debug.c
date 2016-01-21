@@ -5,11 +5,11 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Sun Jan 17 21:39:28 2016 penava_b
+** Last update Wed Jan 20 18:27:04 2016 penava_b
 */
 
 #include <stdio.h>
-#include "test.h"
+#include "Debug.h"
 
 new_tor(Debug, ctor)
 {

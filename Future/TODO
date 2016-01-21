@@ -2,3 +2,6 @@
 2-make all data private except pointers to parents
 3-Stream type and IToStream interface
 4-easy creation and generation of (get/set)ors : see axors.c
+5-add python style format from Future
+6-cout and cerr (f, fln, print, println)
+7-cin?

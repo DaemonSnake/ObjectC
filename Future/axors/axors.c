@@ -5,13 +5,21 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Tue Jan 19 12:47:42 2016 penava_b
-** Last update Tue Jan 19 15:36:34 2016 penava_b
+** Last update Tue Jan 19 15:42:07 2016 penava_b
 */
 
 #include "inc.h"
 
 #define virtual(name)				\
   struct __virtual_ ## name
+
+#define newvirtual(name)			\
+  struct __virtual_ ## name ##  _virtual = {	\
+    (void *)name ## _set_i,			\
+    (void *)name ## _get_i,			\
+    0, 0,					\
+    0, 0					\
+  };
 
 virtual(String)
 {
@@ -32,12 +40,6 @@ typedef struct
 
 new_axors(String, i, get, set);
 
-struct __virtual_String _virtual = {
-  (void *)String_set_i,
-  (void *)String_get_i,
-  0, 0,
-  0, 0
-};
 
 #include <stdio.h>
 

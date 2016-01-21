@@ -5,12 +5,12 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Jan 19 10:31:28 2016 penava_b
+** Last update Wed Jan 20 18:43:17 2016 penava_b
 */
 
 #include <stdio.h>
 
-#include "test.h"
+#include "Debug.h"
 #include "String.h"
 #include "yield.h"
 

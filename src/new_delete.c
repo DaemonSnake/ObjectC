@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 14:40:19 2015 bastien penavayre
-** Last update Sun Jan 17 21:20:41 2016 penava_b
+** Last update Wed Jan 20 18:31:39 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -79,21 +79,21 @@ void	*__new_get_ptor()
   return pop_on_stack();
 }
 
-static void	__delete__(void *obj)
+static void	__delete__(const void *obj)
 {
   void		(*dtor)(void *);
   Object	*tmp;
 
   if (obj == 0)
     return ;
-  tmp = obj;
+  tmp = (void *)obj;
   tmp = tmp->this;
   dtor = tmp->_virtual->dtor;
   dtor(tmp);
   free(tmp);
 }
 
-void	__delete_func(void *obj, ...)
+void	__delete_func(const void *obj, ...)
 {
   va_list ap;
 
