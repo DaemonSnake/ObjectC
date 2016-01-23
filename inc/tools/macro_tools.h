@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:21:22 2015 penava_b
-** Last update Sat Jan 23 04:48:19 2016 penava_b
+** Last update Sat Jan 23 15:23:04 2016 penava_b
 */
 
 #pragma once
@@ -55,3 +55,14 @@
   this->__true_this_ ## name = (void *)this;			\
   this->_virtual_ ## name = (void *)this->_virtual + offset;	\
   offset += sizeof(struct __virtual_ ## name);
+
+/* AXORS METHODS DECL */
+
+#define __axor_get(type, name) type (*get_ ## name)(const void *);
+#define __axor_(type, name)
+#define __axor_set(type, name) void (*set_ ## name)(void *, type name);
+#define __launch_axor(type, name, x, ...) \
+  __axor_ ## x(type, name)		  \
+  __axor_ ## __VA_ARGS__(type, name)
+
+#define axors(type, name, ...)  __launch_axor(type, name, __VA_ARGS__)

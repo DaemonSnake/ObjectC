@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Mon Dec 14 17:15:09 2015 penava_b
+** Last update Sat Jan 23 15:01:55 2016 penava_b
 */
 
 #pragma once
@@ -13,6 +13,7 @@
 /* apply first argument to all the other argument, can handle 10 args max */
 #define APPLY_MACRO_VAR(macro, ...) ______VARARG(_____VARS, macro, ##__VA_ARGS__)
 #define APPLY_MACRO_VAR_TWO(macro, arg, ...) ______VARARG(_____VARS_TWO, macro, arg, ##__VA_ARGS__)
+#define axM(this, name, ...) ______VARARG(__axor_call_, this, name, ##__VA_ARGS__)
 
 /* TOOLS DON'T USE, DON'T WATCH */
 #define ______VA_NARGS_IMPL(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10,	\
@@ -42,6 +43,10 @@
 #define ______VARARG_IMPL2(base, count, ...) base##count(__VA_ARGS__)
 #define ______VARARG_IMPL(base, count, ...) ______VARARG_IMPL2(base, count, __VA_ARGS__)
 #define ______VARARG(base, ...) ______VARARG_IMPL(base, ______VA_NARGS(__VA_ARGS__), __VA_ARGS__)
+
+/*AXORS*/
+#define __axor_call_2(var, name, ...) M(var, get_ ## name)
+#define __axor_call_3(var, name, val) M(var, set_ ## name, val)
 
 /*APPLY_MACRO_VAR*/
 #define _____VARS1(macro, ...)

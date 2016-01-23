@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sat Jan 23 04:39:32 2016 penava_b
+** Last update Sat Jan 23 15:19:54 2016 penava_b
 */
 
 #include <stdio.h>
@@ -20,11 +20,6 @@ const char *new_method(String, toString)
   return 0;
 }
 
-/* 
-   __attribute__((yield_func))
-   would be a way to go around the initYield() issue!
-   With the attribute being a custom attribute
-*/
 String	*yieldList(Generator *this)
 {
   initYield();
@@ -192,7 +187,7 @@ static Debug static_test;
 
 Ginit(Debug, ctor, static_test)
 {
-  // gloabal constructor of static_test
+  // gloabal post constructor of static_test
 }
 
 int	main()

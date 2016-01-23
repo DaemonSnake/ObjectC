@@ -1,12 +1,10 @@
 1-Dynamic cast with interface / runtime check of implementation of interface & cast
-2-make all data private except pointers to parents
 3-Stream type and IToStream interface
-4-easy creation and generation of (get/set)ors : see axors.c
 5-add python style format from Future
 6-cout and cerr (f, fln, print, println)
 7-cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
 8-create a implI(names...) for RTLL of interfaces
 9-Object_getType segfault safe for instrospection
+10-Add a foreach method that yields!
 
-
-BONUS?: create pragma that push a new value in a macro name
+BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design!

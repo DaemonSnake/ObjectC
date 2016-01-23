@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Wed Nov 25 18:54:30 2015 penava_b
-** Last update Fri Dec 18 03:30:35 2015 penava_b
+** Last update Sat Jan 23 05:22:39 2016 penava_b
 */
 
 #pragma once
@@ -20,9 +20,10 @@ class(Stream, Object)
 
 virtual(Stream)
 {
-  Stream	*method(read, Object *);
-  Stream	*method(print, Object *);
-  Stream	*method(printf, const char *, ...);
+  void		method(scan, Object *); // scan from input and use method in Object to push data in the Object
+  void		method(scanf, const char *, ...); // call true scanf then mine with {n}... inside and act like above
+  void		method(print, Object *);
+  void		method(printf, const char *, ...);
   void		method(open, const char *);
   void		method(openFd, int);
   void		method(close);

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sat Jan 23 04:36:19 2016 penava_b
+** Last update Sat Jan 23 15:18:14 2016 penava_b
 */
 
 #pragma once
@@ -124,3 +124,28 @@ void	__call_class_super_dtor(const Object * const);
   __call_class_super_dtor((void *)this)
 
 #define $ (*this)
+
+/* AXORS METHODS IMPL */
+
+#define __new_def_axor_get(class, name)			\
+  typeof(((struct __private_ ## class *)0)->name)	\
+  new_method(class, get_ ## name)			\
+  {							\
+    return $.name;					\
+  }
+
+#define __new_def_axor_set(class, name)					\
+  void									\
+  new_method(class, set_ ## name,					\
+	     typeof(((struct __private_ ## class *)0)->name) name)	\
+  {									\
+    $.name = name;							\
+  }
+
+#define __new_def_axor_(class, name)
+
+#define __launch_new_def_axors(class, name, x, y...)	\
+  __new_def_axor_ ## x(class, name)			\
+  __new_def_axor_ ## y(class, name)
+
+#define new_def_axors(class, name, x...) __launch_new_def_axors(class, name, x)

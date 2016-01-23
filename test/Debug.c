@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Sat Jan 23 03:19:33 2016 penava_b
+** Last update Sat Jan 23 15:22:40 2016 penava_b
 */
 
 #include <stdio.h>
@@ -28,6 +28,8 @@ void	new_method(Debug, print)
 {
   printf("This is %p %d\n", this, $.var);
 }
+
+new_def_axors(Debug, var, get);
 
 implement(Debug, Object, I)
 {

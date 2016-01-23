@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Sat Jan 23 04:44:20 2016 penava_b
+** Last update Sat Jan 23 15:23:30 2016 penava_b
 */
 
 #pragma once
@@ -96,3 +96,4 @@
   typeof(type ## _fake_ ## name())					\
   type ## _ ## name(const struct __private_ ## type * const this,	\
 		    ##__VA_ARGS__)
+

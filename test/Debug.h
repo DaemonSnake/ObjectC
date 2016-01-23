@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:16:21 2015 penava_b
-** Last update Fri Jan 22 23:56:44 2016 penava_b
+** Last update Sat Jan 23 15:21:19 2016 penava_b
 */
 
 #include "String.h"
@@ -22,6 +22,7 @@ class(Debug, Object, I)
 
 virtual(Debug)
 {
+  axors(int, var, get);
 };
 
 end_decl(Debug);
