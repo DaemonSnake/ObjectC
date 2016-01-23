@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sat Jan 23 15:19:54 2016 penava_b
+** Last update Sat Jan 23 19:53:33 2016 penava_b
 */
 
 #include <stdio.h>
@@ -13,6 +13,7 @@
 #include "Debug.h"
 #include "String.h"
 #include "yield.h"
+#include "Range.h"
 
 const char *new_method(String, toString)
 {
@@ -183,6 +184,17 @@ void	return_object_test()
   printf("Return object %p\n", rvalue(return_instance_debug()));
 }
 
+void	range_test()
+{
+  Range	tmp _init(Range, ctorBE, tmp, 0, 10);
+
+  printf("RANGE TEST::\n");
+  for_in(i, &tmp)
+    {
+      printf("range value %d\n", i);
+    }
+}
+
 static Debug static_test;
 
 Ginit(Debug, ctor, static_test)
@@ -201,6 +213,7 @@ int	main()
     invoke_test,
     lreferencevalue_test,
     return_object_test,
+    range_test,
     trace_back_test
   };
 

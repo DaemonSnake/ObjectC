@@ -5,8 +5,10 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:16:21 2015 penava_b
-** Last update Sat Jan 23 15:21:19 2016 penava_b
+** Last update Sat Jan 23 18:48:41 2016 penava_b
 */
+
+#pragma once
 
 #include "String.h"
 

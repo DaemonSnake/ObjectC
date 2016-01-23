@@ -5,13 +5,13 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sat Jan 23 15:18:14 2016 penava_b
+** Last update Sat Jan 23 19:52:19 2016 penava_b
 */
 
 #pragma once
 
 int	write(int, const char *, int);
-void	__call_class_super_dtor(const Object * const);
+void	__call_class_super_dtor(Object * const);
 
 #define implement(name, extends, ...)					\
 									\
@@ -118,7 +118,7 @@ void	__call_class_super_dtor(const Object * const);
   static void __hidden_implement_function_for_ ## name()
 
 #define superCtor(type, name, ...)		\
-  type ## _ ## name(this, ##__VA_ARGS__)
+  type ## _ ## name((void *)this, ##__VA_ARGS__)
 
 #define superDtor()				\
   __call_class_super_dtor((void *)this)

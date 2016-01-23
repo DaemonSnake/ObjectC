@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Sat Jan 23 03:45:55 2016 penava_b
+## Last update Sat Jan 23 19:07:05 2016 penava_b
 ##
 
 CC =		gcc
@@ -15,7 +15,8 @@ RM =		rm -f
 NAME =		unit
 
 SRC =		main.c 	\
-                Debug.c
+                Debug.c	\
+		Range.c
 
 OBJ =		$(SRC:.c=.o)
 
