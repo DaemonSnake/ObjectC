@@ -1,2 +1,14 @@
 # ObjectC
-A library to use as a superset of the C language, offering exceptions handling(try catch finally), Classes, Java like inheritance, Introspection (isInstanceOf, dynamic_cast, getMethod, ivoke method with string), Yield (co-routine, generators), C++ life-cycle, C++ left reference values, C#-like syntax for { get; set } (axors), private member and public methods, override of methods, etc...
+A library to use as a superset of the C language, offering the following :
+
+  -exceptions handling(try catch finally)
+  -Classes
+  -Java like inheritance
+  -Introspection (isInstanceOf, dynamic_cast, getMethod, ivoke method with string)
+  -Yield (co-routine, generators)
+  -C++ life-cycle
+  -C++ left reference values
+  -C#-like syntax for { get; set } (axors)
+  -private member and public methods
+  -override of methods
+  -etc...

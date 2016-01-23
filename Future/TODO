@@ -6,5 +6,6 @@
 8-create a implI(names...) for RTLL of interfaces
 9-Object_getType segfault safe for instrospection
 10-Add a foreach method that yields!
+11-Investigate stdmove
 
 BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design!
