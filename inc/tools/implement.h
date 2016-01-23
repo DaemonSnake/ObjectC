@@ -5,10 +5,12 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Tue Jan 19 07:29:07 2016 penava_b
+** Last update Sat Jan 23 02:05:11 2016 penava_b
 */
 
 #pragma once
+
+int	write(int, const char *, int);
 
 #define implement(name, extends, ...)					\
 									\
@@ -80,10 +82,25 @@
   void		__push_method_ ## name(void *arg, const char *name_m,	\
 				       size_t offset)			\
   {									\
-   int		__get_current_level();					\
+    int		__get_current_level();					\
+    void		**member =					\
+      &((void **)&__true_vtable_instance_ ## name)			\
+      [offset / sizeof(void *)];					\
 									\
-   if (__get_current_level() > 0)					\
-     return;								\
+    if (__get_current_level() > 0)					\
+      {									\
+	write(2, "[Error]Illegal call to __push_method\n", 37);		\
+	return ;							\
+      }									\
+    if (offset < sizeof(struct __virtual_ ## extends) &&		\
+	*member != 0 && *member !=					\
+	((void **)__vtable_instance_ ## extends)			\
+	[offset / sizeof(void *)])					\
+      {									\
+	write(2, "[Error]Trying to override twice a method\n", 41);	\
+	return;								\
+      }									\
+    *member = arg;							\
     ((void **)&__true_vtable_instance_ ## name)				\
       [offset / sizeof(void *)] = arg;					\
     true_ ## name ## _type_instance.methodsName				\

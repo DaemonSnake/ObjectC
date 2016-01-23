@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Wed Jan 20 18:27:04 2016 penava_b
+** Last update Fri Jan 22 23:56:36 2016 penava_b
 */
 
 #include <stdio.h>
@@ -15,6 +15,7 @@ new_tor(Debug, ctor)
 {
   superCtor(Object, ctor);
   printf("Birth of %p\n", this);
+  $.var = 42;
 }
 
 new_tor(Debug, dtor)
@@ -25,7 +26,7 @@ new_tor(Debug, dtor)
 
 void	new_method(Debug, print)
 {
-  printf("This is %p\n", this);
+  printf("This is %p %d\n", this, $.var);
 }
 
 implement(Debug, Object, I)

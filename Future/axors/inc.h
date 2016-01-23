@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Tue Jan 19 14:28:21 2016 penava_b
-** Last update Tue Jan 19 15:34:51 2016 penava_b
+** Last update Sat Jan 23 01:26:40 2016 penava_b
 */
 
 #pragma once
@@ -16,22 +16,22 @@
 #define __launch_axor(type, name, x, ...) __axor_ ## x(type, name) __axor_ ## __VA_ARGS__(type, name)
 #define axor(type, name, ...)  __launch_axor(type, name, __VA_ARGS__)
 
-#define __new_axor_get(class, name)					\
+#define __new_def_axor_get(class, name)					\
   typeof(((class *)0)->name) class ## _ ## get_ ## name(class *arg)	\
   {									\
     return arg->name;							\
   }
 
-#define __new_axor_set(class, name)					\
+#define __new_def_axor_set(class, name)					\
   void class ## _ ## set_ ## name(class *arg,				\
 				 typeof(((class *)0)->name) name)	\
   {									\
     arg->name = name;							\
   }
 
-#define __new_axor_(class, name)
-#define __launch_new_axors(class, name, x, y...) __new_axor_ ## x(class, name) __new_axor_ ## y(class, name)
-#define new_axors(class, name, x...) __launch_new_axors(class, name, x)
+#define __new_def_axor_(class, name)
+#define __launch_new_def_axors(class, name, x, y...) __new_def_axor_ ## x(class, name) __new_def_axor_ ## y(class, name)
+#define new_def_axors(class, name, x...) __launch_new_def_axors(class, name, x)
 
 #define M(this, name, ...) ((this)->_virtual->name(this, ##__VA_ARGS__))
 #define __axor_call_0(var, name, ...) M(var, get_ ## name)

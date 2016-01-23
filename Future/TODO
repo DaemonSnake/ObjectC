@@ -6,7 +6,7 @@
 6-cout and cerr (f, fln, print, println)
 7-cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
 8-create a implI(names...) for RTLL of interfaces
-
+9-Object_getType segfault safe for instrospection
 
 
 BONUS?: create pragma that push a new value in a macro name

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:16:21 2015 penava_b
-** Last update Wed Jan 20 18:25:44 2016 penava_b
+** Last update Fri Jan 22 23:56:44 2016 penava_b
 */
 
 #include "String.h"
@@ -17,6 +17,7 @@ interface(I)
 
 class(Debug, Object, I)
 {
+  int	var;
 };
 
 virtual(Debug)

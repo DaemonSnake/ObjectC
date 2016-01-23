@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Tue Jan 19 10:29:03 2016 penava_b
+** Last update Sat Jan 23 01:15:37 2016 penava_b
 */
 
 #pragma once
@@ -23,17 +23,20 @@ typedef			struct Type
 
 char			__is_same_kind_type(const Type *, const Type *);
 const void		*__typeGetMethod(const Type * const, const void * const * const, const char const *);
+const Type		*Object_getType(const void *);
 
 #define static_cast(type, var) ((var)->this_ ## type)
 
 #define dynamic_cast(type, var)						\
-  (__is_same_kind_type(M(var->this, getType), type ##_type_instance) ?	\
+  (__is_same_kind_type(Object_getType(var), type ##_type_instance) ? \
    (type *)var->this : 0)
 
-#define isInstanceOf(type, pointer) (pointer != NULL && __is_same_kind_type(M(pointer->this, getType), type ## _type_instance))
+#define isInstanceOf(type, pointer)					\
+  (pointer != NULL &&							\
+   __is_same_kind_type(Object_getType(pointer), type ## _type_instance))
 
 # define	getMethod(obj, name)					\
-  (__typeGetMethod((const void *)(((const Object * const )obj)->this)->__class_type, \
+  (__typeGetMethod(Object_getType(obj),					\
 		   (const void *)(((const Object * const )obj)->this)->_virtual, name))
 
 # define	invoke(ret, obj, name, ...)				\

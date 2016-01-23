@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Tue Jan  5 11:56:58 2016 penava_b
+** Last update Sat Jan 23 01:14:33 2016 penava_b
 */
 
 #include "Class.h"
@@ -23,9 +23,9 @@ const char	*Object_toString(void *this __attribute__((unused)))
   return "default Object's toString method";
 }
 
-const Type	*Object_getType(const Object *this)
+const Type	*Object_getType(const void *this)
 {
-  return $.__class_type;
+  return ((Object *)this)->this->__class_type;
 }
 
 static struct __virtual_Object true_vtable_instance = {

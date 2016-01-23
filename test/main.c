@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Thu Jan 21 03:28:50 2016 penava_b
+** Last update Sat Jan 23 02:08:23 2016 penava_b
 */
 
 #include <stdio.h>
@@ -13,6 +13,12 @@
 #include "Debug.h"
 #include "String.h"
 #include "yield.h"
+
+const char *new_method(String, toString)
+{
+  (void)this;
+  return 0;
+}
 
 /* 
    __attribute__((yield_func))
@@ -85,9 +91,7 @@ void		invoke_test(void)
     printf("%s\n", M(exp, c_str));
   }
   if ((c_str = getMethod(tmp, "c_str")) != NULL)
-    {
-      printf("Second invoke : %s\n", invokeM(c_str, tmp));
-    }
+    printf("Second invoke : %s\n", invokeM(c_str, tmp));
   delete(tmp);
 }
 

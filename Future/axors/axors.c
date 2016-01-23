@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Tue Jan 19 12:47:42 2016 penava_b
-** Last update Tue Jan 19 15:42:07 2016 penava_b
+** Last update Sat Jan 23 01:29:54 2016 penava_b
 */
 
 #include "inc.h"
@@ -32,14 +32,18 @@ virtual(String)
 
 typedef struct
 {
-  struct __virtual_String *_virtual;
+  virtual(String) *_virtual;
   int	i;
   char	*lol;
   double j;
 }	String;
 
-new_axors(String, i, get, set);
+new_def_axors(String, i, get, set);
 
+virtual(String) _virtual = {
+  (void *)String_set_i, (void *)String_get_i,
+  0, 0, 0, 0
+};
 
 #include <stdio.h>
 
