@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:21:22 2015 penava_b
-** Last update Sun Jan 17 21:37:40 2016 penava_b
+** Last update Sat Jan 23 04:48:19 2016 penava_b
 */
 
 #pragma once
@@ -26,6 +26,14 @@
   									\
   struct __data_ ## name						\
   {									\
+    struct __supers_data_ ## name;					\
+    char __private_ ## name[sizeof(struct __weak_data_ ## name)];	\
+  };									\
+									\
+  struct __private_ ## name						\
+  {									\
+    name *this;								\
+    const struct __virtual_ ## name *_virtual;				\
     struct __supers_data_ ## name;					\
     struct __weak_data_ ## name;					\
   };									\

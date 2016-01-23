@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Sat Jan 23 02:56:41 2016 penava_b
+** Last update Sat Jan 23 04:52:38 2016 penava_b
 */
 
 #pragma once
@@ -26,10 +26,23 @@ struct	__virtual_Object
   const Type *(*getType)(const void *);
 };
 
+/* struct	__data_weak_Object */
+/* { */
+/*   const Type *__class_type; */
+/* }; */
+
 struct	__data_Object
 {
   const Type *__class_type;
+  /* char	__private_Object[sizeof(struct __data_weak_Object)]; */
 };
+
+/* struct	__private_Object */
+/* { */
+/*   Object *this; */
+/*   const struct __virtual_Object *_virtual; */
+/*   struct __data_weak_Object; */
+/* }; */
 
 struct	Object
 {
