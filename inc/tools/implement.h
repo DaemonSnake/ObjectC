@@ -5,12 +5,13 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sat Jan 23 02:05:11 2016 penava_b
+** Last update Sat Jan 23 03:37:05 2016 penava_b
 */
 
 #pragma once
 
 int	write(int, const char *, int);
+void	__call_class_super_dtor(const Object * const);
 
 #define implement(name, extends, ...)					\
 									\
@@ -18,11 +19,12 @@ int	write(int, const char *, int);
   static void *__pre_ctor_ ## name(name *this)				\
   {									\
     unsigned long offset = sizeof(struct __virtual_ ## extends);	\
+    void	__pre_ctor_Object_child(const void *, const void *);	\
 									\
     (void)offset;							\
+    __pre_ctor_Object_child(this, name ## _type_instance);		\
     this->this = this;							\
     this->_virtual = __vtable_instance_ ## name;			\
-    this->__class_type = name ## _type_instance;			\
     this->this_ ## extends = (void *)this;				\
     APPLY_MACRO_VAR(__implements_in_ctor__, ##__VA_ARGS__);		\
     return this;							\
@@ -119,6 +121,6 @@ int	write(int, const char *, int);
   type ## _ ## name(this, ##__VA_ARGS__)
 
 #define superDtor()				\
-  this->__class_type->super->dtor(this);
+  __call_class_super_dtor((void *)this)
 
 #define $ (*this)

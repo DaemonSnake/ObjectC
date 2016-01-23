@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec 12 22:09:46 2015 penava_b
-** Last update Mon Dec 21 21:51:09 2015 penava_b
+** Last update Sat Jan 23 04:15:09 2016 penava_b
 */
 
 #include "Class.h"
@@ -20,6 +20,15 @@ char		__is_same_kind_type(const Type * my, const Type *their)
     if (tmp == their)
       return 42;
   return 0;
+}
+
+void		__call_class_super_dtor(const Object * const this)
+{
+  if (this->_virtual == __vtable_instance_Object)
+    Object_dtor(this->this);
+  else
+    this->__class_type->super->dtor(this->this); // Add a cast to get the private in future
+  //THE FUCKKKK, can't call function Object_getType or valgrind complains!
 }
 
 const void     	*__typeGetMethod(const Type * const type,

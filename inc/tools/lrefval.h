@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:12:30 2016 penava_b
-** Last update Thu Jan 14 18:53:22 2016 penava_b
+** Last update Sat Jan 23 04:03:52 2016 penava_b
 */
 
 #pragma once
@@ -51,9 +51,10 @@ void		__push_back_on_stack(void *, int);
   ((__typeof__(x) *)						\
    __push_var((struct s_left_reference_value_node[1])		\
 	      {{						\
-		  (__typeof__(x)[1]){(x)},			\
+		  (__typeof__(x)[1]){x},			\
 		    __get_return_dtor(),			\
 		      42,					\
 		      __get_current_level() + 1,		\
 		      (void *)0					\
-		      }}))
+		      }})					\
+   )
