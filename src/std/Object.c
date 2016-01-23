@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Sat Jan 23 03:49:27 2016 penava_b
+** Last update Sat Jan 23 05:00:13 2016 penava_b
 */
 
 #include "Class.h"
@@ -26,7 +26,7 @@ const char	*Object_toString(void *this __attribute__((unused)))
 __attribute__((no_instrument_function))
 const Type	*Object_getType(const void *this)
 {
-  return ((Object *)this)->this->__class_type;
+  return ((struct __private_Object *)((Object *)this)->this)->__class_type;
 }
 
 static struct __virtual_Object true_vtable_instance = {
@@ -38,16 +38,16 @@ static struct __virtual_Object true_vtable_instance = {
 const struct __virtual_Object * const __vtable_instance_Object = &true_vtable_instance;
 
 __attribute__((no_instrument_function))
-static void *__pre_ctor_Object(Object *this)
+static void *__pre_ctor_Object(struct __private_Object *this)
 {
-  this->this = this;
+  this->this = (void *)this;
   this->_virtual = __vtable_instance_Object;
   this->__class_type = Object_type_instance;
   return this;
 }
 
 __attribute__((no_instrument_function))
-void		*__pre_ctor_Object_child(Object *this, const void *type)
+void		*__pre_ctor_Object_child(struct __private_Object *this, const void *type)
 {
   __pre_ctor_Object(this);
   this->__class_type = type;
