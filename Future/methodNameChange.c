@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Sun Jan 24 15:49:25 2016 penava_b
+** Last update Sun Jan 24 16:02:49 2016 penava_b
 */
 
 #include "../inc/tools/for_each_va_args_macro.h"
@@ -22,8 +22,15 @@
 #define method(name, ...)			\
   ______VARARGP(name, void *this, ##__VA_ARGS__)
 
-void	int_ctor1(int *this)
+/*----------------------------------------------------------------------*/
+
+void	new_method(int, ctor)
 {
+}
+
+void	new_method(int, ctor, int i)
+{
+  *this = i;
 }
 
 void	new_method(int, printf)
@@ -41,5 +48,6 @@ int	main()
   int	i = 42;
 
   _init(int, ctor, &i);
+  _init(int, ctor, &i, 84);
   M(&i, printf);
 }
