@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Jan 23 19:01:21 2016 penava_b
-** Last update Sat Jan 23 19:53:23 2016 penava_b
+** Last update Sat Jan 23 20:17:42 2016 penava_b
 */
 
 #include "Range.h"

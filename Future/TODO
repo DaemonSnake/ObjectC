@@ -1,11 +1,14 @@
-1-Dynamic cast with interface / runtime check of implementation of interface & cast
+1!!-New Idea : change method name with number of argument (new function method abi)!!!
+	See : methodNameChange.c
+
+2-Dynamic cast with interface / runtime check of implementation of interface & cast
+8-create a implI(names...) for RTLL of interfaces
 3-Stream type and IToStream interface
 5-add python style format from Future
 6-cout and cerr (f, fln, print, println)
 7-cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
-8-create a implI(names...) for RTLL of interfaces
 9-Object_getType segfault safe for instrospection
 10-Add a foreach method that yields!
-11-Investigate stdmove
+12-Handle nested Objects (without inheritance)
 
 BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design!

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sat Jan 23 19:53:33 2016 penava_b
+** Last update Sat Jan 23 21:29:04 2016 penava_b
 */
 
 #include <stdio.h>
@@ -15,7 +15,7 @@
 #include "yield.h"
 #include "Range.h"
 
-const char *new_method(String, toString)
+const char *new_method(String, toString) //Bad override
 {
   (void)this;
   return 0;

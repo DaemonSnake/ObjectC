@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Tue Jan 19 10:31:38 2016 penava_b
+** Last update Sun Jan 24 15:50:42 2016 penava_b
 */
 
 #pragma once
@@ -41,7 +41,7 @@ void	*__malloc(size_t);
 			}})), ##__VA_ARGS__),			\
      var)
  
-#define _def(type, var) _init(type, ctor, var)
+#define _def(type, var, ...) _init(type, ctor, var, ##__VA_ARGS__)
 
 #define Ginit(type, ctor, var, ...)					\
   __attribute__((no_instrument_function, constructor))			\

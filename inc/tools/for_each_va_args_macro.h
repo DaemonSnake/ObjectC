@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Sat Jan 23 15:01:55 2016 penava_b
+** Last update Sun Jan 24 15:47:46 2016 penava_b
 */
 
 #pragma once
@@ -40,9 +40,14 @@
 		      20, 19, 18, 17, 16, 15, 14, 13, 12, 11,		\
 		      10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
-#define ______VARARG_IMPL2(base, count, ...) base##count(__VA_ARGS__)
-#define ______VARARG_IMPL(base, count, ...) ______VARARG_IMPL2(base, count, __VA_ARGS__)
-#define ______VARARG(base, ...) ______VARARG_IMPL(base, ______VA_NARGS(__VA_ARGS__), __VA_ARGS__)
+#define ______VARARG_IMPL2(base, count, ...)	\
+  base##count
+#define ______VARARG_IMPL(base, count, ...)	\
+  ______VARARG_IMPL2(base, count, __VA_ARGS__)
+#define ______VARARG(base, ...)						\
+  ______VARARG_IMPL(base, ______VA_NARGS(__VA_ARGS__), __VA_ARGS__)(__VA_ARGS__)
+#define ______VARARGP(base, ...)					\
+  (*______VARARG_IMPL(base, ______VA_NARGS(__VA_ARGS__), (*, ), __VA_ARGS__))(__VA_ARGS__)
 
 /*AXORS*/
 #define __axor_call_2(var, name, ...) M(var, get_ ## name)
