@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sat Jan 23 21:29:04 2016 penava_b
+** Last update Sun Jan 24 20:57:43 2016 penava_b
 */
 
 #include <stdio.h>
@@ -70,7 +70,7 @@ void		new_delete(void)
   printf("NEW DELETE::\n");
   delete(new(String, ctorS, "Hello"));
   tmp = static_cast(Object, new(String, ctorS, "Lol"));
-  tmp2 = static_cast(I, new(Debug, ctor));
+  tmp2 = (*new(Debug, ctor)) as(I);
   delete(tmp, tmp2);
 }
 
@@ -144,7 +144,7 @@ void	castTest()
 
   printf("CAST::\n");
   printf("true:%p\n", &tmp);
-  dynamic_func(static_cast(I, &tmp));
+  dynamic_func(tmp as(I));
 }
 
 void	trace_back_test()

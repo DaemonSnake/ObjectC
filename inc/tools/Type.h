@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Sat Jan 23 01:15:37 2016 penava_b
+** Last update Sun Jan 24 20:55:07 2016 penava_b
 */
 
 #pragma once
@@ -25,7 +25,9 @@ char			__is_same_kind_type(const Type *, const Type *);
 const void		*__typeGetMethod(const Type * const, const void * const * const, const char const *);
 const Type		*Object_getType(const void *);
 
-#define static_cast(type, var) ((var)->this_ ## type)
+#define static_cast(type, var) ((var)->this_ ## type) //takes pointer
+
+#define as(type) .this_ ## type //takes value
 
 #define dynamic_cast(type, var)						\
   (__is_same_kind_type(Object_getType(var), type ##_type_instance) ? \
