@@ -5,13 +5,13 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 07:42:19 2015 penava_b
-** Last update Tue Jan 26 15:24:19 2016 penava_b
+** Last update Tue Jan 26 22:39:44 2016 penava_b
 */
 
 #include <string.h>
 #include <stdlib.h>
 
-#include "String.h"
+#include "ObjectC/String.h"
 
 new_tor(String, ctor)
 {

@@ -5,11 +5,11 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Sat Jan 23 05:00:13 2016 penava_b
+** Last update Tue Jan 26 22:40:06 2016 penava_b
 */
 
-#include "Class.h"
-#include "String.h"
+#include "ObjectC/Class.h"
+#include "ObjectC/String.h"
 #include <string.h>
 
 __attribute__((no_instrument_function))

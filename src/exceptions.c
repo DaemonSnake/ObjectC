@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Sun Jan 17 01:55:22 2016 penava_b
+** Last update Tue Jan 26 22:39:55 2016 penava_b
 */
 
 #include <stdio.h>
@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <setjmp.h>
 #include <stdarg.h>
-#include "tools/Type.h"
-#include "tools/Object.h"
+#include "ObjectC/tools/Type.h"
+#include "ObjectC/tools/Object.h"
 
 void		__delete_func(void *, ...);
 int             __get_current_level();

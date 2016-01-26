@@ -5,13 +5,13 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec  5 16:24:38 2015 penava_b
-** Last update Mon Jan 25 02:09:29 2016 penava_b
+** Last update Tue Jan 26 22:38:10 2016 penava_b
 */
 
 #pragma once
 
 #include <alloca.h>
-#include "Generator.h"
+#include "ObjectC/Generator.h"
 
 void    	__yield_editRet();
 void            __prevent_clean_up();

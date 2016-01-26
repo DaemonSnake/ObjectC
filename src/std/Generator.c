@@ -5,11 +5,11 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Mon Jan 25 17:40:26 2016 penava_b
+** Last update Tue Jan 26 22:39:47 2016 penava_b
 */
 
 #include <stdlib.h>
-#include "Generator.h"
+#include "ObjectC/Generator.h"
 
 new_tor(Generator, ctor)
 {

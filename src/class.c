@@ -5,11 +5,11 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec 12 22:09:46 2015 penava_b
-** Last update Tue Jan 26 13:37:42 2016 penava_b
+** Last update Tue Jan 26 22:40:01 2016 penava_b
 */
 
-#include "Class.h"
-#include "String.h"
+#include "ObjectC/Class.h"
+#include "ObjectC/String.h"
 #include <string.h>
 
 char		__is_same_kind_type(const Type * my, const Type *their)

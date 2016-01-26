@@ -1,11 +1,11 @@
 /*
-1;2802;0c** __object_userfront_macro.h for  in /home/penava_b/perso/test/Obj4/inc
+** __object_userfront_macro.h for  in /home/penava_b/perso/test/Obj4/inc
 ** 
 ** Made by penava_b
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Tue Jan 26 14:35:05 2016 penava_b
+** Last update Tue Jan 26 22:38:21 2016 penava_b
 */
 
 #pragma once

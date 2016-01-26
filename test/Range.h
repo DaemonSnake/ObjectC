@@ -5,13 +5,13 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Jan 23 18:48:43 2016 penava_b
-** Last update Tue Jan 26 14:36:25 2016 penava_b
+** Last update Tue Jan 26 22:41:24 2016 penava_b
 */
 
 #pragma once
 
-#include "yield.h"
-#include "Generator.h"
+#include "ObjectC/yield.h"
+#include "ObjectC/Generator.h"
 
 
 #define for_in(name, gen)						\

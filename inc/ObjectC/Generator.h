@@ -5,12 +5,12 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec  5 15:43:48 2015 penava_b
-** Last update Mon Jan 18 16:25:29 2016 penava_b
+** Last update Tue Jan 26 22:38:54 2016 penava_b
 */
 
 #pragma once
 
-#include "Class.h"
+#include "ObjectC/Class.h"
 
 class(Generator, Object)
 {

@@ -5,15 +5,12 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Jan 26 14:59:44 2016 penava_b
+** Last update Tue Jan 26 22:42:35 2016 penava_b
 */
 
 #include <stdio.h>
-
-#include "Debug.h"
-#include "String.h"
-#include "yield.h"
 #include "Range.h"
+#include "Debug.h"
 
 const char *new_method(String, toString) //Bad override
 {
