@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Mon Jan 18 16:22:17 2016 penava_b
+** Last update Mon Jan 25 17:40:26 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -38,16 +38,18 @@ void		new_method(Generator, saveStack, const char *rsp, const char *rbp)
 {
   size_t       	i;
 
-  if (rsp == NULL || rbp == NULL)
-    return ;
-  if ($.size != 0)
-    free($.stack);
-  $.stack = NULL;
-  $.size = 0;
+  if (rsp == NULL || rbp == NULL || rsp > rbp)
+    return ; //throw instead
+  if ($.size == 0 || $.size != (unsigned long)(rbp - rsp))
+    {
+      free($.stack);
+      $.stack = NULL;
+      $.size = 0;
+      if (($.stack = malloc(rbp - rsp)) == NULL)
+	return ; //throw instead
+      $.size = rbp - rsp;
+    }
   $.stack_node = __get_front_node_diff(rbp);
-  if (($.stack = malloc(rbp - rsp)) == NULL)
-    return ;
-  $.size = rbp - rsp;
   for (i = 0; i < $.size; i++)
     $.stack[i] = rsp[i];
   $.alive = 42;
@@ -84,14 +86,11 @@ void		new_method(Generator, restore, const char *rbp)
   size_t       	i;
 
   if (this == NULL || $.stack == NULL || rbp == NULL)
-    return ;
+    return ; //throw instead
   for (i = 0; i < $.size; i++)
     ((char *)rbp - $.size)[i] = $.stack[i];
-  free($.stack);
   if ($.stack_node > 0)
     __push_back_on_stack((void *)rbp - $.stack_node, __get_current_level() - 1);
-  $.stack = 0;
-  $.size = 0;
   $.alive = 0;
 }
 

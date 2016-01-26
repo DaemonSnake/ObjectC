@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec 12 22:09:46 2015 penava_b
-** Last update Sat Jan 23 19:52:33 2016 penava_b
+** Last update Tue Jan 26 13:37:42 2016 penava_b
 */
 
 #include "Class.h"
@@ -31,7 +31,6 @@ void		__call_class_super_dtor(Object * const this)
     return ;
   ((struct __private_Object * const)this)->__class_type = super;
   super->dtor(this->this);
-  //THE FUCKKKK, can't call function Object_getType or valgrind complains!
 }
 
 const void     	*__typeGetMethod(const Type * const type,

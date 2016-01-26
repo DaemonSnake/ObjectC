@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Sun Jan 24 20:55:07 2016 penava_b
+** Last update Tue Jan 26 13:35:18 2016 penava_b
 */
 
 #pragma once
@@ -17,6 +17,11 @@ typedef			struct Type
   unsigned long		size;
   unsigned long		nbMethods;
   const char   		**methodsName;
+  //
+  //unsigned		nbImplements;
+  //const struct Type	**implements; -> find a way to count (structure of pointers ?)
+  //unsigned long	*offsets; -> offset of this_nameofinterface for dynamic_cast
+  //
   void			*(*pre_ctor)(void *);
   void			(*dtor)(void *);
 }			Type;

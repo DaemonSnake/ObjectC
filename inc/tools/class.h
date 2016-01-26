@@ -5,17 +5,36 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Sat Jan 23 15:23:30 2016 penava_b
+** Last update Tue Jan 26 13:26:19 2016 penava_b
 */
 
 #pragma once
 
 #define interface(name)							\
   typedef struct name name;						\
+									\
+  extern const Type * const						\
+  __attribute__((weak))							\
+       name ## _type_instance;						\
+  									\
   struct	name							\
   {									\
     Object	*this;							\
     const struct __virtual_ ## name *_virtual;				\
+  };									\
+									\
+  const Type * const							\
+  name ## _type_instance = (Type[1])					\
+  {									\
+    {									\
+      #name,								\
+      0,								\
+      sizeof(name),							\
+      0,								\
+      0,								\
+      0,								\
+      0									\
+    }									\
   };									\
 									\
   struct __virtual_ ## name

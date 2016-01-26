@@ -1,14 +1,18 @@
-1!!-New Idea : change method name with number of argument (new function method abi)!!!
-	See : methodNameChange.c
-
+1-Make up my mind on wether or not toString allocates or not! (or return a String object (* or not)) [ NEEDED FOR FORMAT! ]
 2-Dynamic cast with interface / runtime check of implementation of interface & cast
 8-create a implI(names...) for RTLL of interfaces
 3-Stream type and IToStream interface
-5-add python style format from Future
+5-add python style format from Future folder
 6-cout and cerr (f, fln, print, println)
 7-cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
 9-Object_getType segfault safe for instrospection
 10-Add a foreach method that yields!
-12-Handle nested Objects (without inheritance)
+12-Handle nested Objects (without inheritance) //for now only new&delete works there
 
 BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design!
+
+-1!!-New Idea : glue method name with number of arguments (new function method abi)!!!
+	Seemed a good idea but screw everything for va_args!!
+	Limit everything to one time and use __isinstanceof
+	Maybe okay actually (for_arg/bad_arg/bad_arg/...)
+	See : methodNameChange.c
