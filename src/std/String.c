@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 07:42:19 2015 penava_b
-** Last update Sun Jan 17 21:36:28 2016 penava_b
+** Last update Tue Jan 26 15:24:19 2016 penava_b
 */
 
 #include <string.h>
@@ -23,8 +23,12 @@ new_tor(String, ctor)
 new_tor(String, ctorS, const char *str)
 {
   superCtor(Object, ctor);
-  $.c_str = strdup(str);
   $.length = strlen(str);
+  $.c_str = malloc($.length + 1);
+  if (!$.c_str)
+    return ((void)($.length = 0));
+  memcpy($.c_str, str, $.length);
+  $.c_str[$.length] = 0;
 }
 
 new_tor(String, dtor)

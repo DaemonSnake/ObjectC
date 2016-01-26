@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Sat Jan 23 19:07:05 2016 penava_b
+## Last update Tue Jan 26 15:15:06 2016 penava_b
 ##
 
 CC =		gcc
@@ -20,7 +20,7 @@ SRC =		main.c 	\
 
 OBJ =		$(SRC:.c=.o)
 
-COMMON =	-W -Wall -Werror -Wextra -fplan9-extensions -g3 -finstrument-functions
+COMMON =	-W -Wall -Werror -Wextra -fplan9-extensions -g3 -finstrument-functions -std=c99
 
 CFLAGS =	$(COMMON) -I../inc
 
