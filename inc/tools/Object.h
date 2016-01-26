@@ -5,14 +5,14 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Sat Jan 23 04:55:08 2016 penava_b
+** Last update Tue Jan 26 14:34:13 2016 penava_b
 */
 
 #pragma once
 
 #define M(var, name, ...)						\
-  ((typeof(var))__new_push_tmp(var))->_virtual->name			\
-  (((typeof(var))__new_get_ptor())->this, ##__VA_ARGS__)
+  ((__typeof__(var))__new_push_tmp(var))->_virtual->name		\
+  (((__typeof__(var))__new_get_ptor())->this, ##__VA_ARGS__)
 
 void	*__new_push_tmp(const void *);
 void	*__new_get_ptor();

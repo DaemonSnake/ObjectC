@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:16:21 2015 penava_b
-** Last update Sat Jan 23 18:48:41 2016 penava_b
+** Last update Tue Jan 26 14:59:19 2016 penava_b
 */
 
 #pragma once
@@ -24,7 +24,7 @@ class(Debug, Object, I)
 
 virtual(Debug)
 {
-  axors(int, var, get);
+  axors(int, var, set, get);
 };
 
 end_decl(Debug);

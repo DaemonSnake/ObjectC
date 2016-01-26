@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Jan 20 18:44:41 2016 penava_b
-** Last update Thu Jan 21 02:24:41 2016 penava_b
+** Last update Tue Jan 26 14:35:36 2016 penava_b
 */
 
 #include <stdio.h>
@@ -85,7 +85,7 @@ char		*format(const char *format, ...)
 	      	  for (j = (args == 0 ? 0 : args->index + 1); j <= tmp; j++)
 		    {
 		      it = alloca(sizeof(*args));
-		      *it = (typeof(*args)){j, va_arg(ap, void *), args};
+		      *it = (__typeof__(*args)){j, va_arg(ap, void *), args};
 		      args = it;
 		    }
 	      	  it = args;

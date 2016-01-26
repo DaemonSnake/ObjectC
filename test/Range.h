@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Jan 23 18:48:43 2016 penava_b
-** Last update Mon Jan 25 17:29:01 2016 penava_b
+** Last update Tue Jan 26 14:36:25 2016 penava_b
 */
 
 #pragma once
@@ -15,7 +15,7 @@
 
 
 #define for_in(name, gen)						\
-  for (typeof((gen)->_virtual->operator_function_void(gen)) name =	\
+  for (__typeof__((gen)->_virtual->operator_function_void(gen)) name =	\
 	 (M(gen, reset, (gen)->_virtual->operator_function_void),	\
 	  M(gen, operator_function_void));				\
        M(gen, __continue); name = M(gen, operator_function_void))

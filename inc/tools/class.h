@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Tue Jan 26 13:26:19 2016 penava_b
+** Last update Tue Jan 26 14:35:05 2016 penava_b
 */
 
 #pragma once
@@ -79,26 +79,26 @@
 
 #define new_method(type, name, ...)					\
   type ## _fake_ ## name();						\
-  typeof(type ## _fake_ ## name())					\
+  __typeof__(type ## _fake_ ## name())					\
   type ## _ ## name(struct __private_ ## type * const this,		\
 		    ##__VA_ARGS__);					\
 									\
   __attribute__((constructor, no_instrument_function))			\
   static inline void	_imp_ ## name()					\
   {									\
-   void __implement_function_for_ ## type();				\
-   __implement_function_for_ ## type();					\
-   void __push_method_ ## type(void *, const char *, size_t);		\
-   __push_method_ ## type(type ## _ ## name, #name,			\
-			  offsetof(struct __virtual_ ## type, name));	\
-   }									\
+    void __implement_function_for_ ## type();				\
+    __implement_function_for_ ## type();				\
+    void __push_method_ ## type(void *, const char *, size_t);		\
+    __push_method_ ## type(type ## _ ## name, #name,			\
+			   offsetof(struct __virtual_ ## type, name));	\
+  }									\
 									\
-  typeof(type ## _fake_ ## name())					\
+  __typeof__(type ## _fake_ ## name())					\
   type ## _ ## name(struct __private_ ## type * const this, ##__VA_ARGS__)
 
 #define new_const_method(type, name, ...)				\
   type ## _fake_ ## name();						\
-  typeof(type ## _fake_ ## name())					\
+  __typeof__(type ## _fake_ ## name())					\
   type ## _ ## name(const struct __private_ ## type * const this,	\
 		    ##__VA_ARGS__);					\
 									\
@@ -112,7 +112,7 @@
 			    offsetof(struct __virtual_ ## type, name)); \
    }									\
 									\
-  typeof(type ## _fake_ ## name())					\
+  __typeof__(type ## _fake_ ## name())					\
   type ## _ ## name(const struct __private_ ## type * const this,	\
 		    ##__VA_ARGS__)
 

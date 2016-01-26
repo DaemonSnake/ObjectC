@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Mon Jan 25 17:41:39 2016 penava_b
+** Last update Tue Jan 26 14:59:44 2016 penava_b
 */
 
 #include <stdio.h>
@@ -175,6 +175,8 @@ Debug	return_instance_debug()
 
   printf("begining of returning function\n");
   printf("before return\n");
+  axM(&tmp, var, 84);
+  printf("Get data %d\n", axM(&tmp, var));
   return stdmove(tmp);
 }
 
