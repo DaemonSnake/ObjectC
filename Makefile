@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Tue Dec  8 20:35:08 2015 penava_b
-## Last update Tue Jan 26 15:04:16 2016 penava_b
+## Last update Thu Jan 28 16:21:27 2016 penava_b
 ##
 
 CC =		gcc
@@ -22,7 +22,8 @@ SRC =		src/class.c			\
 						\
 		src/std/Object.c		\
 		src/std/String.c		\
-		src/std/Generator.c
+		src/std/Generator.c		\
+		src/std/Exceptions.c
 
 OBJ =		$(SRC:.c=.o)
 

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 07:42:19 2015 penava_b
-** Last update Tue Jan 26 22:39:44 2016 penava_b
+** Last update Thu Jan 28 16:08:57 2016 penava_b
 */
 
 #include <string.h>
@@ -26,7 +26,7 @@ new_tor(String, ctorS, const char *str)
   $.length = strlen(str);
   $.c_str = malloc($.length + 1);
   if (!$.c_str)
-    return ((void)($.length = 0));
+    return ((void)($.length = 0)); //Throw badalloc exception
   memcpy($.c_str, str, $.length);
   $.c_str[$.length] = 0;
 }

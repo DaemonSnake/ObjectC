@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Mon Jan 25 02:03:32 2016 penava_b
+** Last update Thu Jan 28 15:18:26 2016 penava_b
 */
 
 #include "../inc/tools/for_each_va_args_macro.h"
@@ -30,10 +30,10 @@ typedef double String;
 #define Mv(x, name, ...)						\
   _virtual.name ## 0(x, ______VA_NARGS(x, ##__VA_ARGS__) - 1, ##__VA_ARGS__)
 
-#define new_vmethod(type, name, ...)					\
+#define new_var_method(type, name, ...)					\
   type ## _ ## name ## 0(type *this, ##__VA_ARGS__, unsigned __va_count__, ...)
 
-#define vmethod(name, ...)			\
+#define var_method(name, ...)			\
   (*name ## 0)(void *this, ##__VA_ARGS__, unsigned, ...)
 
 #include <stdarg.h>
@@ -87,7 +87,7 @@ void	new_method(int, printf)
   printf("%d\n", *this);
 }
 
-void	new_vmethod(int, printf)
+void	new_var_method(int, printf)
 {
   printf("Number of arguments is %d\n", __va_count__);
   for_arg(Object, arg)
@@ -103,7 +103,7 @@ void	new_vmethod(int, printf)
 struct virtual
 {
   void	method(printf);
-  void	vmethod(printf);
+  void	var_method(printf);
 }	_virtual = {
   (void *)int_printf1,
   (void *)int_printf0

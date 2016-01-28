@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Tue Jan 26 22:40:06 2016 penava_b
+** Last update Thu Jan 28 15:54:34 2016 penava_b
 */
 
 #include "ObjectC/Class.h"
