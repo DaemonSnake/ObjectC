@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Wed Dec 30 03:47:42 2015 penava_b
-** Last update Tue Jan  5 15:15:40 2016 penava_b
+** Last update Thu Jan 28 15:01:45 2016 penava_b
 */
 
 #include <stdio.h>
@@ -46,8 +46,25 @@ int		__get_current_level()
   return __stack_list.level;
 }
 
+static void	*__update_node(struct s_node *old_node,
+			      struct s_node *new_node)
+{
+  old_node->dtor(old_node->data);
+  old_node->dtor = new_node->dtor;
+  old_node->toclean = new_node->toclean;
+  old_node->level = new_node->level;
+  return new_node->data;
+}
+
 void		*__push_var(struct s_node *new_node)
 {
+  struct s_node *it;
+  
+  for(it = __stack_list.begin;
+      it != 0 && it->level == new_node->level && it->data > new_node->data;
+      it = it->next);
+  if (it && it->data == new_node->data)
+    return __update_node(it, new_node);
   new_node->next = __stack_list.begin;
   __stack_list.begin = new_node;
   return new_node->data;

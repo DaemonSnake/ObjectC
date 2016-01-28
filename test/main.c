@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Jan 26 22:42:35 2016 penava_b
+** Last update Thu Jan 28 14:58:31 2016 penava_b
 */
 
 #include <stdio.h>
@@ -90,6 +90,7 @@ void		invoke_test(void)
 
 void	string_test()
 {
+  String tmp1 _def(String, tmp1);
   String tmp _init(String, ctorS, tmp, "Hello");
 
   printf("STRING TEST::\n");
@@ -194,6 +195,14 @@ void	range_test()
     }
 }
 
+void	loop_init_test()
+{
+  for (int i = 0; i < 5; i++)
+    {
+      Debug tmp _def(Debug, tmp);
+    }
+}
+
 static Debug static_test;
 
 Ginit(Debug, ctor, static_test)
@@ -213,6 +222,7 @@ int	main()
     lreferencevalue_test,
     return_object_test,
     range_test,
+    loop_init_test,
     trace_back_test
   };
 
