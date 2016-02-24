@@ -16,3 +16,5 @@ BONUS?: create pragma that push a new value in a macro name -> would resolve muc
 	Limit everything to one time and use __isinstanceof
 	Maybe okay actually (for_arg/bad_arg/bad_arg/...)
 	See : methodNameChange.c
+
+(-fms-extensions for clang => -fplan9-extension)
