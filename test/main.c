@@ -5,11 +5,10 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Mar 22 09:08:52 2016 penava_b
+** Last update Tue Mar 22 10:35:39 2016 penava_b
 */
 
 #include <stdio.h>
-#include "Range.h"
 #include "Debug.h"
 
 const char *new_method(String, toString) //Bad override
@@ -128,9 +127,11 @@ void		exceptions()
 void		dynamic_func(const I *tmp)
 {
   Debug		*tmp2 = dynamic_cast(Debug, tmp);
-  I		*tmp3 = dynamic_cast(I, tmp2);
-  
-  printf("Interface : %p Back to class : %p Back to Interface : %p\n", tmp, tmp2, tmp3);
+  Object	*tmp3 = static_cast(Object, tmp2);
+
+  ifIs(I, tmp3) {
+    M(tmp3, print);
+  }
   printf("Object:%p\nB:%p\n", tmp, tmp2);
   printf("Object vtable %p\n", tmp->_virtual);
   printf("Start vtable %p\n", tmp2->_virtual);
@@ -186,12 +187,21 @@ void	return_object_test()
   printf("Return object %p\n", rvalue(return_instance_debug()));
 }
 
+int	range(Generator *this, int begin, int end)
+{
+  initYield();
+  for (int i = begin; i < end; i++)
+    yield(i);
+  return 0;
+}
+
 void	range_test()
 {
-  Range	tmp _init(Range, ctorBE, tmp, 0, 10);
+  Generator gen _def(Generator, gen);
+  int		i;
 
   printf("RANGE TEST::\n");
-  for_in(i, &tmp)
+  for_yield(&gen, range, i, 0, 10)
     {
       printf("range value %d\n", i);
     }

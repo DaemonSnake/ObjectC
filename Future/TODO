@@ -12,7 +12,7 @@
 12-Handle nested Objects (without inheritance) //for now only new&delete works there
 13-Remove use of generator in for_yield, make it create in for the generator -> for(Generator __this_generator__ = ...)
 
-BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design!
+BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design! |-> not possible wirdly enough :<
 
 -1!!-New Idea : glue method name with number of arguments (new function method abi)!!!
 	Seemed a good idea but screw everything for va_args!!

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Tue Mar 22 08:14:12 2016 penava_b
+** Last update Tue Mar 22 10:15:07 2016 penava_b
 */
 
 #pragma once
@@ -51,9 +51,6 @@ const Type		*Object_getType(const void *);
 # define		invokeM(method, obj, ...)				\
   (method)((void *)(((const Object * const)obj)->this), ##__VA_ARGS__)
 
-# define	       	ifIs(type, name)				\
-  if (__tmp_pointer__(dynamic_cast(type, name)))			\
+# define	       	ifIs(type, name, ...)				\
+  if (__tmp_pointer__(dynamic_cast(type, (name, ##__VA_ARGS__))))	\
     for (type *name = __tmp_pointer__((void *)0x42); name != 0; name = 0)
-
-# define		ifExprIs(type, val, name)			\
-  for (type *name = dynamic_cast(type, val); name != 0; name = 0)
