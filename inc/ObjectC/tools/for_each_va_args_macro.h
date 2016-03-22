@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Sun Jan 24 15:47:46 2016 penava_b
+** Last update Tue Mar 22 04:19:01 2016 penava_b
 */
 
 #pragma once
@@ -46,6 +46,8 @@
   ______VARARG_IMPL2(base, count, __VA_ARGS__)
 #define ______VARARG(base, ...)						\
   ______VARARG_IMPL(base, ______VA_NARGS(__VA_ARGS__), __VA_ARGS__)(__VA_ARGS__)
+
+//NEVER used ??
 #define ______VARARGP(base, ...)					\
   (*______VARARG_IMPL(base, ______VA_NARGS(__VA_ARGS__), (*, ), __VA_ARGS__))(__VA_ARGS__)
 

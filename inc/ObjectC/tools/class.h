@@ -5,39 +5,10 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Tue Jan 26 22:38:21 2016 penava_b
+** Last update Tue Mar 22 04:54:56 2016 penava_b
 */
 
 #pragma once
-
-#define interface(name)							\
-  typedef struct name name;						\
-									\
-  extern const Type * const						\
-  __attribute__((weak))							\
-       name ## _type_instance;						\
-  									\
-  struct	name							\
-  {									\
-    Object	*this;							\
-    const struct __virtual_ ## name *_virtual;				\
-  };									\
-									\
-  const Type * const							\
-  name ## _type_instance = (Type[1])					\
-  {									\
-    {									\
-      #name,								\
-      0,								\
-      sizeof(name),							\
-      0,								\
-      0,								\
-      0,								\
-      0									\
-    }									\
-  };									\
-									\
-  struct __virtual_ ## name
 
 #define class(name, extends, ...)					\
   typedef struct name name;						\
@@ -63,6 +34,36 @@
   void	name ## _dtor(struct __private_ ## name *this);			\
 									\
   struct __weak_data_ ## name
+
+#define interface(name)							\
+  typedef struct name name;						\
+									\
+  extern const Type * const						\
+  __attribute__((weak))							\
+       name ## _type_instance;						\
+  									\
+  struct	name							\
+  {									\
+    Object	*this;							\
+    const struct __virtual_ ## name *_virtual;				\
+  };									\
+									\
+  const Type * const							\
+  name ## _type_instance = (Type[1])					\
+  {									\
+    {									\
+      #name,								\
+      0,								\
+      sizeof(name),							\
+      0,								\
+      0,								\
+      0,								\
+      0,								\
+      0									\
+    }									\
+  };									\
+									\
+  struct __virtual_ ## name
 
 #define virtual(name)				\
   struct __weak_virtual_ ## name

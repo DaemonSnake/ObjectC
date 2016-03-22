@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Tue Jan 26 14:34:34 2016 penava_b
+** Last update Tue Mar 22 05:21:23 2016 penava_b
 */
 
 #pragma once
@@ -16,12 +16,10 @@ void	__call_class_super_dtor(Object * const);
 #define implement(name, extends, ...)					\
 									\
   __attribute__((no_instrument_function))				\
-  static void *__pre_ctor_ ## name(struct __private_ ##name *this)	\
+  static void *__pre_ctor_ ## name(struct __private_ ## name *this)	\
   {									\
-    unsigned long offset = sizeof(struct __virtual_ ## extends);	\
     void	__pre_ctor_Object_child(const void *, const void *);	\
 									\
-    (void)offset;							\
     __pre_ctor_Object_child(this, name ## _type_instance);		\
     this->this = (void *)this;						\
     this->_virtual = __vtable_instance_ ## name;			\
@@ -38,13 +36,14 @@ void	__call_class_super_dtor(Object * const);
       sizeof(struct __virtual_ ## name) / sizeof(void *),		\
       (const char *[sizeof(struct __virtual_ ## name) / sizeof(void *)])\
       {},								\
+      ______VA_NARGS(__VA_ARGS__),					\
       (void *)__pre_ctor_ ## name,					\
       (void *)name ## _ ## dtor						\
     };									\
 									\
   const Type * const name ## _type_instance =				\
     &true_ ## name ## _type_instance;					\
-									\
+  									\
   static struct __virtual_ ## name __true_vtable_instance_ ## name;	\
 									\
   const struct __virtual_ ## name * const __vtable_instance_ ## name =	\

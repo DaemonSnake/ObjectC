@@ -1,3 +1,7 @@
+-> Move part of implementation in the class macro in the class.h header file.
+
+// remove pre_ctor in type and replace with void * holding default object + make pre_ctor static inline && constructor
+
 1-Make up my mind on wether or not toString allocates or not! (or return a String object (* or not)) [ NEEDED FOR FORMAT! ]
 2-Dynamic cast with interface / runtime check of implementation of interface & cast
 8-create a implI(names...) for RTLL of interfaces
@@ -8,6 +12,7 @@
 9-Object_getType segfault safe for instrospection
 10-Add a foreach method that yields!
 12-Handle nested Objects (without inheritance) //for now only new&delete works there
+13-Remove use of generator in for_yield, make it create in for the generator -> for(Generator __this_generator__ = ...)
 
 BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design!
 

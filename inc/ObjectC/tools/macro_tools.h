@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:21:22 2015 penava_b
-** Last update Sat Jan 23 15:23:04 2016 penava_b
+** Last update Tue Mar 22 05:21:08 2016 penava_b
 */
 
 #pragma once
@@ -50,11 +50,17 @@
   name *__true_this_ ## name;			\
   struct __virtual_ ## name *_virtual_ ## name;
 
-#define __implements_in_ctor__(name)				\
-  this->this_ ## name = (void *)&this->__true_this_ ## name;	\
-  this->__true_this_ ## name = (void *)this;			\
-  this->_virtual_ ## name = (void *)this->_virtual + offset;	\
-  offset += sizeof(struct __virtual_ ## name);
+#define __implements_in_ctor__(name)					\
+  this->this_ ## name = (void *)&this->__true_this_ ## name;		\
+  this->__true_this_ ## name = (void *)this;				\
+  if (42)								\
+    {									\
+      void *__offset__(struct __virtual_ ## name *tmp)			\
+      {									\
+	return tmp;							\
+      }									\
+      this->_virtual_ ## name = __offset__(this->_virtual);		\
+    }									\
 
 /* AXORS METHODS DECL */
 

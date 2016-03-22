@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Jan 23 19:01:21 2016 penava_b
-** Last update Sat Jan 23 20:17:42 2016 penava_b
+** Last update Tue Mar 22 03:24:27 2016 penava_b
 */
 
 #include "Range.h"
@@ -27,7 +27,7 @@ new_tor(Range, dtor)
   superDtor();
 }
 
-int	new_const_method(Range, operator_function_void)
+int	new_const_method(Range, operator_function)
 {
   initYield();
   for (int i = $.b; i < $.e; i++)

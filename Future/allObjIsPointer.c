@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Jan 28 14:08:29 2016 penava_b
-** Last update Thu Jan 28 14:42:42 2016 penava_b
+** Last update Wed Mar  9 23:26:07 2016 penava_b
 */
 
 #include <stdio.h>
@@ -52,8 +52,9 @@ void	String_ctor(String this, const char *str)
 
 int	main()
 {
-  const(String) tmp _init(String, ctor, "Hello");
-  String	tmp2 _init(String, ctor, "Yolo");
+  const(String) tmp _init(String, ctor, "Hello"); // stack
+  String	tmp2 _init(String, ctor, "Yolo"); // stack
+  String	tmp3 = new(String, ctor, "Yia"); // heap
 
   tmp->print(tmp);
   tmp2->print(tmp2);
