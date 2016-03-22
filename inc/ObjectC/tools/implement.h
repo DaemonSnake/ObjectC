@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Tue Mar 22 06:21:17 2016 penava_b
+** Last update Tue Mar 22 09:23:30 2016 penava_b
 */
 
 #pragma once
@@ -35,9 +35,9 @@ void	__call_class_super_dtor(Object * const);
       sizeof(name),							\
       sizeof(struct __virtual_ ## name) / sizeof(void *),		\
       (const char *[sizeof(struct __virtual_ ## name) / sizeof(void *)]){0}, \
-      ______VA_NARGS(__VA_ARGS__),					\
-      (const Type *[______VA_NARGS(__VA_ARGS__)]){0},			\
-      (unsigned long [______VA_NARGS(__VA_ARGS__)]){0},			\
+      sizeof(struct __interfaces_for_ ## name),				\
+      (const Type *[sizeof(struct __interfaces_for_ ## name)]){0},	\
+      (unsigned long [sizeof(struct __interfaces_for_ ## name)]){0},	\
       (void *)__pre_ctor_ ## name,					\
       (void *)name ## _ ## dtor						\
     };									\
@@ -72,7 +72,13 @@ void	__call_class_super_dtor(Object * const);
 	  extends ## _type_instance->methodsName[i];			\
       }									\
     __true_vtable_instance_ ## name.dtor = (void *)name ## _ ## dtor;	\
-    i = 0;								\
+    for (i = 0; i < extends ## _type_instance->nbImplements; i++)	\
+      {									\
+	true_ ## name ## _type_instance.implements[i] =			\
+	  extends ## _type_instance->implements[i];			\
+	true_ ## name ## _type_instance.offsets[i] =			\
+	  extends ## _type_instance->offsets[i];			\
+      }									\
     APPLY_MACRO_VAR_TWO(__interface_implements__, name, ##__VA_ARGS__);	\
   }									\
       									\

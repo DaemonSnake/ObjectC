@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Tue Mar 22 06:20:16 2016 penava_b
+** Last update Tue Mar 22 09:24:44 2016 penava_b
 */
 
 #pragma once
@@ -22,6 +22,12 @@
   };									\
 									\
   struct __private_ ## name;						\
+									\
+  struct __interfaces_for_ ## name					\
+  {									\
+    char _0[sizeof(struct __interfaces_for_ ## extends)];		\
+    char _1[______VA_NARGS(__VA_ARGS__)];				\
+  };									\
 									\
   struct __supers_data_ ## name						\
   {									\

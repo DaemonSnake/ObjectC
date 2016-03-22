@@ -5,12 +5,25 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec 12 22:09:46 2015 penava_b
-** Last update Tue Mar 22 07:17:44 2016 penava_b
+** Last update Tue Mar 22 09:19:18 2016 penava_b
 */
 
 #include "ObjectC/Class.h"
 #include "ObjectC/String.h"
 #include <string.h>
+
+
+static
+__thread void	*__tmp_pointer_for_ifIs__ = 0;
+
+void		*__tmp_pointer__(void *new_val)
+{
+  if (new_val == 0)
+    return (void *)0;
+  if (new_val != (void *)0x42)
+    __tmp_pointer_for_ifIs__ = new_val;
+  return __tmp_pointer_for_ifIs__;
+}
 
 void     	*__dynamic_cast(const Type *my, const Type *their, void *obj)
 {
@@ -42,7 +55,7 @@ void		__call_class_super_dtor(Object * const this)
   if (super == 0)
     return ;
   ((struct __private_Object * const)this)->__class_type = super;
-  super->dtor(this->this);
+  super->dtor(this);
 }
 
 const void     	*__typeGetMethod(const Type * const type,

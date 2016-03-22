@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Tue Jan 26 14:34:13 2016 penava_b
+** Last update Tue Mar 22 09:18:19 2016 penava_b
 */
 
 #pragma once
@@ -24,6 +24,10 @@ struct	__virtual_Object
   void	(*dtor)(void *);
   const char *(*toString)(const void *);
   const Type *(*getType)(const void *);
+};
+
+struct __interfaces_for_Object
+{
 };
 
 struct	__data_weak_Object

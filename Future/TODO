@@ -3,8 +3,6 @@
 // remove pre_ctor in type and replace with void * holding default object + make pre_ctor static inline && constructor
 
 1-Make up my mind on wether or not toString allocates or not! (or return a String object (* or not)) [ NEEDED FOR FORMAT! ]
-2-Dynamic cast with interface / runtime check of implementation of interface & cast
-8-create a implI(names...) for RTLL of interfaces
 3-Stream type and IToStream interface
 5-add python style format from Future folder
 6-cout and cerr (f, fln, print, println)
