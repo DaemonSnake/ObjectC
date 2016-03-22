@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Tue Mar 22 05:21:23 2016 penava_b
+** Last update Tue Mar 22 06:21:17 2016 penava_b
 */
 
 #pragma once
@@ -34,9 +34,10 @@ void	__call_class_super_dtor(Object * const);
       0,								\
       sizeof(name),							\
       sizeof(struct __virtual_ ## name) / sizeof(void *),		\
-      (const char *[sizeof(struct __virtual_ ## name) / sizeof(void *)])\
-      {},								\
+      (const char *[sizeof(struct __virtual_ ## name) / sizeof(void *)]){0}, \
       ______VA_NARGS(__VA_ARGS__),					\
+      (const Type *[______VA_NARGS(__VA_ARGS__)]){0},			\
+      (unsigned long [______VA_NARGS(__VA_ARGS__)]){0},			\
       (void *)__pre_ctor_ ## name,					\
       (void *)name ## _ ## dtor						\
     };									\
@@ -44,7 +45,7 @@ void	__call_class_super_dtor(Object * const);
   const Type * const name ## _type_instance =				\
     &true_ ## name ## _type_instance;					\
   									\
-  static struct __virtual_ ## name __true_vtable_instance_ ## name;	\
+  static struct __virtual_ ## name __true_vtable_instance_ ## name = {0}; \
 									\
   const struct __virtual_ ## name * const __vtable_instance_ ## name =	\
     &__true_vtable_instance_ ## name;					\
@@ -70,13 +71,9 @@ void	__call_class_super_dtor(Object * const);
 	true_ ## name ## _type_instance.methodsName[i] =		\
 	  extends ## _type_instance->methodsName[i];			\
       }									\
-    for (; i < sizeof(struct __virtual_ ## name)			\
-	   / sizeof(void *); i++)					\
-      {									\
-	((void **)&__true_vtable_instance_ ## name)[i] = 0;		\
-	true_ ## name ## _type_instance.methodsName[i] = 0;		\
-      }									\
     __true_vtable_instance_ ## name.dtor = (void *)name ## _ ## dtor;	\
+    i = 0;								\
+    APPLY_MACRO_VAR_TWO(__interface_implements__, name, ##__VA_ARGS__);	\
   }									\
       									\
   __attribute__((no_instrument_function))				\

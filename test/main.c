@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Mar 22 05:00:14 2016 penava_b
+** Last update Tue Mar 22 07:20:17 2016 penava_b
 */
 
 #include <stdio.h>
@@ -128,7 +128,9 @@ void		exceptions()
 void		dynamic_func(const I *tmp)
 {
   Debug		*tmp2 = dynamic_cast(Debug, tmp);
-
+  I		*tmp3 = dynamic_cast(I, tmp2);
+  
+  printf("Interface : %p Back to class : %p Back to Interface : %p\n", tmp, tmp2, tmp3);
   printf("Object:%p\nB:%p\n", tmp, tmp2);
   printf("Object vtable %p\n", tmp->_virtual);
   printf("Start vtable %p\n", tmp2->_virtual);

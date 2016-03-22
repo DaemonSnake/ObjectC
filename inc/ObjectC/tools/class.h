@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Tue Mar 22 04:54:56 2016 penava_b
+** Last update Tue Mar 22 06:20:16 2016 penava_b
 */
 
 #pragma once
@@ -55,6 +55,8 @@
       #name,								\
       0,								\
       sizeof(name),							\
+      0,								\
+      0,								\
       0,								\
       0,								\
       0,								\

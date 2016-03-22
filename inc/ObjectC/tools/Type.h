@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Tue Mar 22 04:53:36 2016 penava_b
+** Last update Tue Mar 22 07:19:33 2016 penava_b
 */
 
 #pragma once
@@ -17,16 +17,15 @@ typedef			struct Type
   unsigned long		size;
   unsigned long		nbMethods;
   const char   		**methodsName;
-  //
   unsigned		nbImplements;
-  /* const struct Type	**implements; // -> find a way to count (structure of pointers ?) */
-  /* unsigned long	*offsets; // -> offset of this_nameofinterface for dynamic_cast */
-  //
+  const struct Type	**implements;
+  unsigned long		*offsets;
   void			*(*pre_ctor)(void *);
   void			(*dtor)(void *);
 }			Type;
 
 char			__is_same_kind_type(const Type *, const Type *);
+void     		*__dynamic_cast(const Type *, const Type *, void *);
 const void		*__typeGetMethod(const Type * const, const void * const * const, const char const *);
 const Type		*Object_getType(const void *);
 
@@ -35,8 +34,7 @@ const Type		*Object_getType(const void *);
 #define as(type) .this_ ## type //takes value
 
 #define dynamic_cast(type, var)						\
-  (__is_same_kind_type(Object_getType(var), type ##_type_instance) ? \
-   (type *)var->this : 0)
+  ((type *)__dynamic_cast(Object_getType(var), type ##_type_instance, var->this))
 
 #define isInstanceOf(type, pointer)					\
   (pointer != NULL &&							\

@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:21:22 2015 penava_b
-** Last update Tue Mar 22 05:21:08 2016 penava_b
+** Last update Tue Mar 22 06:34:06 2016 penava_b
 */
 
 #pragma once
@@ -55,12 +55,17 @@
   this->__true_this_ ## name = (void *)this;				\
   if (42)								\
     {									\
-      void *__offset__(struct __virtual_ ## name *tmp)			\
+      __attribute__((always_inline, no_instrument_function))		\
+      inline void *__offset__(struct __virtual_ ## name *tmp)		\
       {									\
 	return tmp;							\
       }									\
       this->_virtual_ ## name = __offset__(this->_virtual);		\
     }									\
+
+#define __interface_implements__(name, interface)			\
+  true_ ## name ## _type_instance.implements[i] = interface ## _type_instance; \
+  true_ ## name ## _type_instance.offsets[i++] = offsetof(name, __true_this_ ## interface)
 
 /* AXORS METHODS DECL */
 

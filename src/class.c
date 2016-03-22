@@ -5,21 +5,33 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec 12 22:09:46 2015 penava_b
-** Last update Tue Jan 26 22:40:01 2016 penava_b
+** Last update Tue Mar 22 07:17:44 2016 penava_b
 */
 
 #include "ObjectC/Class.h"
 #include "ObjectC/String.h"
 #include <string.h>
 
-char		__is_same_kind_type(const Type * my, const Type *their)
+void     	*__dynamic_cast(const Type *my, const Type *their, void *obj)
 {
   const Type   	*tmp;
-
+  unsigned	i;
+  
   for (tmp = my; tmp != 0; tmp = tmp->super)
-    if (tmp == their)
-      return 42;
-  return 0;
+    {
+      if (tmp == their)
+	return obj;
+      else if (tmp->nbImplements && tmp->implements && tmp->offsets)
+	for (i = 0; i < tmp->nbImplements; i++)
+	  if (tmp->implements[i] == their)
+	    return ((char *)obj) + tmp->offsets[i];
+    }
+  return (void *)0;
+}
+
+char		__is_same_kind_type(const Type * my, const Type *their)
+{
+  return (__dynamic_cast(my, their, (void *)0x42) ? 42 : 0);
 }
 
 void		__call_class_super_dtor(Object * const this)

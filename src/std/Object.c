@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Tue Mar 22 04:56:10 2016 penava_b
+** Last update Tue Mar 22 06:20:07 2016 penava_b
 */
 
 #include "ObjectC/Class.h"
@@ -63,6 +63,8 @@ static Type	true_Object_type_instance =
     sizeof(struct __virtual_Object) / sizeof(void *),
     (const char *[sizeof(struct __virtual_Object) / sizeof(void *)])
     {"dtor", "toString", "getType"},
+    0,
+    0,
     0,
     (void *)__pre_ctor_Object,
     (void *)Object_dtor

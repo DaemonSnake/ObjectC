@@ -5,12 +5,12 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Tue Mar 22 04:19:01 2016 penava_b
+** Last update Tue Mar 22 05:50:34 2016 penava_b
 */
 
 #pragma once
 
-/* apply first argument to all the other argument, can handle 10 args max */
+/* apply first argument to all the other argument, can handle 100 args max */
 #define APPLY_MACRO_VAR(macro, ...) ______VARARG(_____VARS, macro, ##__VA_ARGS__)
 #define APPLY_MACRO_VAR_TWO(macro, arg, ...) ______VARARG(_____VARS_TWO, macro, arg, ##__VA_ARGS__)
 #define axM(this, name, ...) ______VARARG(__axor_call_, this, name, ##__VA_ARGS__)
