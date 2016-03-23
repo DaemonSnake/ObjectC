@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec  5 16:24:38 2015 penava_b
-** Last update Fri Feb  5 05:34:39 2016 penava_b
+** Last update Wed Mar 23 06:07:55 2016 penava_b
 */
 
 #pragma once
@@ -46,9 +46,8 @@ void		__reset_clean_up();
 	}								\
     }
 
-#define for_yield(x, Func, ret, ...)					\
-  for (M(x, reset, Func), ret = Func(x, ##__VA_ARGS__);			\
-       M(x, __continue);						\
-       ret = ((__typeof__(ret)(*)(Generator *,...))(M(x, getFunc)))(x))
-
-#define yield_interupt(x) if ((M(x, clean), 42))
+#define for_yield(Func, ret, ...)					\
+  for (Generator *this_gen = function_lrvalue(Generator, ctorF, Func); this_gen != 0; this_gen = 0) \
+    for (__typeof__(Func(this_gen, ##__VA_ARGS__)) ret = Func(this_gen, ##__VA_ARGS__);	\
+	 M(this_gen, __continue);					\
+	 ret = (!axM(this_gen, last) ? ((__typeof__(ret)(*)(Generator *, ...))(M(this_gen, getFunc)))(this_gen) : ret))

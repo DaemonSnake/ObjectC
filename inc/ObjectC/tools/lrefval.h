@@ -1,11 +1,11 @@
 /*
-** lrefval.h for  in /home/penava_b/perso/Obj/Obj4/Future/LeftValueRef
+1;2802;0c** lrefval.h for  in /home/penava_b/perso/Obj/Obj4/Future/LeftValueRef
 ** 
 ** Made by penava_b
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:12:30 2016 penava_b
-** Last update Sat Jan 23 04:03:52 2016 penava_b
+** Last update Wed Mar 23 06:05:07 2016 penava_b
 */
 
 #pragma once
@@ -44,6 +44,18 @@ void		__push_back_on_stack(void *, int);
 			}})), ##__VA_ARGS__),				\
     __delayed_level_encrementation(),					\
     (type *)__get_front_var_list())
+
+#define function_lrvalue(type, ctor, ...)				\
+  (type ## _ ## ctor							\
+   (type ## _type_instance->pre_ctor					\
+    (__push_var((struct s_left_reference_value_node[1])			\
+		{{ (type[1]){},						\
+		      (void *)type ## _dtor,				\
+			42,						\
+			__get_current_level(),				\
+			(void *)0					\
+			}})), ##__VA_ARGS__),				\
+   (type *)__get_front_var_list())
 
 #define stdmove(x) (*(__typeof__(x) *)__prevent_clean_up_var(&x))
 

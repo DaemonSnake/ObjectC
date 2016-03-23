@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Sat Dec  5 15:43:48 2015 penava_b
-** Last update Tue Jan 26 22:38:54 2016 penava_b
+** Last update Wed Mar 23 05:51:47 2016 penava_b
 */
 
 #pragma once
@@ -20,6 +20,7 @@ class(Generator, Object)
   long		stack_node;
   char		alive;
   char		init;
+  char		last;
   unsigned long	size;
 };
 
@@ -36,6 +37,10 @@ virtual(Generator)
   void		method(beforeYield);
   char		method(isInitialized);
   void		*const_method(getFunc);
+
+  axors(char, last, get);
 };
+
+new_tor(Generator, ctorF, void *);
 
 end_decl(Generator);

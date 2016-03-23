@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Tue Mar 22 10:35:39 2016 penava_b
+** Last update Wed Mar 23 06:08:13 2016 penava_b
 */
 
 #include <stdio.h>
@@ -29,17 +29,12 @@ String	*yieldList(Generator *this)
 
 void		yieldTest()
 {
-  Generator	tmp _def(Generator, tmp);
-  String	*str;
-
   printf("YIELD::\n");
-  for_yield(&tmp, yieldList, str)
+  for_yield(yieldList, str)
     {
-      printf("Yield : '%s'\n", M(str, c_str));
+      printf("Yield2 : '%s'\n", M(str, c_str));
       delete(str);
     }
-  printf("Returned string '%s'\n", M(str, c_str));
-  delete(str);
 }
 
 void		type(void)
@@ -192,16 +187,13 @@ int	range(Generator *this, int begin, int end)
   initYield();
   for (int i = begin; i < end; i++)
     yield(i);
-  return 0;
+  return end;
 }
 
 void	range_test()
 {
-  Generator gen _def(Generator, gen);
-  int		i;
-
   printf("RANGE TEST::\n");
-  for_yield(&gen, range, i, 0, 10)
+  for_yield(range, i, 0, 10)
     {
       printf("range value %d\n", i);
     }

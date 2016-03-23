@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Tue Jan 26 22:39:47 2016 penava_b
+** Last update Wed Mar 23 05:50:51 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -20,11 +20,21 @@ new_tor(Generator, ctor)
   $.alive = 0;
   $.init = 0;
   $.size = 0;
+  $.last = 0;
+}
+
+#define $$(method, ...) M(this, method, ##__VA_ARGS__) // ??
+
+new_tor(Generator, ctorF, void *func)
+{
+  Generator_ctor(this);
+  $$(reset, func);
 }
 
 new_tor(Generator, dtor)
 {
   M(this, clean);
+  $$(clean);
   superDtor();
 }
 
@@ -102,6 +112,7 @@ void		new_method(Generator, reset, void *func)
   $.stack = 0;
   $.alive = 42;
   $.init = 0;
+  $.last = 0;
 }
 
 void	        new_method(Generator, clean)
@@ -124,8 +135,14 @@ char	        new_method(Generator, __continue)
     return 42;
   if (this == NULL)
     return 0;
-  M(this, clean);
-  return 0;
+  if ($.last)
+    {
+      M(this, clean);
+      return 0;
+    }
+  return ($.last = 42);
 }
+
+new_def_axors(Generator, last, get);
 
 implement(Generator, Object) {}
