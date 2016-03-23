@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Tue Jan 26 22:39:55 2016 penava_b
+** Last update Wed Mar 23 08:32:10 2016 penava_b
 */
 
 #include <stdio.h>
@@ -103,6 +103,7 @@ static void    	trace_back(const char *file, const char *func, int line)
 	      tmp->file, tmp->func, tmp->line);
   fprintf(stderr, "Uncaught exception: (%s): '%s'\n", list->type->name, M(list->obj, toString));
   pop_current();
+  __exit_end_func(-1);
   exit(42);
 }
 

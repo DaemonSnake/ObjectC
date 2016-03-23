@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Wed Mar 23 06:08:13 2016 penava_b
+** Last update Wed Mar 23 06:28:41 2016 penava_b
 */
 
 #include <stdio.h>
@@ -231,8 +231,8 @@ int	main()
   };
 
   for (unsigned i = 0; i < sizeof(tests) / sizeof(void *); i++) {
+    printf("\n");
     tests[i]();
-    (i + 1) < sizeof(tests) / sizeof(tests[0]) ? printf("\n") : 0;
   }
   return 0;
 }

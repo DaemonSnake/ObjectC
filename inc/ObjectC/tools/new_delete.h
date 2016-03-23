@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Tue Jan 26 22:40:50 2016 penava_b
+** Last update Wed Mar 23 08:27:48 2016 penava_b
 */
 
 #pragma once
@@ -30,14 +30,15 @@ void	*__malloc(size_t);
 
 #define _init(type, ctor, var, ...)				\
   =								\
-    (type ## _ ## ctor						\
+    (__protect_kill_stack((char[1]){0}),			\
+     type ## _ ## ctor						\
      (type ## _type_instance->pre_ctor				\
       (__push_var((struct s_left_reference_value_node[1])	\
 		  {{ &var,					\
 			(void *)type ## _dtor,			\
 			42,					\
 			__get_current_level(),			\
-			(void *)0				\
+			(void *)0, (void *)0			\
 			}})), ##__VA_ARGS__),			\
      var)
  
@@ -48,14 +49,16 @@ void	*__malloc(size_t);
   static inline void	__global_ctor_ ## var()				\
   {									\
     static								\
-      struct s_left_reference_value_node	tmp = {						\
+      struct s_left_reference_value_node	tmp = {			\
       &var,								\
       (void *)type ## _dtor,						\
       42,								\
       0,								\
+      (void *)0,							\
       (void *)0								\
     };									\
     									\
+    __protect_kill_stack((char[1]){0});					\
     type ## _ ## ctor							\
       (type ## _type_instance->pre_ctor					\
        (__push_var(&tmp)), ##__VA_ARGS__);				\

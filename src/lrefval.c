@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Wed Dec 30 03:47:42 2015 penava_b
-** Last update Thu Jan 28 15:01:45 2016 penava_b
+** Last update Wed Mar 23 08:30:26 2016 penava_b
 */
 
 #include <stdio.h>
@@ -25,8 +25,13 @@ struct
     int		level;
     struct
     s_node	*next;
+    void	*id;
   }		*begin;
-}	        __stack_list = {0, 0, 0};
+
+  void		*new_id;
+  struct s_node	*to_update;
+  struct s_node	*to_update_next;
+}	        __stack_list = {0, 0, 0, 0, 0, 0};
 
 long		__get_front_node_diff(const char *rbp)
 {
@@ -46,27 +51,33 @@ int		__get_current_level()
   return __stack_list.level;
 }
 
-static void	*__update_node(struct s_node *old_node,
-			      struct s_node *new_node)
+void		__protect_kill_stack(void *id)
 {
-  old_node->dtor(old_node->data);
-  old_node->dtor = new_node->dtor;
-  old_node->toclean = new_node->toclean;
-  old_node->level = new_node->level;
-  return new_node->data;
+  __stack_list.new_id = id;
+  for (struct s_node *node = __stack_list.begin; node != 0 && node->level == __stack_list.level; node = node->next)
+    if (node->id == id)
+      {
+	__stack_list.to_update = node;
+	__stack_list.to_update_next = node->next;
+	node->dtor(node->data);
+	break ;
+      }
 }
 
 void		*__push_var(struct s_node *new_node)
 {
-  struct s_node *it;
-  
-  for(it = __stack_list.begin;
-      it != 0 && it->level == new_node->level && it->data > new_node->data;
-      it = it->next);
-  if (it && it->data == new_node->data)
-    return __update_node(it, new_node);
-  new_node->next = __stack_list.begin;
-  __stack_list.begin = new_node;
+  if (new_node == __stack_list.to_update)
+    {
+      new_node->next = __stack_list.to_update_next;
+      __stack_list.to_update = 0;
+      __stack_list.to_update_next = 0;
+    }
+  else
+    {
+      new_node->next = __stack_list.begin;
+      __stack_list.begin = new_node;
+    }
+  new_node->id = __stack_list.new_id;
   return new_node->data;
 }
 
@@ -116,7 +127,7 @@ void		__reset_clean_up()
 
 void		__delayed_level_encrementation()
 {
-  if (__stack_list.begin == 0)
+  if (__stack_list.begin == 0 || __stack_list.level == 0)
     return ;
   __stack_list.begin->level++;
 }
