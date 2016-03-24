@@ -5,8 +5,10 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Jan 28 15:55:07 2016 penava_b
-** Last update Thu Jan 28 16:32:38 2016 penava_b
+** Last update Thu Mar 24 05:23:59 2016 penava_b
 */
+
+#pragma once
 
 #include "ObjectC/Class.h"
 

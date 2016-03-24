@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 17:42:16 2015 penava_b
-** Last update Tue Mar 22 10:34:18 2016 penava_b
+** Last update Thu Mar 24 05:22:02 2016 penava_b
 */
 
 #pragma once
@@ -20,3 +20,4 @@
 #include "ObjectC/tools/exceptions.h"
 #include "ObjectC/tools/lrefval.h"
 #include "ObjectC/yield.h"
+#include "ObjectC/Exceptions.h"

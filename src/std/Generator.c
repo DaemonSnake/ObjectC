@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Wed Mar 23 05:50:51 2016 penava_b
+** Last update Thu Mar 24 06:03:41 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -141,6 +141,13 @@ char	        new_method(Generator, __continue)
       return 0;
     }
   return ($.last = 42);
+}
+
+void		new_method(Generator, __break)
+{
+  $.alive = 0;
+  $.label = NULL;
+  $.last = 42;
 }
 
 new_def_axors(Generator, last, get);

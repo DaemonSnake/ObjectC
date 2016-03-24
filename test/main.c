@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Wed Mar 23 06:28:41 2016 penava_b
+** Last update Thu Mar 24 06:31:05 2016 penava_b
 */
 
 #include <stdio.h>
@@ -30,7 +30,7 @@ String	*yieldList(Generator *this)
 void		yieldTest()
 {
   printf("YIELD::\n");
-  for_yield(yieldList, str)
+  for_yield(str, yieldList)
     {
       printf("Yield2 : '%s'\n", M(str, c_str));
       delete(str);
@@ -184,16 +184,30 @@ void	return_object_test()
 
 int	range(Generator *this, int begin, int end)
 {
+  int  	i;
+  char	sup = (end > begin);
+
   initYield();
-  for (int i = begin; i < end; i++)
+  if (begin == end)
+    yield_break;
+  for (i = begin; (sup ? i < end - 1 : i > end + 1); i += (sup ? 1 : -1))
     yield(i);
-  return end;
+  return i;
 }
 
 void	range_test()
 {
   printf("RANGE TEST::\n");
-  for_yield(range, i, 0, 10)
+  for_yield(i, range, 0, 0)
+    {
+      fprintf(stderr, "Error if printer???\n");
+    }
+  for_yield(i, range, 0, 10)
+    {
+      printf("range value %d\n", i);
+    }
+  printf("\nBackward\n");
+  for_yield(i, range, 10, 0)
     {
       printf("range value %d\n", i);
     }

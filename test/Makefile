@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Tue Mar 22 10:32:01 2016 penava_b
+## Last update Thu Mar 24 06:32:30 2016 penava_b
 ##
 
 CC =		gcc
@@ -45,7 +45,7 @@ layout.c:
 			./debug/structDump $$file $(CFLAGS) > layout.c;		\
 		done;
 
-cleanlib:
-		@$(MAKE) -C ../ clean
+cleanlib:	fclean
+		@$(MAKE) -C ../ fclean
 
 relib:		fclean cleanlib all
