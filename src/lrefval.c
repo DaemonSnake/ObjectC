@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 **
 ** Started on  Wed Dec 30 03:47:42 2015 penava_b
-** Last update Wed Mar 23 09:02:00 2016 penava_b
+** Last update Sun Mar 27 07:43:24 2016 penava_b
 */
 
 #include <stdio.h>
@@ -17,6 +17,7 @@ struct
 {
   int		level;
   void		(*return_dtor)(void *);
+
   struct	s_node
   {
     void	*data;
@@ -32,6 +33,8 @@ struct
   struct s_node	*to_update;
   struct s_node	*to_update_next;
 }	        __stack_list = {0, 0, 0, 0, 0, 0};
+
+void		__except_clean_exit_func(int);
 
 long		__get_front_node_diff(const char *rbp)
 {
@@ -110,6 +113,7 @@ void		__exit_end_func(int level)
   for (node = begin; node != 0 && node != __stack_list.begin; node = node->next)
     if (node->dtor != 0 && node->toclean != 0)
       node->dtor(node->data);
+  __except_clean_exit_func(level);
   __stack_list.level = level - 1;
 }
 

@@ -1,5 +1,7 @@
 -> Move part of implementation in the class macro in the class.h header file.
 
+-> issue with finally when throw in it and is in an uncaught state => replace old exception (no memory lost though)
+
 // remove pre_ctor in type and replace with void * holding default object + make pre_ctor static inline && constructor
 
 1-Make up my mind on wether or not toString allocates or not! (or return a String object (* or not)) [ NEEDED FOR FORMAT! ]
@@ -11,6 +13,7 @@
 10-Add a foreach method that yields!
 12-Handle nested Objects (without inheritance) //for now only new&delete works there
 13-Remove use of generator in for_yield, make it create in for the generator -> for(Generator __this_generator__ = ...)
+14-create a scope(var) {} construct
 15-Add the $$(method_name, args...) idea (see in Generator.c)
 
 BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design! |-> not possible wirdly enough :<

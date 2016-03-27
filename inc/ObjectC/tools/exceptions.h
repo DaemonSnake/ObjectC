@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Tue Jan 26 22:38:27 2016 penava_b
+** Last update Sun Mar 27 08:12:24 2016 penava_b
 */
 
 #pragma once
@@ -20,16 +20,17 @@ void	       	__except_throw_func(const void *, void *, const char *,
 				    const char *, int);
 int	       	__except_catch_func(const void *);
 void		*__except_get_data();
-char		__except_get_catch_tool(int);
+char		__except_get_catch_tool();
 int		__except_try_n_finally();
 int		__except_is_try();
+void		__except_dtor(void *);
 
 struct	       	__except_list_node
 {
   char	       	status;
   char		caught;
   jmp_buf      	buff;
-  char		catchTool[2];
+  char		catchTool;
   const void   	*type;
   void	 	*obj;
   void    	*origin;
@@ -42,12 +43,12 @@ struct	       	__except_list_node
        __except_dispatcher(__FILE__, __FUNCTION__, __LINE__) ;)		\
     for (; __except_try_n_finally();)					\
       if (__except_is_try())						\
-	for (; __except_get_catch_tool(1);)				\
+	for (; __except_get_catch_tool();)				\
 	  if (setjmp(*__except_get_front()) == 0)
 
 #define catch(type, name)						\
-  else if (__except_catch_func(type ## _type_instance))				\
-    for (type *name __attribute__((unused)) = __except_get_data(); __except_get_catch_tool(0); )
+  else if (__except_catch_func(type ## _type_instance))			\
+    for (type *name __attribute__((unused)) = __except_get_data(); name != 0 ; name = 0)
 
 #define throw(type, ctor, ...)						\
   __except_throw_func(type ## _type_instance,				\

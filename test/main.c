@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Thu Mar 24 06:31:05 2016 penava_b
+** Last update Sun Mar 27 08:17:06 2016 penava_b
 */
 
 #include <stdio.h>
@@ -105,7 +105,8 @@ void		throwing()
     }
   }
   finally {
-    printf("Is going to be deleted %p of value '%s'\n", &tmp, M(&tmp, c_str));
+    printf("Is going to be deleted : %p of value '%s'\n", &tmp, M(&tmp, c_str));
+    return ;
   }
 }
 

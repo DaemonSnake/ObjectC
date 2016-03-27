@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Nov 26 18:54:58 2015 penava_b
-** Last update Wed Mar 23 08:32:10 2016 penava_b
+** Last update Sun Mar 27 08:07:28 2016 penava_b
 */
 
 #include <stdio.h>
@@ -19,6 +19,8 @@
 void		__delete_func(void *, ...);
 int             __get_current_level();
 void            __exit_end_func(int);
+void		__enter_try_block();
+void		__exit_try_block();
 
 enum
   {
@@ -50,7 +52,7 @@ struct	       	s_node
   char	       	status;
   char		caught;
   jmp_buf      	buff;
-  char		catchTool[2];
+  char		catchTool;
   const Type   	*type;
   Object 	*obj;
   info_node    	*origin;
@@ -111,7 +113,7 @@ void		__except_throw_func(const Type *type, Object *obj, const char *file, const
 {
   info_node	*node;
 
-  while (list != NULL && list->caught == CAUGHT)
+  while (list != NULL && (list->caught == CAUGHT || list->status >= IN_FINALLY))
     {
       if (list->next == NULL)
 	trace_back(file, func, line);
@@ -140,6 +142,12 @@ void		__except_throw_func(const Type *type, Object *obj, const char *file, const
     }
   __exit_end_func(list->level);
   longjmp(list->buff, -1);
+}
+
+void		__except_clean_exit_func(int level)
+{
+  while (list != NULL && list->level - 1 == level)
+    pop_current();
 }
 
 int    		__except_dispatcher(const char *file, const char *func, int line)
@@ -177,19 +185,16 @@ int		__except_is_try()
 
 void   		__except_initializer(List *node)
 {
-  List 		*tmp = node;
-
-  tmp->type = NULL;
-  tmp->next = list;
-  tmp->status = BEFORE_TRY;
-  tmp->caught = NOT_THROWN;
-  tmp->type = NULL;
-  tmp->obj = NULL;
-  tmp->origin = NULL;
-  tmp->catchTool[0] = 0;
-  tmp->catchTool[1] = 0;
-  tmp->level = __get_current_level() + 1;
-  list = tmp;
+  node->type = NULL;
+  node->next = list;
+  node->status = BEFORE_TRY;
+  node->caught = NOT_THROWN;
+  node->type = NULL;
+  node->obj = NULL;
+  node->origin = NULL;
+  node->catchTool = 0;
+  node->level = __get_current_level() + 1;
+  list = node;
 }
 
 int    		__except_catch_func(const Type *type)
@@ -222,9 +227,9 @@ void	       	*__except_get_front()
   return &list->buff;
 }
 
-char		__except_get_catch_tool(int index)
+char		__except_get_catch_tool()
 {
   if (list == NULL)
     return 0;
-  return (list->catchTool[index] ^= 1);
+  return (list->catchTool++ == 0);
 }

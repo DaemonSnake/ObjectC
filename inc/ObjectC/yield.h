@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec  5 16:24:38 2015 penava_b
-** Last update Thu Mar 24 06:13:02 2016 penava_b
+** Last update Thu Mar 24 06:35:46 2016 penava_b
 */
 
 #pragma once
@@ -52,7 +52,9 @@ void		__reset_clean_up();
 	 M(this_gen, __continue);					\
 	 ret = (!axM(this_gen, last) ? ((__typeof__(ret)(*)(Generator *, ...))(M(this_gen, getFunc)))(this_gen) : ret))
 
-#define yield_break					\
+#if defined(__LP64__) || defined(__LLP64__)
+
+# define yield_break					\
   if (42)						\
     {							\
       M(this, __break);					\
@@ -60,3 +62,16 @@ void		__reset_clean_up();
       __asm__("leaveq");				\
       __asm__("retq");					\
     }
+
+#else
+
+# define yield_break					\
+  if (42)						\
+    {							\
+      M(this, __break);					\
+      __cyg_profile_func_exit((void *)0, (void *)0);	\
+      __asm__("leave");					\
+      __asm__("ret");					\
+    }
+
+#endif

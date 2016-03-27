@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:12:30 2016 penava_b
-** Last update Wed Mar 23 09:01:04 2016 penava_b
+** Last update Sun Mar 27 07:14:06 2016 penava_b
 */
 
 #pragma once
@@ -16,8 +16,7 @@ struct		s_left_reference_value_node
   void		(*dtor)(void *);
   char		toclean;
   int		level;
-  struct
-  s_left_reference_value_node	*next;
+  struct s_left_reference_value_node	*next;
   void		*id;
 };
 
