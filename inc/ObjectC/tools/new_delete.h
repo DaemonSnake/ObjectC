@@ -1,11 +1,11 @@
 /*
-1;2802;0c** delete_new.h for  in /home/penava_b/perso/ObjLang3/Lib
+** delete_new.h for  in /home/penava_b/perso/ObjLang3/Lib
 ** 
 ** Made by bastien penavayre
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Wed Mar 23 09:01:09 2016 penava_b
+** Last update Sat Apr  2 15:00:33 2016 penava_b
 */
 
 #pragma once

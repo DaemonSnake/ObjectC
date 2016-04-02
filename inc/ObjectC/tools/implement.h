@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Tue Mar 22 09:23:30 2016 penava_b
+** Last update Sat Apr  2 14:46:37 2016 penava_b
 */
 
 #pragma once
@@ -16,7 +16,7 @@ void	__call_class_super_dtor(Object * const);
 #define implement(name, extends, ...)					\
 									\
   __attribute__((no_instrument_function))				\
-  static void *__pre_ctor_ ## name(struct __private_ ## name *this)	\
+ static void *__pre_ctor_ ## name(struct __private_ ## name *this)	\
   {									\
     void	__pre_ctor_Object_child(const void *, const void *);	\
 									\

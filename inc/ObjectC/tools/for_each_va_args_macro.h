@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Tue Mar 22 05:50:34 2016 penava_b
+** Last update Thu Mar 31 07:14:06 2016 penava_b
 */
 
 #pragma once
@@ -28,7 +28,7 @@
 			    _91, _92, _93, _94, _95, _96, _97, _98, _99, _100, _101, \
 			    N, ...) N
 #define ______VA_NARGS(...)						\
-  ______VA_NARGS_IMPL(X,##__VA_ARGS__,					\
+  ______VA_NARGS_IMPL(X, ##__VA_ARGS__,					\
 		      100, 99, 98, 97, 96, 95, 94, 93, 92, 91,		\
 		      90, 89, 88, 87, 86, 85, 84, 83, 82, 81,		\
 		      80, 79, 78, 77, 76, 75, 74, 73, 72, 71,		\

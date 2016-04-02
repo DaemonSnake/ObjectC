@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sun Mar 27 08:17:06 2016 penava_b
+** Last update Sat Apr  2 09:42:55 2016 penava_b
 */
 
 #include <stdio.h>
@@ -201,7 +201,7 @@ void	range_test()
   printf("RANGE TEST::\n");
   for_yield(i, range, 0, 0)
     {
-      fprintf(stderr, "Error if printer???\n");
+      fprintf(stderr, "Error if printed???\n");
     }
   for_yield(i, range, 0, 10)
     {

@@ -1,0 +1,20 @@
+#!/usr/bin/python3
+
+from sys import argv as args
+import re
+
+def main(args):
+  if len(args) != 1:
+    quit(84)
+  for line in open(args[0]):
+    if not line.startswith("#pragma push_my_macro("):
+      print(line, end='')
+      continue
+    line = line[22:-2]
+    print("#ifdef CLASS")
+    print("# undef CLASS")
+    print("#endif")
+    print("#define CLASS {0}".format(line))
+
+if __name__ == "__main__":
+  main(args[1:])

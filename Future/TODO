@@ -1,27 +1,30 @@
 -> Move part of implementation in the class macro in the class.h header file.
-
 -> issue with finally when throw in it and is in an uncaught state => replace old exception (no memory lost though)
 
-// remove pre_ctor in type and replace with void * holding default object + make pre_ctor static inline && constructor
+Urgent:
+	- if break in a for_yield block all the node where toClean is unset will not be cleaned
+	  => add close in Dtor of Generator for when alive flag is still on
+	- __prector calls only prector of Object and not of the parrent (implement.c)
 
-1-Make up my mind on wether or not toString allocates or not! (or return a String object (* or not)) [ NEEDED FOR FORMAT! ]
-3-Stream type and IToStream interface
-5-add python style format from Future folder
-6-cout and cerr (f, fln, print, println)
-7-cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
-9-Object_getType segfault safe for instrospection
-10-Add a foreach method that yields!
-12-Handle nested Objects (without inheritance) //for now only new&delete works there
-13-Remove use of generator in for_yield, make it create in for the generator -> for(Generator __this_generator__ = ...)
-14-create a scope(var) {} construct
-15-Add the $$(method_name, args...) idea (see in Generator.c)
+Not urgent:
 
-BONUS?: create pragma that push a new value in a macro name -> would resolve much much bad design! |-> not possible wirdly enough :<
-
--1!!-New Idea : glue method name with number of arguments (new function method abi)!!!
+    -Replace init_yield macro with new function in __cyg_profile_func_enter (see : yieldV2.c)
+    -Can't static_cast from A to A (only from child to parent) [Ok or Not ?]
+    	   && static_cast(Object, interface) => error for that reason
+    -Make up my mind on wether or not toString allocates or not!
+    	   (or return a String object (* or not)) [ NEEDED FOR FORMAT! ]
+    -Stream type and IToStream interface
+    -Add python style format from Future folder
+    -Cout and cerr (f, fln, print, println)
+    -Cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
+    -Object_getType segfault safe for instrospection
+    -For_yield for methods
+    -Handle nested Objects (without inheritance) //for now only new & delete works there
+    -Create a scope(var) {} construct
+    -Add the $$(method_name, args...) idea (see in Generator.c)
+    -Add a true_keyword & in_loop macro before try & other for based keyword breaking context
+    -Glue method name with number of arguments (new function method abi)!!!
 	Seemed a good idea but screw everything for va_args!!
 	Limit everything to one time and use __isinstanceof
 	Maybe okay actually (for_arg/bad_arg/bad_arg/...)
 	See : methodNameChange.c
-
-(-fms-extensions for clang => -fplan9-extension)
