@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Sun Apr  3 19:31:48 2016 penava_b
+** Last update Sun Apr  3 20:41:43 2016 penava_b
 */
 
 #include "ObjectC/Class.h"
@@ -38,7 +38,7 @@ static struct __virtual_Object true_vtable_instance = {
 const struct __virtual_Object * const __vtable_instance_Object = &true_vtable_instance;
 
 __attribute__((no_instrument_function))
-static void *__pre_ctor_Object(struct __private_Object *this)
+void	*__pre_ctor_Object(struct __private_Object *this)
 {
   this->this = (void *)this;
   this->_virtual = __vtable_instance_Object;
@@ -64,7 +64,6 @@ static Type	true_Object_type_instance =
     0,
     0,
     0,
-    (void *)__pre_ctor_Object,
     (void *)Object_dtor
   };
 

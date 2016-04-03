@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Thu Mar 31 07:02:43 2016 penava_b
+** Last update Sun Apr  3 20:29:08 2016 penava_b
 */
 
 #pragma once
@@ -20,7 +20,6 @@ typedef			struct Type
   unsigned		nbImplements;
   const struct Type	**implements;
   unsigned long		*offsets;
-  void			*(*pre_ctor)(void *);
   void			(*dtor)(void *);
 }			Type;
 

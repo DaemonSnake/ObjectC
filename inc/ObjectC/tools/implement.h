@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sun Apr  3 19:42:10 2016 penava_b
+** Last update Sun Apr  3 20:30:50 2016 penava_b
 */
 
 #pragma once
@@ -16,11 +16,11 @@ void	__call_class_super_dtor(Object * const);
 #define implement(name, extends, ...)					\
 									\
   __attribute__((no_instrument_function))				\
- static void *__pre_ctor_ ## name(struct __private_ ## name *this)	\
+ void		*__pre_ctor_ ## name(struct __private_ ## name *this)	\
   {									\
     void	__pre_ctor_Object_child(const void *, const void *);	\
 									\
-    extends ## _type_instance->pre_ctor(this);				\
+    __pre_ctor_ ## extends((void *)this);				\
     __pre_ctor_Object_child(this, name ## _type_instance);		\
     this->this = (void *)this;						\
     this->_virtual = __vtable_instance_ ## name;			\
@@ -39,7 +39,6 @@ void	__call_class_super_dtor(Object * const);
       sizeof(struct __interfaces_for_ ## name),				\
       (const Type *[sizeof(struct __interfaces_for_ ## name)]){0},	\
       (unsigned long [sizeof(struct __interfaces_for_ ## name)]){0},	\
-      (void *)__pre_ctor_ ## name,					\
       (void *)name ## _ ## dtor						\
     };									\
 									\

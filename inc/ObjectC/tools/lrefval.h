@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:12:30 2016 penava_b
-** Last update Sun Mar 27 07:14:06 2016 penava_b
+** Last update Sun Apr  3 20:32:17 2016 penava_b
 */
 
 #pragma once
@@ -36,7 +36,7 @@ void		__protect_kill_stack(void *);
 #define lrvalue(type, ctor, ...)					\
   (__protect_kill_stack((char[1]){0}),					\
    type ## _ ## ctor							\
-   (type ## _type_instance->pre_ctor					\
+   (__pre_ctor_ ## type							\
     (__push_var((struct s_left_reference_value_node[1])			\
 		{{ (type[1]){},						\
 		      (void *)type ## _dtor,				\
@@ -50,7 +50,7 @@ void		__protect_kill_stack(void *);
 #define function_lrvalue(type, ctor, ...)				\
   (__protect_kill_stack((char[1]){0}),					\
    type ## _ ## ctor							\
-   (type ## _type_instance->pre_ctor					\
+   (__pre_ctor_ ## type							\
     (__push_var((struct s_left_reference_value_node[1])			\
 		{{ (type[1]){},						\
 		      (void *)type ## _dtor,				\

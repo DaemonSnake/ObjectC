@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Tue Mar 22 09:24:44 2016 penava_b
+** Last update Sun Apr  3 20:40:48 2016 penava_b
 */
 
 #pragma once
@@ -38,6 +38,7 @@
 									\
   void	name ## _ctor(struct __private_ ## name *this);			\
   void	name ## _dtor(struct __private_ ## name *this);			\
+  void	*__pre_ctor_ ## name(struct __private_ ## name *this);		\
 									\
   struct __weak_data_ ## name
 
@@ -61,7 +62,6 @@
       #name,								\
       0,								\
       sizeof(name),							\
-      0,								\
       0,								\
       0,								\
       0,								\

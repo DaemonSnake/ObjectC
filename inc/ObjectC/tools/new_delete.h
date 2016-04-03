@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Sun Apr  3 19:41:59 2016 penava_b
+** Last update Sun Apr  3 20:37:49 2016 penava_b
 */
 
 #pragma once
@@ -20,8 +20,7 @@ void	__delete_func(const void *, ...);
 void	*__malloc(size_t);
 
 #define new(type, ctor, ...)						\
-  (type ## _ ## ctor							\
-   (type ## _type_instance->pre_ctor(__new_push_ptor(sizeof(type))), ##__VA_ARGS__), \
+  (type ## _ ## ctor(__pre_ctor_ ## type(__new_push_ptor(sizeof(type))), ##__VA_ARGS__), \
    (type *)__new_get_ptor())
 
 #define newDef(type, ...) new(type, ctor, ##__VA_ARGS__)
@@ -32,7 +31,7 @@ void	*__malloc(size_t);
   =								\
     (__protect_kill_stack((char[1]){0}),			\
      type ## _ ## ctor						\
-     (type ## _type_instance->pre_ctor				\
+     (__pre_ctor_ ## type					\
       (__push_var((struct s_left_reference_value_node[1])	\
 		  {{ &var,					\
 			(void *)type ## _dtor,			\
@@ -44,25 +43,26 @@ void	*__malloc(size_t);
  
 #define _def(type, var, ...) _init(type, ctor, var, ##__VA_ARGS__)
 
-#define Ginit(type, ctor, var, ...)					\
-  __attribute__((no_instrument_function, constructor))			\
-  static inline void	__global_ctor_ ## var()				\
-  {									\
-    static								\
-      struct s_left_reference_value_node	tmp = {			\
-      &var,								\
-      (void *)type ## _dtor,						\
-      42,								\
-      0,								\
-      (void *)0,							\
-      (void *)0								\
-    };									\
-    									\
-    __protect_kill_stack((char[1]){0});					\
-    type ## _ ## ctor							\
-      (type ## _type_instance->pre_ctor					\
-       (__push_var(&tmp)), ##__VA_ARGS__);				\
-  }									\
-									\
-  __attribute__((no_instrument_function, constructor))			\
+#define Ginit(type, ctor, var, ...)			\
+  __attribute__((no_instrument_function, constructor))	\
+  static inline void	__global_ctor_ ## var()		\
+  {							\
+    static						\
+      struct s_left_reference_value_node	tmp =	\
+      {							\
+	&var,						\
+	(void *)type ## _dtor,				\
+	42,						\
+	0,						\
+	(void *)0,					\
+	(void *)0					\
+      };						\
+							\
+    __protect_kill_stack((char[1]){0});			\
+    type ## _ ## ctor					\
+      (__pre_ctor_ ## type				\
+       (__push_var(&tmp)), ##__VA_ARGS__);		\
+  }							\
+							\
+  __attribute__((no_instrument_function, constructor))	\
   static inline void __user_code_gctor_ ## var()
