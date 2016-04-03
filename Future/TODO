@@ -8,6 +8,9 @@ Urgent:
 
 Not urgent:
 
+    -Remove a lot of methods from Generator and make them simple functions instead
+    	    (avoid possible override, bad usage, ...)
+    -Remove pre_ctor from Type and let it be a public function
     -Replace init_yield macro with new function in __cyg_profile_func_enter (see : yieldV2.c)
     -Can't static_cast from A to A (only from child to parent) [Ok or Not ?]
     	   && static_cast(Object, interface) => error for that reason

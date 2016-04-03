@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 22:04:06 2015 penava_b
-** Last update Thu Mar 24 06:03:41 2016 penava_b
+** Last update Sun Apr  3 19:34:46 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -22,8 +22,6 @@ new_tor(Generator, ctor)
   $.size = 0;
   $.last = 0;
 }
-
-#define $$(method, ...) M(this, method, ##__VA_ARGS__) // ??
 
 new_tor(Generator, ctorF, void *func)
 {

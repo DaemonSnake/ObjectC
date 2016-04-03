@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Tue Mar 22 06:20:07 2016 penava_b
+** Last update Sun Apr  3 19:31:48 2016 penava_b
 */
 
 #include "ObjectC/Class.h"
@@ -47,11 +47,9 @@ static void *__pre_ctor_Object(struct __private_Object *this)
 }
 
 __attribute__((no_instrument_function))
-void		*__pre_ctor_Object_child(struct __private_Object *this, const void *type)
+void		__pre_ctor_Object_child(struct __private_Object *this, const void *type)
 {
-  __pre_ctor_Object(this);
   this->__class_type = type;
-  return this;
 }
 
 

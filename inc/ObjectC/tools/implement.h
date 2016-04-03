@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sat Apr  2 14:46:37 2016 penava_b
+** Last update Sun Apr  3 19:42:10 2016 penava_b
 */
 
 #pragma once
@@ -20,6 +20,7 @@ void	__call_class_super_dtor(Object * const);
   {									\
     void	__pre_ctor_Object_child(const void *, const void *);	\
 									\
+    extends ## _type_instance->pre_ctor(this);				\
     __pre_ctor_Object_child(this, name ## _type_instance);		\
     this->this = (void *)this;						\
     this->_virtual = __vtable_instance_ ## name;			\
@@ -126,6 +127,8 @@ void	__call_class_super_dtor(Object * const);
   __call_class_super_dtor((void *)this)
 
 #define $ (*this)
+
+#define $$(method, ...) M(this, method, ##__VA_ARGS__)
 
 /* AXORS METHODS IMPL */
 
