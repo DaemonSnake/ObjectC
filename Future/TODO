@@ -2,15 +2,15 @@
 -> issue with finally when throw in it and is in an uncaught state => replace old exception (no memory lost though)
 
 Urgent:
-	- if break in a for_yield block all the node where toClean is unset will not be cleaned
+	- if break in a for_yield block all the node where toClean is unset will not be cleaned as they don't exist...
 	  => add close in Dtor of Generator for when alive flag is still on
 	- __prector calls only prector of Object and not of the parrent (implement.c)
 
 Not urgent:
 
+    -Instead of using toClean make Generator saveContext/restore pop the all level, return it's starts and save it in the Generator ???
     -Remove a lot of methods from Generator and make them simple functions instead
     	    (avoid possible override, bad usage, ...)
-    -Remove pre_ctor from Type and let it be a public function
     -Replace init_yield macro with new function in __cyg_profile_func_enter (see : yieldV2.c)
     -Can't static_cast from A to A (only from child to parent) [Ok or Not ?]
     	   && static_cast(Object, interface) => error for that reason
@@ -24,7 +24,6 @@ Not urgent:
     -For_yield for methods
     -Handle nested Objects (without inheritance) //for now only new & delete works there
     -Create a scope(var) {} construct
-    -Add the $$(method_name, args...) idea (see in Generator.c)
     -Add a true_keyword & in_loop macro before try & other for based keyword breaking context
     -Glue method name with number of arguments (new function method abi)!!!
 	Seemed a good idea but screw everything for va_args!!
