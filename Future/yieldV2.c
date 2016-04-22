@@ -5,11 +5,12 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Apr  2 09:49:17 2016 penava_b
-** Last update Sat Apr  2 14:23:43 2016 penava_b
+** Last update Wed Apr 13 11:10:10 2016 penava_b
 */
 
 int	printf(const char *, ...);
 
+__thread
 void	*__yield_func__ = 0;
 
 typedef struct Gen

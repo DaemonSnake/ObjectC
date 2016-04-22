@@ -5,12 +5,10 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Jan 28 14:08:29 2016 penava_b
-** Last update Wed Mar  9 23:26:07 2016 penava_b
+** Last update Thu Apr 14 16:49:53 2016 penava_b
 */
 
 #include <stdio.h>
-
-#define const(type) const_ ## type
 
 #define _init(type, name, ...)						\
   = (type ## _ ## name(push_var((struct type[1]){0}), ##__VA_ARGS__), (type)get_var())
