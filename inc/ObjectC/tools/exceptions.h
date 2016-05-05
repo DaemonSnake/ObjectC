@@ -5,13 +5,16 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Sun Mar 27 08:12:24 2016 penava_b
+** Last update Thu May  5 15:51:54 2016 penava_b
 */
 
 #pragma once
 
 #include <setjmp.h>
 #include "ObjectC/tools/new_delete.h"
+
+_Pragma("GCC diagnostic push");
+_Pragma("GCC diagnostic ignored \"-Wparentheses\"")
 
 jmp_buf		*__except_get_front();
 void	       	__except_initializer(void *);
@@ -20,7 +23,6 @@ void	       	__except_throw_func(const void *, void *, const char *,
 				    const char *, int);
 int	       	__except_catch_func(const void *);
 void		*__except_get_data();
-char		__except_get_catch_tool();
 int		__except_try_n_finally();
 int		__except_is_try();
 void		__except_dtor(void *);
@@ -30,7 +32,6 @@ struct	       	__except_list_node
   char	       	status;
   char		caught;
   jmp_buf      	buff;
-  char		catchTool;
   const void   	*type;
   void	 	*obj;
   void    	*origin;
@@ -43,7 +44,6 @@ struct	       	__except_list_node
        __except_dispatcher(__FILE__, __FUNCTION__, __LINE__) ;)		\
     for (; __except_try_n_finally();)					\
       if (__except_is_try())						\
-	for (; __except_get_catch_tool();)				\
 	  if (setjmp(*__except_get_front()) == 0)
 
 #define catch(type, name)						\

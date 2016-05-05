@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Thu Jan 28 15:55:07 2016 penava_b
-** Last update Thu Mar 24 05:23:59 2016 penava_b
+** Last update Thu May  5 15:59:29 2016 penava_b
 */
 
 #pragma once
@@ -26,10 +26,20 @@ new_tor(Exception, ctorS, const char *);
 
 end_decl(Exception);
 
-class(AllocFailed, Exception) {};
-virtual(AllocFailed) {};
+class(AllocFailed, Exception)
+{
+};
 
-class(IsNotObject, Exception) {};
-virtual(IsNotObject) {};
+virtual(AllocFailed)
+{
+};
+
+class(IsNotObject, Exception)
+{
+};
+
+virtual(IsNotObject)
+{
+};
 
 end_decl(AllocFailed, IsNotObject);

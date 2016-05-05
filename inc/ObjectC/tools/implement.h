@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Sun Apr  3 20:30:50 2016 penava_b
+** Last update Thu May  5 16:57:55 2016 penava_b
 */
 
 #pragma once
@@ -153,3 +153,13 @@ void	__call_class_super_dtor(Object * const);
   __new_def_axor_ ## y(class, name)
 
 #define new_def_axors(class, name, x...) __launch_new_def_axors(class, name, x)
+
+// get
+#define __new_user_axor_2(class, name, ...) \
+    __typeof__(((struct __private_ ## class *)0)->name) new_method(class, get_ ## name)
+
+// set
+#define __new_user_axor_3(class, name, arg, ...)        \
+    void new_method(class, set_ ## name, arg)
+
+#define new_axor(class, name, ...) ______VARARG(__new_user_axor_, class, name, ##__VA_ARGS__)

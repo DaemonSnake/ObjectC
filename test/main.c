@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Wed Apr 13 12:08:30 2016 penava_b
+** Last update Thu May  5 17:20:36 2016 penava_b
 */
 
 #include <stdio.h>
@@ -94,7 +94,7 @@ void	string_test()
 void		throwing()
 {
   String	tmp _init(String, ctorS, tmp, "Not a leak");
-
+  
   try {
     try {
       printf("Does not except!\n");

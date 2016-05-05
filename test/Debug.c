@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 22:12:01 2015 penava_b
-** Last update Tue Mar 22 09:19:51 2016 penava_b
+** Last update Thu May  5 16:22:16 2016 penava_b
 */
 
 #include <stdio.h>
@@ -29,7 +29,13 @@ void	new_method(Debug, print)
   printf("This is %p %d\n", this, $.var);
 }
 
-new_def_axors(Debug, var, get, set);
+new_def_axors(Debug, var, get);
+
+new_axor(Debug, var, int var)
+{
+    if (var != 0)
+        $.var = var;
+}
 
 implement(Debug, Object, I)
 {

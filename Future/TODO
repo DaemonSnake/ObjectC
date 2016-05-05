@@ -1,21 +1,20 @@
--> Move part of implementation in the class macro in the class.h header file.
--> issue with finally when throw in it and is in an uncaught state => replace old exception (no memory lost though)
-
 Urgent:
-	- if break in a for_yield block all the node where toClean is unset will not be cleaned as they don't exist...
+	YIELD ISSUE
+        -> Break/Return/Throw/... in a for_yield block : method's destructors not called
 	  => add close in Dtor of Generator for when alive flag is still on
-	- __prector calls only prector of Object and not of the parrent (implement.c)
+          => to remeber that rbp must stay the same when going back in the coroutine/cleaning
+          => secure break/return with __attribute__((cleanup))
+          => find a way to secure throw
+        -> save rbp and ensure that it's always the same value
 
 Not urgent:
 
+    -Remove const_method idea as there is no way to enforce it => syntax noise
+    -Make the return of axor's "get" be a const pointer so that it won't be a probleme with nested Objects
     -Instead of using toClean make Generator saveContext/restore pop the all level, return it's starts and save it in the Generator ???
     -Remove a lot of methods from Generator and make them simple functions instead
     	    (avoid possible override, bad usage, ...)
-    -Replace init_yield macro with new function in __cyg_profile_func_enter (see : yieldV2.c)
-    -Can't static_cast from A to A (only from child to parent) [Ok or Not ?]
-    	   && static_cast(Object, interface) => error for that reason
-    -Make up my mind on wether or not toString allocates or not!
-    	   (or return a String object (* or not)) [ NEEDED FOR FORMAT! ]
+    -Replace init_yield macro with new function in __cyg_profile_func_enter (see : yieldV2.c);
     -Stream type and IToStream interface
     -Add python style format from Future folder
     -Cout and cerr (f, fln, print, println)
@@ -23,10 +22,18 @@ Not urgent:
     -Object_getType segfault safe for instrospection
     -For_yield for methods
     -Handle nested Objects (without inheritance) //for now only new & delete works there
-    -Create a scope(var) {} construct
+    -Create a scope(already_existing_var) {} construct
     -Add a true_keyword & in_loop macro before try & other for based keyword breaking context
-    -Glue method name with number of arguments (new function method abi)!!!
+    -Glue method name with number of arguments (new function method abi)
 	Seemed a good idea but screw everything for va_args!!
 	Limit everything to one time and use __isinstanceof
 	Maybe okay actually (for_arg/bad_arg/bad_arg/...)
 	See : methodNameChange.c
+
+To decide:
+        -> Should static_cast from interface to Object work?
+        -> Make up my mind on what should return toString {String, String *, const char *, allocated const char *, ...}[ NEEDED FOR FORMAT! ]
+
+Decisions Made:
+        -> Throw in finally has correct behaviour (replace old exception with new type)
+        -> Can't static_cast from A to A (only from child to parent)
