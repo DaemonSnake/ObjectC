@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Jan  1 10:12:30 2016 penava_b
-** Last update Sun Apr  3 20:32:17 2016 penava_b
+** Last update Sun May  8 13:28:12 2016 penava_b
 */
 
 #pragma once
@@ -60,7 +60,7 @@ void		__protect_kill_stack(void *);
 			}})), ##__VA_ARGS__),				\
    (type *)__get_front_var_list())
 
-#define stdmove(x) (*(__typeof__(x) *)__prevent_clean_up_var(&x))
+#define stdmove(x) (*(__typeof__(x))__prevent_clean_up_var(x))
 
 #define rvalue(x)						\
   (__protect_kill_stack((char[1]){0}),				\

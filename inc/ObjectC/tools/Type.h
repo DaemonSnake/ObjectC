@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:29:19 2015 penava_b
-** Last update Sun Apr  3 20:29:08 2016 penava_b
+** Last update Sun May  8 13:26:25 2016 penava_b
 */
 
 #pragma once
@@ -31,7 +31,7 @@ const Type		*Object_getType(const void *);
 
 # define	      	static_cast(type, var) ((var)->this_ ## type) //takes pointer
 
-# define		as(type) .this_ ## type //takes value
+# define		as(type) ->this_ ## type //takes value
 
 # define	      	dynamic_cast(type, var)						\
   ((type *)__dynamic_cast(Object_getType(var), type ##_type_instance, var->this))

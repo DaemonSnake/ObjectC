@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Nov 27 02:11:31 2015 penava_b
-** Last update Thu May  5 15:51:54 2016 penava_b
+** Last update Sun May  8 12:12:25 2016 penava_b
 */
 
 #pragma once
@@ -14,7 +14,7 @@
 #include "ObjectC/tools/new_delete.h"
 
 _Pragma("GCC diagnostic push");
-_Pragma("GCC diagnostic ignored \"-Wparentheses\"")
+_Pragma("GCC diagnostic ignored \"-Wparentheses\"");
 
 jmp_buf		*__except_get_front();
 void	       	__except_initializer(void *);
