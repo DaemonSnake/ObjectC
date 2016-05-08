@@ -1,11 +1,11 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 # test.py for  in /home/penava_b/perso/test/structPrinter
 # 
 # Made by penava_b
 # Login   <penava_b@epitech.net>
 # 
 # Started on  Tue Jan 19 05:06:26 2016 penava_b
-# Last update Tue Jan 19 06:57:12 2016 penava_b
+# Last update Mon May  9 00:50:41 2016 penava_b
 ##
 
 from fileinput import input

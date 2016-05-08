@@ -36,4 +36,4 @@ To decide:
 
 Decisions Made:
         -> Throw in finally has correct behaviour (replace old exception with new type)
-        -> Can't static_cast from A to A (only from child to parent)
+        -> Need to static_cast from A to A (PointerType _var(type, name, ctorName, args...) as(PointerType) is not a good syntax)
