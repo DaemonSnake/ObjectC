@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec  5 16:24:38 2015 penava_b
-** Last update Sat Apr  2 14:48:55 2016 penava_b
+** Last update Sun May  8 14:19:12 2016 penava_b
 */
 
 #pragma once
@@ -47,7 +47,7 @@ void		__reset_clean_up();
     }
 
 #define for_yield(ret, Func, ...)					\
-  for (Generator *this_gen = function_lrvalue(Generator, ctorF, Func);	\
+  for (Generator *this_gen = function_rvalue(Generator, ctorF, Func);	\
        this_gen != 0; this_gen = 0)					\
     for (__typeof__(Func(this_gen, ##__VA_ARGS__)) ret =		\
 	   Func(this_gen, ##__VA_ARGS__);				\

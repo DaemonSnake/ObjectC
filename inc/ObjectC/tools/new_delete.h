@@ -5,13 +5,13 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Sun May  8 13:52:04 2016 penava_b
+** Last update Sun May  8 14:31:41 2016 penava_b
 */
 
 #pragma once
 
 #include <stddef.h>
-#include "ObjectC/tools/lrefval.h"
+#include "ObjectC/tools/rvalref.h"
 
 void	*__new_push_ptor(size_t);
 void	*__new_get_ptor();
@@ -32,7 +32,7 @@ void	*__malloc(size_t);
         (__protect_kill_stack((char[1]){0}),                            \
          type ## _ ## ctor						\
          (__pre_ctor_ ## type                                           \
-          (__push_var((struct s_left_reference_value_node[1])           \
+          (__push_var((struct s_right_value_node[1])                    \
                       {{                                                \
                               ((*(void **)&var = (type[1]){{0}})),      \
                                   (void *)type ## _dtor,                \
@@ -50,7 +50,7 @@ void	*__malloc(size_t);
   static inline void	__global_ctor_ ## var()		\
   {							\
     static						\
-      struct s_left_reference_value_node	tmp =	\
+      struct s_right_value_node	tmp =	\
       {							\
 	&var,						\
 	(void *)type ## _dtor,				\

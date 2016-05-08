@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Sun May  8 13:55:25 2016 penava_b
+** Last update Sun May  8 14:27:50 2016 penava_b
 */
 
 #include <stdio.h>
@@ -159,10 +159,10 @@ void	debug_printer(Debug *tmp)
     printf("Debug object %p\n", tmp);
 }
 
-void	lreferencevalue_test()
+void	rvalue_test()
 {
     printf("LEFT REFERENCE VALUE::\n");
-    debug_printer(lrvalue(Debug, ctor));
+    debug_printer(rvalue(Debug, ctor));
 }
 
 Debug	return_instance_debug()
@@ -179,7 +179,7 @@ Debug	return_instance_debug()
 void	return_object_test()
 {
     printf("RETURN OBJECT BY VALUE::\n");
-    printf("Return object %p\n", rvalue(return_instance_debug()));
+    printf("Return object %p\n", retvalue(return_instance_debug()));
 }
 
 int	range(Generator *this, int begin, int end)
@@ -234,7 +234,7 @@ int	main()
         exceptions,
         type,
         invoke_test,
-        lreferencevalue_test,
+        rvalue_test,
         return_object_test,
         range_test,
         loop_init_test,
