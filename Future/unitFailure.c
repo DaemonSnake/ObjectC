@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Tue Mar 22 03:21:09 2016 penava_b
-** Last update Tue Mar 22 04:15:08 2016 penava_b
+** Last update Sun May  8 14:42:46 2016 penava_b
 */
 
 /* Header */
@@ -21,12 +21,16 @@ struct  	unit_failure
   char		active;
 };
 
-#define UnitFailed(name, ...) /* EXIT_CODE is the last arg (0 as default)*/ \
+#define UnitFailed(name, ...) /* EXIT_CODE is the last arg (1 as default)*/ \
   if (unit_ok())							\
-    for (unit_failure name = get_unit(); ; exit((0, ##__VA_ARGS__)))	\
+    for (unit_failure name = get_unit(); ; exit((1, ##__VA_ARGS__)))	\
 
 #define push_failure(what)						\
   __push_failure((unit_failure){ what, __FILE__, __FUNCTION__, __LINE__, 42 })
+
+#define new_unit(name)                                          \
+    __attribute__((constructor, no_instrument_functions))       \
+    void name()
 
 void		__push_failure(unit_failure);
 int		unit_ok();
@@ -58,8 +62,7 @@ const unit_failure	get_unit()
 
 int printf(const char *, ...);
 
-__attribute__((constructor))
-void		unit_test()
+new_unit(test)
 {
   push_failure("Lol");
 }
