@@ -1,4 +1,6 @@
 Urgent:
+        - Add licence header to all files
+
 	YIELD ISSUE
         -> Break/Return/Throw/... in a for_yield block : method's destructors not called
 	  => add close in Dtor of Generator for when alive flag is still on
@@ -9,6 +11,8 @@ Urgent:
 
 Not urgent:
 
+    -Add a autocast construct for objects to it's parent (new type)
+    -Finish and use gcc wrapper ?
     -Remove const_method idea as there is no way to enforce it => syntax noise
     -Make the return of axor's "get" be a const pointer so that it won't be a probleme with nested Objects
     -Instead of using toClean make Generator saveContext/restore pop the all level, return it's starts and save it in the Generator ???
@@ -36,4 +40,3 @@ To decide:
 
 Decisions Made:
         -> Throw in finally has correct behaviour (replace old exception with new type)
-        -> Need to static_cast from A to A (PointerType _var(type, name, ctorName, args...) as(PointerType) is not a good syntax)

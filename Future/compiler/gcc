@@ -1,0 +1,11 @@
+#!/bin/sh
+## gcc for  in /home/penava_b/perso/Obj/Obj4/Future/compiler
+## 
+## Made by penava_b
+## Login   <penava_b@epitech.net>
+## 
+## Started on  Wed May 11 02:18:25 2016 penava_b
+## Last update Wed May 11 02:33:56 2016 penava_b
+##
+
+gcc -no-integrated-cpp -wrapper ./compile-caller $@;

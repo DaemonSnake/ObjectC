@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 21 21:47:42 2015 penava_b
-** Last update Thu Apr 14 16:34:35 2016 penava_b
+** Last update Wed May 11 01:22:06 2016 penava_b
 */
 
 #include "ObjectC/Class.h"
@@ -41,6 +41,7 @@ __attribute__((no_instrument_function))
 void	*__pre_ctor_Object(struct __private_Object *this)
 {
   this->this = (void *)this;
+  this->this_Object = (void *)this;
   this->_virtual = __vtable_instance_Object;
   this->__class_type = Object_type_instance;
   return this;

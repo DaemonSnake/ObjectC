@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Sun Apr  3 20:42:31 2016 penava_b
+** Last update Wed May 11 01:30:56 2016 penava_b
 */
 
 #pragma once
@@ -37,6 +37,7 @@ struct	__data_weak_Object
 
 struct	__data_Object
 {
+  Object *this_Object;
   char	__private_Object[sizeof(struct __data_weak_Object)];
 };
 
@@ -44,6 +45,7 @@ struct	__private_Object
 {
   Object *this;
   const struct __virtual_Object *_virtual;
+  Object *this_Object;
   struct __data_weak_Object;
 };
 

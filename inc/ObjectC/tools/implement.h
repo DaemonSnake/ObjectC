@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:48:27 2015 penava_b
-** Last update Thu May  5 16:57:55 2016 penava_b
+** Last update Wed May 11 01:23:37 2016 penava_b
 */
 
 #pragma once
@@ -23,8 +23,8 @@ void	__call_class_super_dtor(Object * const);
     __pre_ctor_ ## extends((void *)this);				\
     __pre_ctor_Object_child(this, name ## _type_instance);		\
     this->this = (void *)this;						\
+    this->this_ ## name = (void *)this;                                 \
     this->_virtual = __vtable_instance_ ## name;			\
-    this->this_ ## extends = (void *)this;				\
     APPLY_MACRO_VAR(__implements_in_ctor__, ##__VA_ARGS__);		\
     return this;							\
   }									\

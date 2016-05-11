@@ -1,0 +1,33 @@
+#!/bin/bash
+## mycomp for  in /home/penava_b/perso/Obj/Obj4/Future/compiler
+## 
+## Made by penava_b
+## Login   <penava_b@epitech.net>
+## 
+## Started on  Wed May 11 02:10:57 2016 penava_b
+## Last update Wed May 11 03:25:54 2016 penava_b
+##
+
+$@;
+if [ "$(echo $1 | awk -F '/' '{print $NF}')" = "cc1" ] && [ "$2" = "-E" ];
+then
+    bool=0
+    for arg in $@;
+    do
+        if [ $bool -eq 1 ];
+        then
+            #Insert my precompiler here
+            # touch $arg-precomp;
+            cat $arg | while read line;
+            do
+                echo;
+            done;
+            break;
+        fi;
+        
+        if [ $arg = "-o" ];
+        then
+            bool=1;
+        fi;
+    done;
+fi;

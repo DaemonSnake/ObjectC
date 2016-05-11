@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sun Dec 13 01:23:03 2015 penava_b
-** Last update Sun Apr  3 21:49:59 2016 penava_b
+** Last update Wed May 11 01:20:18 2016 penava_b
 */
 
 #pragma once
@@ -32,7 +32,7 @@
   struct __supers_data_ ## name						\
   {									\
     struct __data_ ## extends;						\
-    extends *this_ ## extends;						\
+    name *this_ ## name;                                                \
     APPLY_MACRO_VAR(__thisify__, ##__VA_ARGS__);			\
   };									\
 									\
