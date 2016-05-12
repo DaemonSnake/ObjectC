@@ -5,17 +5,15 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Wed May 11 01:30:56 2016 penava_b
+** Last update Thu May 12 22:51:19 2016 penava_b
 */
 
 #pragma once
 
 #define M(var, name, ...)						\
-  ((__typeof__(var))__new_push_tmp(var))->_virtual->name		\
-  (((__typeof__(var))__new_get_ptor())->this, ##__VA_ARGS__)
-
-void	*__new_push_tmp(const void *);
-void	*__new_get_ptor();
+    ({ __typeof__(var) __save__ = var;                                  \
+        var->_virtual->name(__save__->this, ##__VA_ARGS__);             \
+    })
 
 typedef struct Object Object;
 
