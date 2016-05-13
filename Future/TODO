@@ -11,7 +11,7 @@ Urgent:
 
 Not urgent:
 
-    -Add a autocast construct for objects to it's parent (new type)
+    -Limit override use (or else any method could be overwriten by anyone)
     -Finish and use gcc wrapper ?
     -Remove const_method idea as there is no way to enforce it => syntax noise
     -Make the return of axor's "get" be a const pointer so that it won't be a probleme with nested Objects

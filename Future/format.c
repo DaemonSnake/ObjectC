@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Jan 20 18:44:41 2016 penava_b
-** Last update Tue Jan 26 14:35:36 2016 penava_b
+** Last update Fri May 13 00:57:30 2016 penava_b
 */
 
 #include <stdio.h>
@@ -84,8 +84,8 @@ char		*format(const char *format, ...)
 	      	{
 	      	  for (j = (args == 0 ? 0 : args->index + 1); j <= tmp; j++)
 		    {
-		      it = alloca(sizeof(*args));
-		      *it = (__typeof__(*args)){j, va_arg(ap, void *), args};
+		      it = alloca(sizeof(t_args));
+		      *it = (t_args){j, va_arg(ap, void *), args};
 		      args = it;
 		    }
 	      	  it = args;
@@ -135,3 +135,24 @@ int	main()
   printf("%s\n", str);
   free(str);
 }
+
+/*
+  Future
+
+  If possible -> need to think
+  If good for user -> ask
+
+  {-n} -> {allready_parsed_args_size - n}
+  {%*} -> pop new argument using vsprintf as save it
+  {n%*} -> calls vsprintf on nth argument
+                if (n == current + 1) {
+                        then pop give it to vsprintf and save it
+                }
+                else if (n > current + 1) {
+                        ignore -> as is
+                }
+                else if (n < current) {
+                        use already parsed value as argument git it to ...
+                }
+
+ */

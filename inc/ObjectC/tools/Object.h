@@ -5,16 +5,15 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Mon Dec 14 23:43:01 2015 penava_b
-** Last update Thu May 12 22:51:19 2016 penava_b
+** Last update Fri May 13 22:47:28 2016 penava_b
 */
 
 #pragma once
 
 #define M(var, name, ...)						\
-    ({ __typeof__(var) __save__ = var;                                  \
-        var->_virtual->name(__save__->this, ##__VA_ARGS__);             \
-    })
-
+    (((__typeof__(var))__tmp_pointer__((void *)var))                    \
+     ->_virtual->name(((__typeof__(var))__tmp_pointer__((void *)0x42))->this, ##__VA_ARGS__))
+    
 typedef struct Object Object;
 
 struct	__virtual_Object
