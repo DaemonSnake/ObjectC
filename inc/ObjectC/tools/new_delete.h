@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri Oct 30 15:38:53 2015 bastien penavayre
-** Last update Thu May 12 22:46:31 2016 penava_b
+** Last update Sat May 14 00:23:25 2016 penava_b
 */
 
 #pragma once
@@ -18,10 +18,13 @@ void	*__malloc(size_t);
 
 #define new(type, ctor, ...)						\
     ({                                                                  \
-        type *__save__ = __pre_ctor_ ## type(__malloc(sizeof(type)));   \
-                                                                        \
-        type ## _ ## ctor((void *)__save__, ##__VA_ARGS__);             \
-        __save__;                                                       \
+        __attribute__((always_inline, no_instrument_function))          \
+            inline type *__new__(type * const __new_this__)             \
+        {                                                               \
+            type ## _ ## ctor((void *)__new_this__, ##__VA_ARGS__);     \
+            return __new_this__;                                        \
+        }                                                               \
+        __new__(__pre_ctor_ ## type(__malloc(sizeof(type))));           \
     })
 
 #define newDef(type, ...) new(type, ctor, ##__VA_ARGS__)
