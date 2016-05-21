@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Tue Dec  8 20:35:08 2015 penava_b
-## Last update Thu Jan 28 16:21:27 2016 penava_b
+## Last update Sat May 21 20:26:32 2016 penava_b
 ##
 
 CC =		gcc
@@ -36,7 +36,7 @@ LDFLAGS =	$(COMMON) -shared
 all: 		$(NAME)
 
 src/std/%.o:	src/std/%.c
-		gcc $(CFLAGS) -finstrument-functions -c -o $@ $<
+		$(CC) $(CFLAGS) -finstrument-functions -c -o $@ $<
 
 $(NAME): 	$(OBJ)
 		$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)

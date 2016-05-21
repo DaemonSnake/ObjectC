@@ -5,7 +5,8 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Wed May 11 02:18:25 2016 penava_b
-## Last update Wed May 11 02:33:56 2016 penava_b
+## Last update Sat May 21 20:25:40 2016 penava_b
 ##
 
-gcc -no-integrated-cpp -wrapper ./compile-caller $@;
+gcc -no-integrated-cpp -wrapper ./compile-caller $@ \
+    -fplan9-extensions -finstrument-functions;
