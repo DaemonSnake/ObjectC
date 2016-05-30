@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Wed May 11 02:10:57 2016 penava_b
-## Last update Sat May 21 14:19:54 2016 penava_b
+## Last update Sat May 28 01:10:38 2016 penava_b
 ##
 
 if [ "$(echo $1 | awk -F '/' '{print $NF}')" = "cc1" ] && [ "$2" = "-E" ];
@@ -15,10 +15,14 @@ then
     do
         if [ $bool -eq 1 ];
         then
-            $@ -CC;
-            cpp $arg -o $arg.precompiled.c;
-            mv $arg.precompiled.c $arg;
-            break;
+            $@ -CC -D__OBJECT_C_COMPILER__;
+            ret=$?
+            if [ $ret == 0 ];
+            then
+               cpp $arg -o $arg.precompiled.c;
+               mv $arg.precompiled.c $arg;
+            fi;
+            exit $ret;
         fi;
         if [ $arg = "-o" ];
         then

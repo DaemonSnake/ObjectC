@@ -5,8 +5,8 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Wed May 11 02:18:25 2016 penava_b
-## Last update Sat May 21 20:25:40 2016 penava_b
+## Last update Tue May 24 00:13:34 2016 penava_b
 ##
 
-gcc -no-integrated-cpp -wrapper ./compile-caller $@ \
-    -fplan9-extensions -finstrument-functions;
+gcc -no-integrated-cpp -wrapper ./compile-caller -std=c99 $@ \
+    -fplan9-extensions -finstrument-functions -Wfatal-errors;
