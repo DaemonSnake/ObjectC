@@ -5,10 +5,10 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Dec  9 06:10:58 2015 penava_b
-** Last update Thu Jan 28 15:18:26 2016 penava_b
+** Last update Tue May 24 23:51:57 2016 penava_b
 */
 
-#include "../inc/tools/for_each_va_args_macro.h"
+#include "../inc/ObjectC/tools/for_each_va_args_macro.h"
 #include <stdio.h>
 
 #define _init(type, name, this, ...)			\
@@ -44,10 +44,8 @@ typedef double String;
       if (__isinstanceof(#type, name))					\
 
 #define bad_arg(type, name)					\
-  else								\
-    if (__push_name(name))					\
-      for (type *name = __pop_name(); name != 0; name = 0)	\
-	if (__isinstanceof(#type, name))
+    else if (__isinstanceof(#type, name) && __push_name(name))  \
+        for (type *name = __pop_name(); name != 0; name = 0)	\
 
 /*----------------------------------------------------------------------*/
 
@@ -104,10 +102,11 @@ struct virtual
 {
   void	method(printf);
   void	var_method(printf);
-}	_virtual = {
-  (void *)int_printf1,
-  (void *)int_printf0
-};
+}       _virtual =
+    {
+        (void *)int_printf1,
+        (void *)int_printf0
+    };
 
 int	main()
 {
