@@ -1,32 +1,24 @@
 Urgent:
         - Add licence header to all files
-
-	YIELD ISSUE
-        -> Break/Return/Throw/... in a for_yield block : method's destructors not called
-	  => add close in Dtor of Generator for when alive flag is still on
-          => to remeber that rbp must stay the same when going back in the coroutine/cleaning
-          => secure break/return with __attribute__((cleanup))
-          => find a way to secure throw
-        -> save rbp and ensure that it's always the same value
+        - Make yield function always inline (remove Generator, ...)
 
 Not urgent:
 
+    -Fix chained for_yield for yieldV2 before implementation
+    -In instrument function add a return intercepter for Objects
+    -add head based nodes mixed with stack based on killstask (for return cases ((removall of retvalue + scoped(pointer))) )
+         or replace all stack based with heap based (@see ref_count)
     -Limit override use (or else any method could be overwriten by anyone)
-    -Finish and use gcc wrapper ?
+    -Use finished cpp wrapper, add #error messaging for debug, improve syntax
     -Remove const_method idea as there is no way to enforce it => syntax noise
     -Make the return of axor's "get" be a const pointer so that it won't be a probleme with nested Objects
-    -Instead of using toClean make Generator saveContext/restore pop the all level, return it's starts and save it in the Generator ???
-    -Remove a lot of methods from Generator and make them simple functions instead
-    	    (avoid possible override, bad usage, ...)
-    -Replace init_yield macro with new function in __cyg_profile_func_enter (see : yieldV2.c);
     -Stream type and IToStream interface
     -Add python style format from Future folder
     -Cout and cerr (f, fln, print, println)
     -Cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
     -Object_getType segfault safe for instrospection
-    -For_yield for methods
     -Handle nested Objects (without inheritance) //for now only new & delete works there
-    -Create a scope(already_existing_var) {} construct
+    -Create a scope(already_existing_var) {} construct or|and scope(exit) && scope(replace_exit)
     -Add a true_keyword & in_loop macro before try & other for based keyword breaking context
     -Glue method name with number of arguments (new function method abi)
 	Seemed a good idea but screw everything for va_args!!
@@ -37,6 +29,12 @@ Not urgent:
 To decide:
         -> Should static_cast from interface to Object work?
         -> Make up my mind on what should return toString {String, String *, const char *, allocated const char *, ...}[ NEEDED FOR FORMAT! ]
+        -> implement chainable method calls (mmap execute @see head_func)
+        -> all objects on the heap but keep RAII (shared_ptr as default and non RAII heap available)
 
 Decisions Made:
         -> Throw in finally has correct behaviour (replace old exception with new type)
+        -> yield => inline
+
+Wished:
+        -> toString returns String * with RAII
