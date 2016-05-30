@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Wed Jan 20 18:44:41 2016 penava_b
-** Last update Fri May 13 00:57:30 2016 penava_b
+** Last update Wed May 25 00:01:31 2016 penava_b
 */
 
 #include <stdio.h>
@@ -143,8 +143,11 @@ int	main()
   If good for user -> ask
 
   {-n} -> {allready_parsed_args_size - n}
-  {%*} -> pop new argument using vsprintf as save it
-  {n%*} -> calls vsprintf on nth argument
+
+
+  Not possible:
+        {%*} -> pop new argument using vsprintf as save it
+          {n%*} -> calls vsprintf on nth argument
                 if (n == current + 1) {
                         then pop give it to vsprintf and save it
                 }
