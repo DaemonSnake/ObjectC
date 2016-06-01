@@ -5,7 +5,7 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Sat May 28 15:30:03 2016 penava_b
-** Last update Sat May 28 15:34:28 2016 penava_b
+** Last update Wed Jun  1 15:53:38 2016 penava_b
 */
 
 #include <stdlib.h>
@@ -74,26 +74,26 @@ void __cyg_profile_func_exit(void *save_var, void *save_return)
     asm("mov %%rbx, %0" : "=r"(save_return));
     level--;
     for (tmp = var_list; tmp != 0 && tmp->level > level; tmp = var_list)
-        {
-            var_list = tmp->next;
-            free(tmp);
-        }
+    {
+        var_list = tmp->next;
+        free(tmp);
+    }
     struct heap_list *prev = 0;
     for (struct heap_list *tmp = heap_list; tmp != 0 && tmp->level > level; tmp = save_var)
-        {
-            save_var = tmp->next;
-            if (tmp->address == save_return)
+    {
+        save_var = tmp->next;
+        if (tmp->address == save_return)
+            goto skip;
+        for (struct var_list *tmp2 = var_list; tmp2 != 0; tmp2 = tmp2->next)
+            if (*tmp2->var == tmp->address)
                 goto skip;
-            for (struct var_list *tmp2 = var_list; tmp2 != 0; tmp2 = tmp2->next)
-                if (*tmp2->var == tmp->address)
-                    goto skip;
-            free(tmp->address);
-            free(tmp);
-            *(prev == NULL ? &heap_list : &prev->next) = save_var;
-            continue;
-        skip:
-            (tmp->level > level ? tmp->level-- : 0);
-            prev = tmp;
-            break;
-        }
+        free(tmp->address);
+        free(tmp);
+        *(prev == NULL ? &heap_list : &prev->next) = save_var;
+        continue;
+    skip:
+        (tmp->level > level ? tmp->level-- : 0);
+        prev = tmp;
+        break;
+    }
 }
