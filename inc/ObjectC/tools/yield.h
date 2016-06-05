@@ -25,11 +25,12 @@
 typedef struct
 {
     void *label;
+    void *id;
     int stop;
 }       generator;
 
 /* FUNCTIONS */
-int __yield_setjmp();
+int __yield_setjmp(void *, const char *);
 void __yield_postjump();
 generator *__yield_get_generator();
 generator *__yield_update_generator(generator *);
@@ -64,7 +65,7 @@ inline void __yield_fgoto(generator *gen)
 
 #define for_yield(ret, call)                                            \
     for (__typeof__(call) ** const __holder__ =                         \
-             (void *)((generator*[3]){__yield_get_generator(), __yield_update_generator(((generator[1]){{0, 42}})), NULL}), \
+             (void *)((generator*[3]){__yield_get_generator(), __yield_update_generator(((generator[1]){{0, __builtin_return_address(0), 42}})), NULL}), \
              ret = ({ call; });                                         \
          __yield_continue(__holder__);                                  \
          (__yield_update_generator((void *)__holder__[2]), __yield_fgoto((void *)__holder__[1])))
@@ -73,8 +74,8 @@ inline void __yield_fgoto(generator *gen)
 
 #define yield_break(type) return (type){0}
 
-#define yield(val)                                      \
-    if (__yield_setjmp() == 42)                         \
-        return val;                                     \
-    else                                                \
+#define yield(val)                                                      \
+    if (__yield_setjmp(__builtin_return_address(0), __func__) == 42)    \
+        return val;                                                     \
+    else                                                                \
         __yield_postjump();

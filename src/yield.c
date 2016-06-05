@@ -20,13 +20,33 @@
   SOFTWARE.
 */
 #include "ObjectC/tools/yield.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 static __thread generator *__gen__ = 0;
 
-int __yield_setjmp()
+static void abort_if_bad(void *caller_id, const char *function_name)
 {
     if (!__gen__)
-        return 0;
+    {
+        fprintf(stderr, "[YIELD_ERROR]: '%s' wasn't called using for_yield.\n\
+[YIELD_ERROR]: Either remove yield or add for_yield in the parent function\n", function_name);
+        abort();
+    }
+    if (caller_id != __gen__->id)
+    {
+        fprintf(stderr, "[YIELD_ERROR]: trying to yield in incompatible function : %s\n", function_name);
+        fprintf(stderr, "[YIELD_ERROR]: To correct this replace the return type of this function with yieds(type)\n");
+        fprintf(stderr, "[YIELD_EXAMPLE]:\n");
+        fprintf(stderr, "from:  int function() {}\n");
+        fprintf(stderr, "to:    yields(int) function() {}\n");
+        abort();
+    }
+}
+
+int __yield_setjmp(void *caller_id, const char *function_name)
+{
+    abort_if_bad(caller_id, function_name);
     __gen__->label = __builtin_return_address(0);
     __gen__->stop = 0;
     return 42;
