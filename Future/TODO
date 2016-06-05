@@ -1,10 +1,4 @@
-Urgent:
-        - Add licence header to all files
-        - Make yield function always inline (remove Generator, ...)
-
 Not urgent:
-
-    -Fix chained for_yield for yieldV2 before implementation
     -In instrument function add a return intercepter for Objects
     -add head based nodes mixed with stack based on killstask (for return cases ((removall of retvalue + scoped(pointer))) )
          or replace all stack based with heap based (@see ref_count)

@@ -19,55 +19,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-#include <sys/mman.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 
-static void *__this__ = 0;
-
-void *push_this(void *this)
+void Object_method(void *this)
 {
-    __this__ = this;
-    this += sizeof(void *);
-    return (*(void **)this);
+    printf("%p\n", this);
 }
 
-void *__get_this__()
+struct VTable
 {
-    return __this__;
+    void (*method)(void *);
+};
+
+const struct VTable *vtable = (struct VTable[1]){Object_method};
+
+struct Object
+{
+    const struct VTable *(*get_vtable)(char);
+};
+
+const struct VTable *get_vtable(char tmp)
+{
+    (void)tmp;
+    return vtable;
 }
 
-void *(*return_func(void *addr))()
-{
-#if (ULONG_MAX == UINT_MAX)
-# define PRE_MOV_OP "\x48"
-# define OFFSET 1
-#else
-# define PRE_MOV_OP
-# define OFFSET 0
-#endif
-    char *exec = mmap(NULL, 23,
-                      PROT_WRITE|PROT_EXEC,
-                      MAP_ANON|MAP_PRIVATE, -1, 0);
-    unsigned i = 0;
-    char *f = (void *)push_this;
+static struct Object tmp = { get_vtable };
 
-    i = OFFSET + 1;
-    strncpy(exec, PRE_MOV_OP "\xbf", i); //mov $0, %rdi
-    strncpy(exec + i, (void *)&addr, sizeof(void *));
-    i += sizeof(void *);
-    strncpy(exec + i, PRE_MOV_OP "\xba", OFFSET + 1); //mov $0, %rdx
-    i += OFFSET + 1;
-    strncpy(exec + i, (void *)&f, sizeof(void *));
-    i += sizeof(void *);
-    strncpy(exec + i, "\xff\xd2", 2); //callq *%rdx
-    i += 2;
-    exec[i] = 0xc3;
-    mprotect(exec, 23, PROT_READ|PROT_EXEC);
-    return (void *)exec;
-    #undef PRE_MOV_OP
-    #undef OFFSET
+char lock()
+{
+    printf("LOCK\n");
+    return 0;
+}
+
+void *unlock_get_this()
+{
+    printf("UNLOCK\n");
+    return &tmp;
+}
+
+#define $M(method, args...) get_vtable(lock())->method(unlock_get_this(), ##args)
+
+int main()
+{
+    tmp.$M(method);
+    tmp.get_vtable(lock())->method(unlock_get_this());
 }

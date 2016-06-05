@@ -1,15 +1,27 @@
 /*
-** main.c for  in /home/penava_b/perso/test/Obj4
-** 
-** Made by penava_b
-** Login   <penava_b@epitech.net>
-** 
-** Started on  Sat Dec 12 23:36:57 2015 penava_b
-** Last update Wed May 11 01:36:34 2016 penava_b
-*/
-
+ * Copyright (C) 2016  Bastien Penavayre
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 #include <stdio.h>
 #include "Debug.h"
+#include "ObjectC.h"
 
 const char *new_method(String, toString) //Bad override
 {
@@ -17,24 +29,24 @@ const char *new_method(String, toString) //Bad override
     return 0;
 }
 
-String	*yieldList(Generator *this)
+yields(String *) yieldList()
 {
-    initYield();
     I _var(Debug, tmp, ctor) as(I);
 
     yield(new(String, ctorS, "First yield"));
     yield(new(String, ctorS, "Second yield"));
-    return new(String, ctorS, "After last yield");
+    yield(new(String, ctorS, "Last yield"));
+    yield_break(String *);
 }
 
 void		yieldTest()
 {
     printf("YIELD::\n");
-    for_yield(str, yieldList)
-        {
-            printf("Yield2 : '%s'\n", M(str, c_str));
-            delete(str);
-        }
+    for_yield(str, yieldList())
+    {
+        printf("Yield2 : '%s'\n", M(str, c_str));
+        delete(str);
+    }
 }
 
 void		type(void)
@@ -182,30 +194,28 @@ void	return_object_test()
     printf("Return object %p\n", retvalue(return_instance_debug()));
 }
 
-int	range(Generator *this, int begin, int end)
+yields(int)	range(int begin, int end)
 {
-    int  	i;
     char	sup = (end > begin);
 
-    initYield();
-    if (begin == end)
-        yield_break;
-    for (i = begin; (sup ? i < end - 1 : i > end + 1); i += (sup ? 1 : -1))
-        yield(i);
-    return i;
+    if (begin != end)
+        for (int i = begin; (sup ? i < end : i > end + 1); i += (sup ? 1 : -1))
+            yield(i);
+    yield_break(int);
 }
 
 void	range_test()
 {
     printf("RANGE TEST::\n");
-    for_yield(i, range, 0, 0) {
+    for_yield(i, range(0, 0)) {
+        (void)i;
         fprintf(stderr, "Error if printed???\n");
     }
-    for_yield(i, range, 0, 10) {
+    for_yield(i, range(0, 10)) {
         printf("range value %d\n", i);
     }
     printf("\nBackward\n");
-    for_yield(i, range, 10, 0) {
+    for_yield(i, range(10, 0)) {
         printf("range value %d\n", i);
     }
 }
@@ -213,9 +223,9 @@ void	range_test()
 void	loop_init_test()
 {
     for (int i = 0; i < 5; i++)
-        {
-            Object _def(Debug, tmp) as(Object);
-        }
+    {
+        Object _def(Debug, tmp) as(Object);
+    }
 }
 
 static Debug static_test;

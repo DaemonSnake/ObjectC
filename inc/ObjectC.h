@@ -21,30 +21,15 @@
  */
 #pragma once
 
-#include "ObjectC.h"
-
-class(String, Object)
-{
-  char *c_str;
-  unsigned long	length;
-};
-
-virtual(String)
-{
-  const char	*const_method(c_str);
-  unsigned long	const_method(size);
-  char		const_method(get, int);
-  char		method(set, int, char);
-  /* 
-     --ToDo--
-  String	const_method(copy);
-  String	const_method(subStr, int, int);
-  String	const_method(opEq, const char *);
-  char		const_method(isEq, const char *);
-  void		method(replace, const char *to, const char *whith);
-  */
-};
-
-new_tor(String, ctorS, const char *);
-
-end_decl(String);
+#include "ObjectC/tools/for_each_va_args_macro.h"
+#include "ObjectC/tools/macro_tools.h"
+#include "ObjectC/tools/class.h"
+#include "ObjectC/tools/Type.h"
+#include "ObjectC/tools/Object.h"
+#include "ObjectC/tools/implement.h"
+#include "ObjectC/tools/new_delete.h"
+#include "ObjectC/tools/exceptions.h"
+#include "ObjectC/tools/rvalref.h"
+#include "ObjectC/tools/yield.h"
+#include "ObjectC/Exceptions.h"
+#include "ObjectC/String.h"

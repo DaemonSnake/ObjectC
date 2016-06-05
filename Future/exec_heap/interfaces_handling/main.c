@@ -19,32 +19,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#pragma once
 
-#include "ObjectC.h"
-
-class(String, Object)
+void func(void *addr, int offset)
 {
-  char *c_str;
-  unsigned long	length;
-};
+    printf("this:%p offset:%d\n", addr, offset);
+}
 
-virtual(String)
+void heapBased();
+
+int main()
 {
-  const char	*const_method(c_str);
-  unsigned long	const_method(size);
-  char		const_method(get, int);
-  char		method(set, int, char);
-  /* 
-     --ToDo--
-  String	const_method(copy);
-  String	const_method(subStr, int, int);
-  String	const_method(opEq, const char *);
-  char		const_method(isEq, const char *);
-  void		method(replace, const char *to, const char *whith);
-  */
-};
-
-new_tor(String, ctorS, const char *);
-
-end_decl(String);
+    (heapBased + 14)(); //base class
+    (heapBased + 14 + 9)(); //interface 1
+    (heapBased + 14 + 9 * 2)(); //interface 2
+    (heapBased + 14 + 9 * 3)(); //interface 3
+}

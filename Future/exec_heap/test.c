@@ -5,12 +5,14 @@
 ** Login   <penava_b@epitech.net>
 ** 
 ** Started on  Fri May 27 02:50:21 2016 penava_b
-** Last update Fri May 27 22:10:08 2016 penava_b
+** Last update Thu Jun  2 18:46:35 2016 penava_b
 */
 
 #include <stdio.h>
 #include <sys/mman.h>
 #include "Object.h"
+
+/* OBJECT INITIALISATION */
 
 Object *Object_print(Object *this)
 {
@@ -29,8 +31,10 @@ void Object_ctor(Object *this)
 
 void Object_dtor(Object *this)
 {
-    munmap(this->_getV, 36);
+    munmap(this->_getV, 23);
 }
+
+/* ACTUAL TEST */ 
 
 int main()
 {
@@ -38,5 +42,5 @@ int main()
 
     Object_ctor(a);
     a->$M(print)->$M(print);
-    /* Object_dtor(a); */
+    Object_dtor(a);
 }
