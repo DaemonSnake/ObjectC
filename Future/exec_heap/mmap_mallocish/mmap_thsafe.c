@@ -23,6 +23,63 @@
 #include <sys/mman.h>
 #include <stdio.h>
 
+struct page_mmap_list
+{
+    void *begin;
+    unsigned short free_blocks;
+    unsigned pages;
+    struct page_mmap_list *next;
+};
+
+struct global_mmap_data
+{
+    struct page_mmap_list *begin;
+    unsigned pages;
+    unsigned page_size;
+};
+
+struct subpage_node //not a header, seperate list on different region of heap
+{
+    size_t size;
+    char free;
+    void *addr;
+    struct subpage_node *end;
+};
+
+#if 0
+//  Requester/Provider idea (difficult to implement)
+
+routine(size)
+{
+    req = new_request(size);
+    push_request(&req); //updates request minimum size
+    while (!request_validated(&req))
+    {
+        for (chunk : get_thread_unique_page())
+        {
+            if (!chunk.freed)
+                continue;
+            //free flag alteration in this function for true
+            if (remove_request_if_selfvalid_else_give(&chunk, &req))
+                goto manage;
+        }
+    }
+ manage:
+    //an otherthread may have already (un)set permissions
+    tryopen_permission(req.page);
+    fill(req.data, size);
+    tryclose_permission(req.page);
+    return req.data;
+}
+
+#elif 0
+//Inner thread pool
+#elif 0
+//MultiThread request, single thread use
+#endif
+
+static global_mmap_data data = { 0, 0 };
+
 char *addr = 0;
 static pthread_mutex_t data_edit_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t cond = PTHREAD_COND_INITIALIZER;

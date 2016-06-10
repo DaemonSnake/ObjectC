@@ -29,6 +29,7 @@ To decide:
 Decisions Made:
         -> Throw in finally has correct behaviour (replace old exception with new type)
         -> yield => inline
+        -> Try to implement ABI just for constructors to start
 
 Wished:
         -> toString returns String * with RAII

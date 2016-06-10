@@ -98,7 +98,7 @@
     type @_def(true_type, var_name, args...), ...;
     type *var_name = @new(type, ctor_name, args...);
     type *var_name = @newDef(type, args...);
-    
+
     @delete(var_name);
     @M(var_name, method_name, args...);
     @axM(var_name, sub_var_name, new_val); /* set */
@@ -126,7 +126,7 @@
         @CODE();
     }
 
-    @for_yield(saving_result, function_name, args...)
+    @for_yield(saving_result, function_name(args...))
     {
         @CODE();
     }
@@ -139,13 +139,12 @@
 
 YIELD()
 {
-    type function_name(Generator *this, args...)
+    @yieds(type) function_name(args...)
     {
-        @initYield();
         ...;
         @yield(value);
-        @yield_break; /* breaks the for_yield() loop */
+        @yield_break(type); /* breaks the for_yield() loop */
         ...;
-        return last_value;
+        return last_value; // ignored
     }
 }

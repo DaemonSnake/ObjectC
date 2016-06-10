@@ -82,21 +82,21 @@ void	*__pop_name()
 }
 
 /*----------------------------------------------------------------------*/
-void	new_method(int, ctor)
+void	new_method(Object, ctor)
 {
 }
 
-void	new_method(int, ctor, int i)
+void	new_method(Object, ctor, int i)
 {
   *this = i;
 }
 
-void	new_method(int, printf)
+void	new_method(Object, printf)
 {
   printf("%d\n", *this);
 }
 
-void	new_var_method(int, printf)
+void	new_var_method(Object, printf)
 {
   printf("Number of arguments is %d\n", __va_count__);
   for_arg(Object, arg)
@@ -115,16 +115,16 @@ struct virtual
   void	var_method(printf);
 }       _virtual =
     {
-        (void *)int_printf1,
-        (void *)int_printf0
+        (void *)Object_printf1,
+        (void *)Object_printf0
     };
 
 int	main()
 {
   int	i = 42;
 
-  _init(int, ctor, &i);
-  _init(int, ctor, &i, 84);
+  _init(Object, ctor, &i);
+  _init(Object, ctor, &i, 84);
   M(&i, printf);
   Mv(&i, printf, 0x42, 0x37, 0x53);
 }

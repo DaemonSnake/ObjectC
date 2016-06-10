@@ -66,7 +66,7 @@ inline void __yield_fgoto(generator *gen)
 #define for_yield(ret, call)                                            \
     for (__typeof__(call) ** const __holder__ =                         \
              (void *)((generator*[3]){__yield_get_generator(), __yield_update_generator(((generator[1]){{0, __builtin_return_address(0), 42}})), NULL}), \
-             ret = ({ call; });                                         \
+             ret = call;                                                \
          __yield_continue(__holder__);                                  \
          (__yield_update_generator((void *)__holder__[2]), __yield_fgoto((void *)__holder__[1])))
 
