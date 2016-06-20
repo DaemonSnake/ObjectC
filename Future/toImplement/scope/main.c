@@ -19,26 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-class(StringArray, Object)
-{
-    String *strings;
-};
 
-virtual(StringArray)
-{
-};
-
-yields(String) type_method(StringArray, foreach)
-{
-}
-
-end_decl(StringArray);
+#include "scope_exit.h"
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 int main()
 {
-    StringArray _var(tmp, StringArray);
+    int i = 42;
 
-    foreach(StringArray)(var, tmp)
+    i = open("./scope_exit.c", O_RDONLY);
+    scope(exit)
     {
+        printf("In all cases fd=%d\n", i);
+        close(i);
     }
+
+    scope(failure) {
+        printf("Error!!!!\n");
+    }
+
+    scope(success) {
+        printf("Everything went as planned!\n");
+    }
+    printf("End\n");
+    bad_exit();
+    return 0;
 }

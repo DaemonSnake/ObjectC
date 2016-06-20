@@ -1,3 +1,0 @@
-#!/bin/bash
-
-cpp "$@" | grep -v '#' | debug/structPrinter.py

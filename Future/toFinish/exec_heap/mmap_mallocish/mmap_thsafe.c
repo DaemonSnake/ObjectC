@@ -72,10 +72,6 @@ routine(size)
     return req.data;
 }
 
-#elif 0
-//Inner thread pool
-#elif 0
-//MultiThread request, single thread use
 #endif
 
 static global_mmap_data data = { 0, 0 };

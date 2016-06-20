@@ -19,37 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#define scope()								\
-  for (int __scope_tmp__ = __scope__ + 1,				\
-	 __scope__ __attribute__((cleanup(dtor))) = __scope_tmp__;	\
-       __scope__ != 0; __scope__ = 0)
 
-void	dtor(int *tmp)
+#pragma once
+
+struct exit_struct
 {
-  if (*tmp == 0)
-    printf("Exiting normaly a scope\n");
-  else
-    printf("Exiting prematurly %d scopes\n", *tmp);
+    void *start;
+    unsigned level;
+    enum        {
+        scope_failure_state = 0,
+        scope_success_state,
+        scope_exit_state
+    } state;
+    struct exit_struct *next;
+};
+
+__attribute__((always_inline, no_instrument_function))
+inline void __force_exit_function()
+{
+    asm("retq");
 }
 
-const int	__scope__ = 0;
+#define scope(type)                                                     \
+    if (mysetjmp((struct exit_struct[1]){0, 0, scope_ ## type ## _state }) != 42) \
+        for (;; __force_exit_function())                                \
+            for (;; __force_exit_function())
 
-void	func()
-{
-  printf("%d\n", __scope__);
-  scope()
-    {
-      printf("%d\n", __scope__);
-      scope()
-	{
-	  dtor(&__scope__);
-	  asm("leaveq");
-	  asm("retq");
-	}
-    }
-}
 
-int	main()
-{
-  func();
-}
+int mysetjmp(struct exit_struct *);
+void bad_exit();

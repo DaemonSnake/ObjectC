@@ -18,6 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+/* Syntax :
+
+   @UPCASENAME() : idea
+   @lowcasename : ObjectC's keyword
+   [@lowcasenames...] : if placed at the end of a line declaring a keyword this indicated what is required to use said keyword
+   @(...) : possible option to use
+
+ */
+
 @CLASS()
 {
     @CLASS_DEFINITION()
@@ -66,7 +75,7 @@
                 @CODE();
             }
 
-            implement(class_name, parent, interfaces...) [@end_decl]
+            @implement(class_name, parent, interfaces...) [@end_decl]
             {
                 @CODE();
             }

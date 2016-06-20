@@ -19,71 +19,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include <stdio.h>
-#include <stdlib.h>
 
-struct scope_list
-{
-    void (*func)();
-    unsigned level;
-    struct scope_list *next;
-};
+#include "scope_exit.h"
 
 static __thread unsigned level = 0;
-static __thread struct scope_list *_list = 0;
+static __thread struct exit_struct *ge = 0;
 
 __attribute__((no_instrument_function))
-void push_scope_exit(void (*func)())
+int mysetjmp(struct exit_struct *e)
 {
-    struct scope_list *tmp;
-
-    tmp = malloc(sizeof(struct scope_list));
-    tmp->func = func;
-    tmp->next = _list;
-    tmp->level = level;
-    _list = tmp;
+    e->start = __builtin_return_address(0);
+    e->level = level;
+    e->next = ge;
+    ge = e;
+    return 42;
 }
 
 __attribute__((no_instrument_function))
-void __cyg_profile_func_enter(void *a, void *b)
+void __cyg_profile_func_enter(void *arg, void *arg2)
 {
-    (void)a, (void)b;
+    (void)arg, (void)arg2;
     level++;
 }
 
-__attribute__((no_instrument_function))
-void __cyg_profile_func_exit(void *a, void *b)
+static void empty_func()
 {
-    (void)b;
-    level--;
-    for (struct scope_list *tmp = _list; tmp != 0 && tmp->level > level; tmp = a)
-    {
-        a = tmp->next;
-        tmp->func();
-        free(tmp);
-    }
 }
 
-#define __SCOPE_exit__(counter)                         \
-    __attribute__((no_instrument_function))             \
-    auto void __scope_exit_function_ ## counter();      \
-    push_scope_exit(__scope_exit_function_ ## counter); \
-    auto void __scope_exit_function_ ## counter()
+__attribute__((no_instrument_function))
+static void (*pop_node(int arg))()
+{
+    struct exit_struct *tmp = ge;
 
-#define __CALL__(macro, val) macro(val)
+    ge = ge->next;
+    if (arg)
+        return tmp->start;
+    return empty_func;
+}
 
-#define scope(name)                                     \
-    __CALL__(__SCOPE_ ## name ## __, __COUNTER__)
+__thread int scope_current_state = scope_success_state;
 
-    int main()
-    {
-        scope(exit)
-        {
-            printf("At end\n");
-        }
-        scope(exit)
-        {
-            printf("After first end\n");
-        }
-        printf("Before\n");
-    }
+__attribute__((no_instrument_function))
+void __cyg_profile_func_exit(void *arg, void *arg2)
+{
+    (void)arg, (void)arg2;
+    asm("leaveq");
+    while (ge != 0 && ge->level >= level)
+        pop_node(ge->state == scope_exit_state || ge->state == scope_current_state)();
+    level--;
+    asm("retq");
+}
+
+void bad_exit()
+{
+    scope_current_state = scope_failure_state;
+}
