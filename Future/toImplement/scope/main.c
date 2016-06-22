@@ -27,25 +27,37 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int main()
+void caller()
 {
     int i = 42;
 
     i = open("./scope_exit.c", O_RDONLY);
     scope(exit)
     {
-        printf("In all cases fd=%d\n", i);
+        printf("[exit] closing fd=%d\n", i);
         close(i);
     }
 
     scope(failure) {
-        printf("Error!!!!\n");
+        printf("[failure] Error!\n");
     }
 
     scope(success) {
-        printf("Everything went as planned!\n");
+        printf("[success] Everything went as planned!\n");
     }
-    printf("End\n");
-    bad_exit();
+
+#ifdef FAILURE_TEST
+    all_scopes_exit();
+#endif
+}
+
+int main()
+{
+    scope(exit)
+    {
+        printf("[exit] To be called at last in all cases\n");
+    }
+    caller();
+    printf("End of main\n");
     return 0;
 }

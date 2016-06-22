@@ -22,10 +22,13 @@
 
 #pragma once
 
+#include <alloca.h>
+
 struct exit_struct
 {
     void *start;
     unsigned level;
+    void *rbp;
     enum        {
         scope_failure_state = 0,
         scope_success_state,
@@ -41,10 +44,11 @@ inline void __force_exit_function()
 }
 
 #define scope(type)                                                     \
-    if (mysetjmp((struct exit_struct[1]){0, 0, scope_ ## type ## _state }) != 42) \
-        for (;; __force_exit_function())                                \
+    for (; mysetjmp(__builtin_frame_address(0),                         \
+                    (struct exit_struct[1]){0, 0, 0, scope_ ## type ## _state }) != 42; \
+         __force_exit_function())                                       \
             for (;; __force_exit_function())
 
 
-int mysetjmp(struct exit_struct *);
-void bad_exit();
+int mysetjmp(void *, struct exit_struct *);
+void all_scopes_exit();

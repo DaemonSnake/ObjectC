@@ -26,11 +26,12 @@ static __thread unsigned level = 0;
 static __thread struct exit_struct *ge = 0;
 
 __attribute__((no_instrument_function))
-int mysetjmp(struct exit_struct *e)
+int mysetjmp(void *rbp, struct exit_struct *e)
 {
     e->start = __builtin_return_address(0);
     e->level = level;
     e->next = ge;
+    e->rbp = rbp;
     ge = e;
     return 42;
 }
@@ -42,19 +43,13 @@ void __cyg_profile_func_enter(void *arg, void *arg2)
     level++;
 }
 
-static void empty_func()
-{
-}
-
 __attribute__((no_instrument_function))
-static void (*pop_node(int arg))()
+static void (*pop_node())()
 {
     struct exit_struct *tmp = ge;
 
     ge = ge->next;
-    if (arg)
-        return tmp->start;
-    return empty_func;
+    return tmp->start;
 }
 
 __thread int scope_current_state = scope_success_state;
@@ -63,14 +58,26 @@ __attribute__((no_instrument_function))
 void __cyg_profile_func_exit(void *arg, void *arg2)
 {
     (void)arg, (void)arg2;
-    asm("leaveq");
+    asm("mov %rbp, %rsp");
     while (ge != 0 && ge->level >= level)
-        pop_node(ge->state == scope_exit_state || ge->state == scope_current_state)();
+        if (ge->state == scope_exit_state || ge->state == scope_current_state)
+        {
+            asm("mov %0, %%rbp" :: "r"(ge->rbp));
+            pop_node()();
+        }
+        else
+            pop_node();
     level--;
+    asm("pop %rbp");
     asm("retq");
 }
 
-void bad_exit()
+void exit(int);
+
+void all_scopes_exit()
 {
     scope_current_state = scope_failure_state;
+    level = 0;
+    __cyg_profile_func_exit(0, 0);
+    exit(0);
 }
