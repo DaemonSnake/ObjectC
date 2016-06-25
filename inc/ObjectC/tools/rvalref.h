@@ -35,13 +35,9 @@ int		__get_current_level();
 void		*__push_var(struct s_right_value_node *);
 void		*__get_front_var_list();
 void		__exit_end_func(int);
-void		__prevent_clean_up();
-void		__reset_clean_up();
 void		__delayed_level_encrementation();
 void		*__prevent_clean_up_var(void *);
 void		(*__get_return_dtor())(void *);
-long		__get_front_node_diff(const char *);
-void		__push_back_on_stack(void *, int);
 void		__protect_kill_stack(void *);
 
 #define rvalue(type, ctor, ...)                                         \

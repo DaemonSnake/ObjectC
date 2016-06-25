@@ -8,11 +8,10 @@
 #define paste2(x, y) x ## y
 
 #define unit_test()                                                     \
-    __attribute__((always_inline))                                      \
-    inline char paste(__unit_test_, __LINE__)();                        \
+    static char paste(__unit_test_, __LINE__)();                        \
                                                                         \
     __attribute__((constructor))                                        \
-    static inline void paste(__unit_test_caller_, __LINE__)()           \
+    static void paste(__unit_test_caller_, __LINE__)()                  \
     {                                                                   \
         if (UNITTEST && !paste(__unit_test_, __LINE__)())               \
             fprintf(stderr,                                             \
@@ -20,8 +19,7 @@
                     __FILE__, __LINE__);                                \
     }                                                                   \
                                                                         \
-    __attribute__((always_inline))                                      \
-    inline char paste(__unit_test_, __LINE__)()
+    static char paste(__unit_test_, __LINE__)()
 
 unit_test()
 {

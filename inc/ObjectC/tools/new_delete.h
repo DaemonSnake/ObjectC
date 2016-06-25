@@ -61,7 +61,7 @@ void	*__malloc(size_t);
 
 #define Ginit(type, ctor, var, ...)                             \
     __attribute__((no_instrument_function, constructor))	\
-    static inline void	__global_ctor_ ## var()                 \
+    static void	__global_ctor_ ## var()                         \
     {                                                           \
         static                                                  \
             struct s_right_value_node	tmp =                   \
@@ -81,4 +81,4 @@ void	*__malloc(size_t);
     }                                                           \
                                                                 \
     __attribute__((no_instrument_function, constructor))	\
-    static inline void __user_code_gctor_ ## var()
+    static void __user_code_gctor_ ## var()

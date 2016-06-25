@@ -46,13 +46,6 @@ struct
 
 void		__except_clean_exit_func(int);
 
-long		__get_front_node_diff(const char *rbp)
-{
-  if (__stack_list.front == 0)
-    return -1;
-  return (void *)rbp - (void *)__stack_list.front;
-}
-
 static
 void		__enter_new_func()
 {
@@ -94,18 +87,6 @@ void		*__push_var(struct s_node *new_node)
   return new_node->data;
 }
 
-void		__push_back_on_stack(struct s_node *front, int level)
-{
-  struct s_node	*node;
-  int		start_level = front->level;
-  
-  for (node = front; node != 0 && node->level == start_level; node = node->next)
-    {
-      node->level = level;
-      __push_var(node);
-    }
-}
-
 void		*__get_front_var_list()
 {
   if (__stack_list.front == 0)
@@ -125,18 +106,6 @@ void		__exit_end_func(int level)
       node->dtor(node->data);
   __except_clean_exit_func(level);
   __stack_list.level = level - 1;
-}
-
-void		__prevent_clean_up()
-{
-  for (struct s_node *node = __stack_list.front; node != 0 && node->level == __stack_list.level; node = node->next)
-    node->toclean = 0;
-}
-
-void		__reset_clean_up()
-{
-  for (struct s_node *node = __stack_list.front; node != 0 && node->level == __stack_list.level; node = node->next)
-    node->toclean = 42;
 }
 
 void		__delayed_level_encrementation()
@@ -167,8 +136,7 @@ void		(*__get_return_dtor())(void *)
 }
 
 __attribute__((destructor))
-static inline
-void		__clean_for_exit()
+static void    	__clean_for_exit()
 {
   __exit_end_func(-1);
 }
