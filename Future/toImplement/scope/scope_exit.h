@@ -49,6 +49,5 @@ inline void __force_exit_function()
          __force_exit_function())                                       \
             for (;; __force_exit_function())
 
-
 int mysetjmp(void *, struct exit_struct *);
 void all_scopes_exit();

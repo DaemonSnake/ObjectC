@@ -21,6 +21,7 @@
  */
 
 #include "scope_exit.h"
+#include <stdlib.h>
 
 static __thread unsigned level = 0;
 static __thread struct exit_struct *ge = 0;
@@ -71,8 +72,6 @@ void __cyg_profile_func_exit(void *arg, void *arg2)
     asm("pop %rbp");
     asm("retq");
 }
-
-void exit(int);
 
 void all_scopes_exit()
 {
