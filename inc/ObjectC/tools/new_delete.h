@@ -51,7 +51,6 @@ void	*__malloc(size_t);
                       {{                                                \
                               ((*(void **)&var = (type[1]){{0}})),      \
                                   (void *)type ## _dtor,                \
-                                  42,                                   \
                                   __get_current_level(),                \
                                   (void *)0, (void *)0                  \
                                   }})), ##__VA_ARGS__),                 \
@@ -68,7 +67,6 @@ void	*__malloc(size_t);
             {                                                   \
                 &var,						\
                 (void *)type ## _dtor,				\
-                42,						\
                 0,						\
                 (void *)0,					\
                 (void *)0					\

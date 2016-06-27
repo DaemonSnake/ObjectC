@@ -25,7 +25,6 @@ struct		s_right_value_node
 {
   void		*data;
   void		(*dtor)(void *);
-  char		toclean;
   int		level;
   struct s_right_value_node	*next;
   void		*id;
@@ -47,7 +46,6 @@ void		__protect_kill_stack(void *);
     (__push_var((struct s_right_value_node[1])                          \
 		{{ (type[1]){},						\
                             (void *)type ## _dtor,                      \
-                                42,                                     \
                                 __get_current_level(),                  \
                                 (void *)0, (void *)0                    \
                                 }})), ##__VA_ARGS__),                   \
@@ -61,7 +59,6 @@ void		__protect_kill_stack(void *);
           (__push_var((struct s_right_value_node[1])    \
           {{ (type[1]){},                               \
                  (void *)type ## _dtor,                 \
-                 42,                                    \
                  __get_current_level(),                 \
                  (void *)0, (void *)0                   \
                  }})), ##__VA_ARGS__),                  \
@@ -76,7 +73,6 @@ void		__protect_kill_stack(void *);
 	      {{						\
 		  (__typeof__(x)[1]){x},			\
 		    __get_return_dtor(),			\
-		      42,					\
 		      __get_current_level() + 1,		\
 		      (void *)0, (void *)0			\
 		      }})					\

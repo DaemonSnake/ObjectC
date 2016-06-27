@@ -27,7 +27,6 @@ struct		s_node
 {
   void		*data;
   void		(*dtor)(void *);
-  char		toclean;
   int	       	level;
   struct s_node	*next;
   void		*id;
@@ -102,7 +101,7 @@ void		__exit_end_func(int level)
   for (node = __stack_list.front; node != 0 && node->level >= level; node = node->next)
     __stack_list.front = node->next;
   for (node = front; node != 0 && node != __stack_list.front; node = node->next)
-    if (node->dtor != 0 && node->toclean != 0)
+    if (node->dtor != 0)
       node->dtor(node->data);
   __except_clean_exit_func(level);
   __stack_list.level = level - 1;

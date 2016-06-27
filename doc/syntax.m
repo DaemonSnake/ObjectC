@@ -40,7 +40,7 @@
             @virtual(class_name) [@class]
             {
                 type @method(name, args...);
-                @axors(type, name, @(@(set || get) || @(set && get)));
+                @axors(type, name, @(set ||&& get));
                 ...;
             };
 
@@ -56,7 +56,7 @@
                 $$(method_name, args...); /* => M(this, method_name, args...); */
             }
 
-            @new_def_axors(class_name, var_name, @(@(set || get) || @(set && get)));
+            @new_def_axors(class_name, var_name, @(set ||&& get) );
 
             @new_axor(class_name, var_name, get)
             {
