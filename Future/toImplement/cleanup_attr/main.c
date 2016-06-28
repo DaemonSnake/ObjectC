@@ -2,7 +2,8 @@ static __thread char allow_cleanup = 42;
 
 void dtor(void *arg)
 {
-    register const void *ret asm("rbx");
+    register const void *rbx asm("rbx");
+    const void *ret = rbx;
 
     if (!allow_cleanup || *(void **)arg == 0 || *(void **)arg == ret)
         return ;
