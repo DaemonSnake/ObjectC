@@ -5,14 +5,14 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Tue Dec  8 20:35:08 2015 penava_b
-## Last update Fri Jul  1 20:12:10 2016 penava_b
+## Last update Fri Jul  1 23:35:37 2016 penava_b
 ##
 
 CC =		gcc
 
 RM =		rm -f
 
-NAME =		libObject.so
+NAME =		libObjectC.so
 
 SRC =		src/class.c			\
 		src/yield.c			\

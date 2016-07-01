@@ -21,9 +21,8 @@
 
 function precompiler()
 {
-    echo $arg;
-    if [ ! -z $arg ]; then
-        $@ -CC -D__OBJECT_C_COMPILER__ | cpp | grep -v '^#';
+    if [ -z $arg ]; then
+        $@ -CC -D__OBJECT_C_COMPILER__ | cpp;
         exit $?;
     fi;
     $@ -CC -D__OBJECT_C_COMPILER__;
@@ -61,4 +60,7 @@ function compiler_call()
     fi;
 }
 
+if [ $OBJECT_C_DEBUG ]; then
+    echo "$@";
+fi;
 compiler_call $@;
