@@ -19,5 +19,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-gcc -no-integrated-cpp -wrapper ./compile-caller $@ \
+gcc -no-integrated-cpp -wrapper `dirname $0`/compile-caller $@ \
     -fplan9-extensions -finstrument-functions -Wfatal-errors;

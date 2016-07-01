@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Copyright (C) 2016  Bastien Penavayre
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,46 +19,4 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-function precompiler()
-{
-    echo $arg;
-    if [ ! -z $arg ]; then
-        $@ -CC -D__OBJECT_C_COMPILER__ | cpp | grep -v '^#';
-        exit $?;
-    fi;
-    $@ -CC -D__OBJECT_C_COMPILER__;
-    ret=$?
-    if [ $ret == 0 ];
-    then
-        cpp $arg -o $arg.precompiled.c;
-        mv $arg.precompiled.c $arg;
-    fi;
-    exit $ret;
-}
-
-function compiler_call()
-{
-    local ret arg
-    if [ `basename $1` = "cc1" ] && [ "$2" = "-E" ] || [ `basename $1` = "cpp" ];
-    then
-        for i in `seq 1 $#`;
-        do
-            case ${!i} in
-                -o*)
-                    i=$(echo $i+1 | bc)
-                    break;
-                    ;;
-                -o)
-                    break;
-                    ;;
-            esac;
-        done;
-        arg=`echo ${!i} | awk -F '-o' '{print $NF}'`
-        precompiler $@
-    else
-        $@;
-        exit $?;
-    fi;
-}
-
-compiler_call $@;
+`dirname $0`/compile-caller cpp $@ -Wfatal-errors;

@@ -23,12 +23,12 @@
 
 #include "system_header.h"
 
-__CREATE_MACRO__(#, __POST_COMP_GLUE__, __POST_COMP_GLUE2__(x, y), x, y)
-__CREATE_MACRO__(#, __POST_COMP_GLUE2__, x ## y, x, y)
+__CREATE_MACRO__(__POST_COMP_GLUE__, __POST_COMP_GLUE2__(x, y), x, y)
+__CREATE_MACRO__(__POST_COMP_GLUE2__, x ## y, x, y)
 
 #define class(name, base, args...)                                      \
-    __CREATE_MACRO__(__HASH_WORD__, CLASS, __POST_COMP_GLUE__(name, arg), arg) \
-    __CREATE_MACRO__(__HASH_WORD__, name ## _SUPERS, args)              \
+    __CREATE_MACRO__(CLASS, __POST_COMP_GLUE__(name, arg), arg)         \
+    __CREATE_MACRO__(name ## _SUPERS, args)                             \
                                                                         \
     typedef struct name name; __NL__                                    \
     typedef struct name name ## __private; __NL__                       \
@@ -47,9 +47,9 @@ __CREATE_MACRO__(#, __POST_COMP_GLUE2__, x ## y, x, y)
 
 // all type argument will as accessible as this
 #define new_method(type, name, ...)                                     \
-    __CREATE_MACRO_NF__(__HASH_WORD__, type, __POST_COMP_GLUE__(type, __private)) \
+    __CREATE_MACRO_NF__(type, __POST_COMP_GLUE__(type, __private))      \
     type ## _ ## name(type const *this, ##__VA_ARGS__)                  \
-    __UNDEF_MACRO__(__HASH_WORD__, type)
+    __UNDEF_MACRO__(type)
 
 #define implement(name) __NL__                                         \
     struct name ## _virtual __global_vtable_ ## name = {0};__NL__      \

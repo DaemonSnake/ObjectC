@@ -27,27 +27,29 @@
 
 #define __HASH_WORD__ #
 #define __NL__ /*
-*/
-#define __CREATE_MACRO__(symb, name, val, args...) __NL__       \
-    symb ifdef name __NL__                                      \
-    symb undef name __NL__                                      \
-    symb endif __NL__                                           \
-    symb define name(args) val __NL__
+                */
+#define __CREATE_MACRO__(name, val, args...) __NL__     \
+    __HASH_WORD__ ifdef name __NL__                     \
+    __HASH_WORD__ undef name __NL__                     \
+    __HASH_WORD__ endif __NL__                          \
+    __HASH_WORD__ define name(args) val __NL__
 
-#define __CREATE_MACRO_NF__(symb, name, val) __NL__             \
-    symb ifdef name __NL__                                      \
-    symb undef name __NL__                                      \
-    symb endif __NL__                                           \
-    symb define name val __NL__
+#define __CREATE_MACRO_NF__(name, val) __NL__   \
+    __HASH_WORD__ ifdef name __NL__             \
+    __HASH_WORD__ undef name __NL__             \
+    __HASH_WORD__ endif __NL__                  \
+    __HASH_WORD__ define name val __NL__
 
-#define __IF_DEF_ERROR__(symb, name, errorM...) __NL__  \
-    symb ifdef name __NL__                              \
-    symb error errorM __NL__                            \
-    symb endif __NL__
+#define __IF_DEF_ERROR__(name, errorM...) __NL__        \
+    __HASH_WORD__ ifdef name __NL__                     \
+    __HASH_WORD__ error errorM __NL__                   \
+    __HASH_WORD__ endif __NL__
 
-#define __UNDEF_MACRO__(symb, name) __NL__      \
-    symb undef name __NL__
+#define __UNDEF_MACRO__(name) __NL__            \
+    __HASH_WORD__ ifdef name __NL__             \
+    __HASH_WORD__ undef name __NL__             \
+    __HASH_WORD__ endif __NL__    
 
-#define __DEF_LOCK__(symb, name, errorM...)            \
-    __IF_DEF_ERROR__(symb, name, errorM)               \
-    symb defile name __NL__
+#define __DEF_LOCK__(name, errorM...)           \
+    __IF_DEF_ERROR__(name, errorM)              \
+    __HASH_WORD__ define name __NL__
