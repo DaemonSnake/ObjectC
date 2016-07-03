@@ -31,16 +31,16 @@ class(String, Object)
 
 virtual(String)
 {
-  const char	*const_method(c_str);
-  unsigned long	const_method(size);
-  char		const_method(get, int);
+  const char	*method(c_str);
+  unsigned long	method(size);
+  char		method(get, int);
   char		method(set, int, char);
   /* 
      --ToDo--
-  String	const_method(copy);
-  String	const_method(subStr, int, int);
-  String	const_method(opEq, const char *);
-  char		const_method(isEq, const char *);
+  String	method(copy);
+  String	method(subStr, int, int);
+  String	method(opEq, const char *);
+  char		method(isEq, const char *);
   void		method(replace, const char *to, const char *whith);
   */
 };

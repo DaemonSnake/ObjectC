@@ -23,15 +23,15 @@
 
 typedef			struct Type
 {
-  const char		*name;
-  const struct Type	*super;
-  unsigned long		size;
-  unsigned long		nbMethods;
-  const char   		**methodsName;
-  unsigned		nbImplements;
-  const struct Type	**implements;
-  unsigned long		*offsets;
-  void			(*dtor)(void *);
+    const char		*name;
+    const struct Type	*super;
+    unsigned long		size;
+    unsigned long		nbMethods;
+    const char   		**methodsName;
+    unsigned		nbImplements;
+    const struct Type	**implements;
+    unsigned long		*offsets;
+    void			(*dtor)(void *);
 }			Type;
 
 void			*__tmp_pointer__(void *);
@@ -44,23 +44,23 @@ const Type		*Object_getType(const void *);
 
 # define		as(type) ->this_ ## type //takes value
 
-# define	      	dynamic_cast(type, var)						\
-  ((type *)__dynamic_cast(Object_getType(var), type ##_type_instance, var->this))
+# define	      	dynamic_cast(type, var)                         \
+    ((type *)__dynamic_cast(Object_getType(var), type ##_type_instance, var->this))
 
-# define		isInstanceOf(type, pointer)					\
-  (pointer != NULL &&							\
-   __is_same_kind_type(Object_getType(pointer), type ## _type_instance))
+# define		isInstanceOf(type, pointer)                     \
+    (pointer != NULL &&							\
+     __is_same_kind_type(Object_getType(pointer), type ## _type_instance))
 
-# define		getMethod(obj, name)					\
-  (__typeGetMethod(Object_getType(obj),					\
-		   (const void *)(((const Object * const )obj)->this)->_virtual, name))
+# define		getMethod(obj, name)                            \
+    (__typeGetMethod(Object_getType(obj),                               \
+                     (const void *)(((const Object * const )obj)->this)->_virtual, name))
 
-# define		invoke(ret, obj, name, ...)				\
-  (((ret (*)(const void*, ...))getMethod(obj, name))((const void*)(((const Object * const)obj)->this), ##__VA_ARGS__))
+# define		invoke(ret, obj, name, args...)                 \
+    (((ret (*)(const void*, ...))getMethod(obj, name))((const void*)(((const Object * const)obj)->this), ##args))
 
-# define		invokeM(method, obj, ...)				\
-  (method)((void *)(((const Object * const)obj)->this), ##__VA_ARGS__)
+# define		invokeM(method, obj, args...)                   \
+    (method)((void *)(((const Object * const)obj)->this), ##args)
 
-# define	       	ifIs(type, name, ...)				\
-  if (__tmp_pointer__(dynamic_cast(type, (name, ##__VA_ARGS__))))	\
-    for (type *name = __tmp_pointer__((void *)0x42); name != 0; name = 0)
+# define	       	ifIs(type, name, args...)                       \
+    if (__tmp_pointer__(dynamic_cast(type, (name, ##args))))            \
+        for (type *name = __tmp_pointer__((void *)0x42); name != 0; name = 0)

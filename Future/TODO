@@ -1,18 +1,21 @@
-Not urgent:
+Issues:
+    -To correct already defined __STDC__ for compiler => toImplement/compiler/gcc
     -In instrument function add a return intercepter for Objects
     -add head based nodes mixed with stack based on killstask (for return cases ((removall of retvalue + scoped(pointer))) )
          or replace all stack based with heap based (@see ref_count)
     -Limit override use (or else any method could be overwriten by anyone)
     -Use finished cpp wrapper, add #error messaging for debug, improve syntax
     -Remove const_method idea as there is no way to enforce it => syntaxic noise
-    -Make the return of axor's "get" be a const pointer so that it won't be a probleme with nested Objects
+    -Make the return of axor's "get" be a const pointer so that it won't be a probleme with nested Objects //Not a problem if neested are pointers @ref_count
+    -Object_getType segfault safe for instrospection
+    -Handle nested Objects (without inheritance) //for now only new & delete works there
+    -Create a scope(already_existing_var) {} construct or|and scope(exit) && scope(replace_exit)
+
+Ideas:
     -Stream type and IToStream interface
     -Add python style format from Future folder
     -Cout and cerr (f, fln, print, println)
     -Cin? : add a fromStream & toStream method in Object || f("",...) && scan(obj)
-    -Object_getType segfault safe for instrospection
-    -Handle nested Objects (without inheritance) //for now only new & delete works there
-    -Create a scope(already_existing_var) {} construct or|and scope(exit) && scope(replace_exit)
     -Add a true_keyword & in_loop macro before try & other for based keyword breaking context
     -Glue method name with number of arguments (new function method abi)
 	Seemed a good idea but screw everything for va_args!!

@@ -27,22 +27,22 @@
 void	__delete_func(const void *, ...);
 void	*__malloc(size_t);
 
-#define new(type, ctor, ...)						\
-    ({                                                                  \
-        __attribute__((always_inline, no_instrument_function))          \
-            inline type *__new__(type * const __new_this__)             \
-        {                                                               \
-            type ## _ ## ctor((void *)__new_this__, ##__VA_ARGS__);     \
-            return __new_this__;                                        \
-        }                                                               \
-        __new__(__pre_ctor_ ## type(__malloc(sizeof(type))));           \
+#define new(type, ctor, args...)                                \
+    ({                                                          \
+        __attribute__((always_inline, no_instrument_function))  \
+            inline type *__new__(type * const __new_this__)     \
+        {                                                       \
+            type ## _ ## ctor((void *)__new_this__, ##args);    \
+            return __new_this__;                                \
+        }                                                       \
+        __new__(__pre_ctor_ ## type(__malloc(sizeof(type))));   \
     })
 
-#define newDef(type, ...) new(type, ctor, ##__VA_ARGS__)
+#define newDef(type, args...) new(type, ctor, ##args)
 
-#define delete(obj, ...) __delete_func(obj, ##__VA_ARGS__, 0)
+#define delete(obj, args...) __delete_func(obj, ##args, 0)
 
-#define _var(type, var, ctor, ...)                                      \
+#define _var(type, var, ctor, args...)                                  \
     * const var =                                                       \
         (__protect_kill_stack((char[1]){0}),                            \
          type ## _ ## ctor						\
@@ -53,12 +53,12 @@ void	*__malloc(size_t);
                                   (void *)type ## _dtor,                \
                                   __get_current_level(),                \
                                   (void *)0, (void *)0                  \
-                                  }})), ##__VA_ARGS__),                 \
+                                  }})), ##args),                        \
          (type *)var)
  
-#define _def(type, var, ...) _var(type, var, ctor, ##__VA_ARGS__)
+#define _def(type, var, args...) _var(type, var, ctor, ##args)
 
-#define Ginit(type, ctor, var, ...)                             \
+#define Ginit(type, ctor, var, args...)                         \
     __attribute__((no_instrument_function, constructor))	\
     static void	__global_ctor_ ## var()                         \
     {                                                           \
@@ -75,7 +75,7 @@ void	*__malloc(size_t);
         __protect_kill_stack((char[1]){0});			\
         type ## _ ## ctor					\
             (__pre_ctor_ ## type				\
-             (__push_var(&tmp)), ##__VA_ARGS__);		\
+             (__push_var(&tmp)), ##args);                       \
     }                                                           \
                                                                 \
     __attribute__((no_instrument_function, constructor))	\

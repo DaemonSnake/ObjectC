@@ -61,10 +61,10 @@ struct	       	__except_list_node
   else if (__except_catch_func(type ## _type_instance))			\
     for (type *name __attribute__((unused)) = __except_get_data(); name != 0 ; name = 0)
 
-#define throw(type, ctor, ...)						\
-  __except_throw_func(type ## _type_instance,				\
-		      new(type, ctor, ##__VA_ARGS__),			\
-		      __FILE__, __FUNCTION__, __LINE__)
+#define throw(type, ctor, args...)                              \
+    __except_throw_func(type ## _type_instance,                 \
+                        new(type, ctor, ##args),                \
+                        __FILE__, __FUNCTION__, __LINE__)
 
 #define finally					\
   else {					\

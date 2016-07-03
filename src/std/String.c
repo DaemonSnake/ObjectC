@@ -48,12 +48,12 @@ new_tor(String, dtor)
   superDtor();
 }
 
-const char	*new_const_method(String, c_str)
+const char	*new_method(String, c_str)
 {
   return $.c_str;
 }
 
-size_t		new_const_method(String, size)
+size_t		new_method(String, size)
 {
   return $.length;
 }

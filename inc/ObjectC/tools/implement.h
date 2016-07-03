@@ -24,7 +24,7 @@
 int	write(int, const char *, int);
 void	__call_class_super_dtor(Object * const);
 
-#define implement(name, extends, ...)					\
+#define implement(name, extends, args...)                               \
 									\
   __attribute__((no_instrument_function))				\
  void		*__pre_ctor_ ## name(struct __private_ ## name *this)	\
@@ -36,7 +36,7 @@ void	__call_class_super_dtor(Object * const);
     this->this = (void *)this;						\
     this->this_ ## name = (void *)this;                                 \
     this->_virtual = __vtable_instance_ ## name;			\
-    APPLY_MACRO_VAR(__implements_in_ctor__, ##__VA_ARGS__);		\
+    APPLY_MACRO_VAR(__implements_in_ctor__, ##args);                    \
     return this;							\
   }									\
     									\
@@ -90,7 +90,7 @@ void	__call_class_super_dtor(Object * const);
 	true_ ## name ## _type_instance.offsets[i] =			\
 	  extends ## _type_instance->offsets[i];			\
       }									\
-    APPLY_MACRO_VAR_TWO(__interface_implements__, name, ##__VA_ARGS__);	\
+    APPLY_MACRO_VAR_TWO(__interface_implements__, name, ##args);	\
   }									\
       									\
   __attribute__((no_instrument_function))				\
@@ -130,15 +130,15 @@ void	__call_class_super_dtor(Object * const);
   __attribute__((no_instrument_function))				\
   static void __hidden_implement_function_for_ ## name()
 
-#define superCtor(type, name, ...)		\
-  type ## _ ## name((void *)this, ##__VA_ARGS__)
+#define superCtor(type, name, args...)		\
+  type ## _ ## name((void *)this, ##args)
 
 #define superDtor()				\
   __call_class_super_dtor((void *)this)
 
 #define $ (*this)
 
-#define $$(method, ...) M(this, method, ##__VA_ARGS__)
+#define $$(method, args...) M(this, method, ##args)
 
 /* AXORS METHODS IMPL */
 
@@ -160,17 +160,17 @@ void	__call_class_super_dtor(Object * const);
 #define __new_def_axor_(class, name)
 
 #define __launch_new_def_axors(class, name, x, y...)	\
-  __new_def_axor_ ## x(class, name)			\
-  __new_def_axor_ ## y(class, name)
+    __new_def_axor_ ## x(class, name)			\
+    __new_def_axor_ ## y(class, name)
 
 #define new_def_axors(class, name, x...) __launch_new_def_axors(class, name, x)
 
 // get
-#define __new_user_axor_2(class, name, ...) \
+#define __new_user_axor_2(class, name, ...)                             \
     __typeof__(((struct __private_ ## class *)0)->name) new_method(class, get_ ## name)
 
 // set
 #define __new_user_axor_3(class, name, arg, ...)        \
     void new_method(class, set_ ## name, arg)
 
-#define new_axor(class, name, ...) ______VARARG(__new_user_axor_, class, name, ##__VA_ARGS__)
+#define new_axor(class, name, args...) ______VARARG(__new_user_axor_, class, name, ##args)

@@ -39,41 +39,41 @@ void		*__prevent_clean_up_var(void *);
 void		(*__get_return_dtor())(void *);
 void		__protect_kill_stack(void *);
 
-#define rvalue(type, ctor, ...)                                         \
-  (__protect_kill_stack((char[1]){0}),					\
-   type ## _ ## ctor							\
-   (__pre_ctor_ ## type							\
-    (__push_var((struct s_right_value_node[1])                          \
-		{{ (type[1]){},						\
-                            (void *)type ## _dtor,                      \
-                                __get_current_level(),                  \
-                                (void *)0, (void *)0                    \
-                                }})), ##__VA_ARGS__),                   \
-   __delayed_level_encrementation(),					\
-   (type *)__get_front_var_list())
+#define rvalue(type, ctor, args...)                             \
+    (__protect_kill_stack((char[1]){0}),                        \
+     type ## _ ## ctor                                          \
+     (__pre_ctor_ ## type                                       \
+      (__push_var((struct s_right_value_node[1])                \
+                  {{ (type[1]){},                               \
+                              (void *)type ## _dtor,            \
+                                  __get_current_level(),        \
+                                  (void *)0, (void *)0          \
+                                  }})), ##args),                \
+     __delayed_level_encrementation(),                          \
+     (type *)__get_front_var_list())
 
-#define function_rvalue(type, ctor, ...)                \
-    (__protect_kill_stack((char[1]){0}),                \
-         type ## _ ## ctor                              \
-         (__pre_ctor_ ## type                           \
-          (__push_var((struct s_right_value_node[1])    \
-          {{ (type[1]){},                               \
-                 (void *)type ## _dtor,                 \
-                 __get_current_level(),                 \
-                 (void *)0, (void *)0                   \
-                 }})), ##__VA_ARGS__),                  \
-         (type *)__get_front_var_list())
+#define function_rvalue(type, ctor, args...)                    \
+    (__protect_kill_stack((char[1]){0}),                        \
+     type ## _ ## ctor                                          \
+     (__pre_ctor_ ## type                                       \
+      (__push_var((struct s_right_value_node[1])                \
+                  {{ (type[1]){},                               \
+                              (void *)type ## _dtor,            \
+                                  __get_current_level(),        \
+                                  (void *)0, (void *)0          \
+                                  }})), ##args),                \
+     (type *)__get_front_var_list())
 
 #define stdmove(x) (*(__typeof__(x))__prevent_clean_up_var(x))
 
-#define retvalue(x)						\
-  (__protect_kill_stack((char[1]){0}),				\
-   (__typeof__(x) *)						\
-   __push_var((struct s_right_value_node[1])                    \
-	      {{						\
-		  (__typeof__(x)[1]){x},			\
-		    __get_return_dtor(),			\
-		      __get_current_level() + 1,		\
-		      (void *)0, (void *)0			\
-		      }})					\
-   )
+#define retvalue(x)                                     \
+    (__protect_kill_stack((char[1]){0}),                \
+         (__typeof__(x) *)                              \
+         __push_var((struct s_right_value_node[1])      \
+         {{						\
+           (__typeof__(x)[1]){x},			\
+               __get_return_dtor(),			\
+               __get_current_level() + 1,		\
+               (void *)0, (void *)0			\
+               }})					\
+         )

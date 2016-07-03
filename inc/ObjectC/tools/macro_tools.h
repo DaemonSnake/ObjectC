@@ -83,8 +83,8 @@
 #define __axor_get(type, name) type (*get_ ## name)(const void *);
 #define __axor_(type, name)
 #define __axor_set(type, name) void (*set_ ## name)(void *, type name);
-#define __launch_axor(type, name, x, ...) \
+#define __launch_axor(type, name, x, y...) \
   __axor_ ## x(type, name)		  \
-  __axor_ ## __VA_ARGS__(type, name)
+  __axor_ ## y(type, name)
 
-#define axors(type, name, ...)  __launch_axor(type, name, __VA_ARGS__)
+#define axors(type, name, args...)  __launch_axor(type, name, args)

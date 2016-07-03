@@ -30,27 +30,15 @@ class(Exception, Object)
 
 virtual(Exception)
 {
-  const char *const_method(what);
+  const char *method(what);
 };
 
 new_tor(Exception, ctorS, const char *);
 
 end_decl(Exception);
 
-class(AllocFailed, Exception)
-{
-};
-
-virtual(AllocFailed)
-{
-};
-
-class(IsNotObject, Exception)
-{
-};
-
-virtual(IsNotObject)
-{
-};
-
+class(AllocFailed, Exception) {};
+virtual(AllocFailed) {};
+class(IsNotObject, Exception) {};
+virtual(IsNotObject) {};
 end_decl(AllocFailed, IsNotObject);
