@@ -107,4 +107,5 @@ void __cyg_profile_func_exit(void *save_var, void *save_return)
         prev = tmp;
         break;
     }
+    asm("mov %0, %%rbx" :: "r"(save_return));
 }
