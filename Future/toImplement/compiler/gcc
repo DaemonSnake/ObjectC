@@ -20,4 +20,4 @@
 # THE SOFTWARE.
 
 gcc -std=c99 -no-integrated-cpp -wrapper `dirname $0`/compile-caller $@ \
-    -fplan9-extensions -finstrument-functions -Wfatal-errors -lObjectC;
+    -fplan9-extensions -finstrument-functions -Wfatal-errors;

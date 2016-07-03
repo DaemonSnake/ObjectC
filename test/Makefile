@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Thu May  5 15:23:59 2016 penava_b
+## Last update Sun Jul  3 03:20:35 2016 penava_b
 ##
 
 CC =		gcc
@@ -23,7 +23,7 @@ COMMON =	-W -Wall -Werror -Wextra -fplan9-extensions -g3 -finstrument-functions 
 
 CFLAGS =	$(COMMON) -I../inc
 
-LDFLAGS =	$(COMMON) -Wl,-rpath=../ -L../ -lObject
+LDFLAGS =	$(COMMON) -Wl,-rpath=../ -L../ -lObjectC
 
 all: 		$(NAME)
 
