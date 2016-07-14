@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Tue Dec  8 20:35:08 2015 penava_b
-## Last update Sun Jul  3 03:43:24 2016 penava_b
+## Last update Thu Jul 14 21:37:12 2016 penava_b
 ##
 
 CC =		gcc
@@ -35,7 +35,7 @@ LDFLAGS =	$(COMMON) -shared
 all: 		$(NAME)
 
 src/std/%.o:	src/std/%.c
-		$(CC) $(CFLAGS) -finstrument-functions -c -o $@ $<
+		Future/toImplement/compiler/gcc-ObjectC $(CFLAGS) -finstrument-functions -c -o $@ $<
 
 $(NAME): 	$(OBJ)
 		$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)

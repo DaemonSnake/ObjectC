@@ -25,29 +25,29 @@
 #error Compiling using the non ObjectC wrapper of gcc
 #endif
 
-#define __HASH_WORD__ #
-#define __NL__ /*
-                */
-#define __CREATE_MACRO__(name, val, args...) __NL__     \
-    __HASH_WORD__ ifdef name __NL__                     \
-    __HASH_WORD__ undef name __NL__                     \
-    __HASH_WORD__ endif __NL__                          \
+#define __HASH_WORD__ __NL__ #
+#define __NL__ _Pragma("")
+
+#define __CREATE_MACRO__(name, val, args...)      \
+    __HASH_WORD__ ifdef name                      \
+    __HASH_WORD__ undef name                      \
+    __HASH_WORD__ endif                           \
     __HASH_WORD__ define name(args) val __NL__
 
-#define __CREATE_MACRO_NF__(name, val) __NL__   \
-    __HASH_WORD__ ifdef name __NL__             \
-    __HASH_WORD__ undef name __NL__             \
-    __HASH_WORD__ endif __NL__                  \
+#define __CREATE_MACRO_NF__(name, val)    \
+    __HASH_WORD__ ifdef name              \
+    __HASH_WORD__ undef name              \
+    __HASH_WORD__ endif                   \
     __HASH_WORD__ define name val __NL__
 
-#define __IF_DEF_ERROR__(name, errorM...) __NL__        \
-    __HASH_WORD__ ifdef name __NL__                     \
-    __HASH_WORD__ error errorM __NL__                   \
+#define __IF_DEF_ERROR__(name, errorM...)         \
+    __HASH_WORD__ ifdef name                      \
+    __HASH_WORD__ error errorM                    \
     __HASH_WORD__ endif __NL__
 
-#define __UNDEF_MACRO__(name) __NL__            \
-    __HASH_WORD__ ifdef name __NL__             \
-    __HASH_WORD__ undef name __NL__             \
+#define __UNDEF_MACRO__(name)             \
+    __HASH_WORD__ ifdef name              \
+    __HASH_WORD__ undef name              \
     __HASH_WORD__ endif __NL__    
 
 #define __DEF_LOCK__(name, errorM...)           \

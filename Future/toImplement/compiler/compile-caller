@@ -21,11 +21,12 @@
 
 function precompiler()
 {
+    local args="`echo $@ | sed "s/ -dD//g"`"
     if [ -z $arg ]; then
-        $@ -CC -D__OBJECT_C_COMPILER__ | cpp;
+        $args -D__OBJECT_C_COMPILER__ | cpp;
         exit $?;
     fi;
-    $@ -CC -D__OBJECT_C_COMPILER__;
+    $args -D__OBJECT_C_COMPILER__;
     ret=$?
     if [ $ret == 0 ];
     then

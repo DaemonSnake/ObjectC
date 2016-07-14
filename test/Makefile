@@ -5,10 +5,10 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Sun Jul  3 03:20:35 2016 penava_b
+## Last update Thu Jul 14 21:36:15 2016 penava_b
 ##
 
-CC =		gcc
+CC =		../Future/toImplement/compiler/gcc-ObjectC
 
 RM =		rm -f
 
@@ -37,13 +37,6 @@ fclean: 	clean
 		$(RM) $(NAME)
 
 re: 		fclean all
-
-layout.c:
-		@echo "...Building layout.c"
-		@for file in $(SRC);						\
-		do								\
-			./debug/structDump $$file $(CFLAGS) > layout.c;		\
-		done;
 
 cleanlib:	fclean
 		@$(MAKE) -C ../ fclean
