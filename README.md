@@ -55,7 +55,7 @@ A library to use as a superset of the C language, offering the following :</br>
   -override of methods</br>
   -etc...</br>
 </br>
-Features to come:</br>
+Features to come: (See Future/ for possible ways of implementation)</br>
   -Chained method call</br>
   -Python's format for strings</br>
   -A wrapper for gcc to add extra features and simplify syntax and improve error debuging</br>
