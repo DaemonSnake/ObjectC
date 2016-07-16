@@ -2,10 +2,44 @@
 A library to use as a superset of the C language, offering the following :</br>
 </br>
   -Exceptions handling (try catch finally)</br>
-  -Classes, interfaces</br>
-  -Java like inheritance (baseclass and interfaces)</br>
-  -Introspection (isInstanceOf, dynamic_cast, getMethod, ivoke method with string)</br>
+  ```
+  try {
+   ...
+  } catch(TypeName, VarName) {
+   ...
+  } finally {
+   ...
+  }
+  ```
+  -Classes, interfaces with Java like inheritance</br>
+  ```
+  class(Name, BaseClass, Interfaces...)
+  {
+  };
+  
+  virtual(Name)
+  {
+  };
+  
+  end_class(Name, OtherNames...);
+  ```
+  -Introspection
+  ```
+  Object *tmp = new(String, ctorS, "Hello") as(Object); // as only needed when casting from object to interface pointer
+  isInstanceOf(String, tmp) // => true
+  dynamic_cast(String, tmp)
+  const char *(*method_toString)(String *) = getMethod(tmp, "toString");
+  invoke(void, tmp, "toString");
+  ```
   -Python Yield (co-routine, generators)</br>
+  ```
+  yields(type) func_name(args...)
+  {
+      for (...)
+         yields(value);
+      yield_break(type);
+  }
+  ```
   -C++ life-cycle (RAII)</br>
   -C++ rvalue reference</br>
   -C#-like syntax for { get; set } (axors)</br>
@@ -21,3 +55,12 @@ Features to come:</br>
   -scope(...) principle from Dlang</br>
   -A custom ABI for methods described as follow : type name_'number_of_arguments'(...)</br>
   -foreach() keyword using coroutines (yield)</br>
+  
+Disclamer: this project relies heavily gcc's extensions to the C language.
+Most of thoses exist in clang under a different name but not all.
+Therefore, for now, clang support is not a priority.
+Once we feel confident in tagging the project in 1.0 then things may change.
+The main prority is to improve the language and implement the above features.
+
+
+Thanks.
