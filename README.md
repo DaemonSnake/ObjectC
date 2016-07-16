@@ -33,11 +33,19 @@ A library to use as a superset of the C language, offering the following :</br>
   ```
   -Python Yield (co-routine, generators)</br>
   ```
-  yields(type) func_name(args...)
+  yields(int) range(int begin, int end)
   {
-      for (...)
-         yields(value);
-      yield_break(type);
+      for (int i = begin; i < end; i++)
+         yields(i);
+      yield_break(int);
+  }
+  
+  int main()
+  {
+     for_yield(i, range(0, 5)) {
+       printf("%d\n", i);
+     }
+     return 0;
   }
   ```
   -C++ life-cycle (RAII)</br>
