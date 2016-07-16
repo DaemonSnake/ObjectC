@@ -3,7 +3,7 @@ This project is a library to use as a superset of the C language.</br>
 <h3>It offers the following :</h3>
 </br>
   -Exceptions handling (try catch finally)</br>
-  ```
+  ```java
   try {
    ...
   } catch(TypeName, VarName) {
@@ -13,7 +13,7 @@ This project is a library to use as a superset of the C language.</br>
   }
   ```
   -Classes, interfaces with Java like inheritance</br>
-  ```
+  ```c++
   class(Name, BaseClass, Interfaces...)
   {
   };
@@ -25,7 +25,7 @@ This project is a library to use as a superset of the C language.</br>
   end_class(Name, OtherNames...);
   ```
   -Introspection
-  ```
+  ```c++
   Object *tmp = new(String, ctorS, "Hello") as(Object); // as only needed when casting from object to interface pointer
   isInstanceOf(String, tmp) // => true
   dynamic_cast(String, tmp)
@@ -33,11 +33,11 @@ This project is a library to use as a superset of the C language.</br>
   invoke(void, tmp, "toString");
   ```
   -Python Yield (co-routine, generators)</br>
-  ```
+  ```c
   yields(int) range(int begin, int end)
   {
       for (int i = begin; i < end; i++)
-         yields(i);
+         yield(i);
       yield_break(int);
   }
   
