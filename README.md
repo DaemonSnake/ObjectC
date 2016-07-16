@@ -1,5 +1,6 @@
 # ObjectC
-A library to use as a superset of the C language, offering the following :</br>
+This project is a library to use as a superset of the C language.</br>
+<h3>It offers the following :</h3>
 </br>
   -Exceptions handling (try catch finally)</br>
   ```
@@ -55,7 +56,7 @@ A library to use as a superset of the C language, offering the following :</br>
   -override of methods</br>
   -etc...</br>
 </br>
-Features to come: (See Future/ for possible ways of implementation)</br>
+<h3>Features to come (See Future/ ): </h3>
   -Chained method call</br>
   -Python's format for strings</br>
   -A wrapper for gcc to add extra features and simplify syntax and improve error debuging</br>
