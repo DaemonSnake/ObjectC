@@ -27,6 +27,9 @@
 
 #define M(x, name, ...) _virtual.______VARARG(name, x, ##__VA_ARGS__)
 
+#define ______VARARGP(base, args...)                                    \
+    (*______VARARG_IMPL(base, ______VA_NARGS(args), (*, ), args))(args)
+
 #define new_method(type, name, ...)			\
   ______VARARG(type ## _ ## name, type *this, ##__VA_ARGS__)
 

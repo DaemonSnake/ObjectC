@@ -5,7 +5,7 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Thu Jul 14 21:36:15 2016 penava_b
+## Last update Sun Jul 17 22:49:49 2016 penava_b
 ##
 
 CC =		../Future/toImplement/compiler/gcc-ObjectC
@@ -19,7 +19,7 @@ SRC =		main.c 	\
 
 OBJ =		$(SRC:.c=.o)
 
-COMMON =	-W -Wall -Werror -Wextra -fplan9-extensions -g3 -finstrument-functions -std=c99
+COMMON =	-W -Wall -Werror -Wextra -fplan9-extensions -g3 -finstrument-functions
 
 CFLAGS =	$(COMMON) -I../inc
 
