@@ -1,7 +1,6 @@
 #define CLASS(name) String ## __ ## name
 #define ADD_THIS_P(args...) (CLASS(private) *this, ##args)
-#define ADD_THIS(args...) (void *this, ##args)
-#define method(name) (*name)ADD_THIS
+#define new_method(class, name...) GLUE(NAMESPACE(class), name) ADD_THIS_P
 
 //SwitchNamespace(String);
 
@@ -14,7 +13,6 @@ struct String
 
 #define GLUE2(x, y) x ## y
 #define GLUE(x, y) GLUE2(x, y)
-#define new_method(class, name...) GLUE(NAMESPACE(class), name) ADD_THIS_P
 
 void new_method(toString)()
 {
