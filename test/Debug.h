@@ -25,7 +25,7 @@
 
 interface(I)
 {
-  void	method(print);
+  void	method(print)();
 };
 
 class(Debug, Object, I)

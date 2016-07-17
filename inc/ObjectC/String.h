@@ -31,10 +31,10 @@ class(String, Object)
 
 virtual(String)
 {
-  const char	*method(c_str);
-  unsigned long	method(size);
-  char		method(get, int);
-  char		method(set, int, char);
+  const char	*method(c_str)();
+  unsigned long	method(size)();
+  char		method(get)(int);
+  char		method(set)(int, char);
   /* 
      --ToDo--
   String	method(copy);

@@ -88,3 +88,6 @@
   __axor_ ## y(type, name)
 
 #define axors(type, name, args...)  __launch_axor(type, name, args)
+
+/**/
+#define __ADD_THISP__(args...) (void *, ##args)

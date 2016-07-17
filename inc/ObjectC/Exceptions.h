@@ -30,7 +30,7 @@ class(Exception, Object)
 
 virtual(Exception)
 {
-  const char *method(what);
+  const char *method(what)();
 };
 
 new_tor(Exception, ctorS, const char *);

@@ -90,7 +90,7 @@
 #define end_decl(args...)                       \
     APPLY_MACRO_VAR(__true_end_decl, ##args)
 
-#define method(name, args...) (*name)(void *, ##args)
+#define method(name) (*name)__ADD_THISP__
 
 #define new_tor(type, name, args...)					\
     void type ## _ ## name(struct __private_ ## type * const this, ##args)

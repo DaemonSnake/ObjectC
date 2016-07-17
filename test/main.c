@@ -80,7 +80,7 @@ void		new_delete(void)
 void		invoke_test(void)
 {
     const void  *tmp = new(String, ctorS, "Invoke print this");
-    char	*method(c_str);
+    char	*method(c_str)();
   
     printf("INVOKE::\n");
     try {
