@@ -143,7 +143,7 @@ void	__call_class_super_dtor(Object * const);
 /* AXORS METHODS IMPL */
 
 #define __new_def_axor_get(class, name)			\
-  __typeof__(((struct __private_ ## class *)0)->name)	\
+  typeof(((struct __private_ ## class *)0)->name)	\
   new_method(class, get_ ## name)			\
   {							\
     return $.name;					\
@@ -152,7 +152,7 @@ void	__call_class_super_dtor(Object * const);
 #define __new_def_axor_set(class, name)					\
   void									\
   new_method(class, set_ ## name,					\
-	     __typeof__(((struct __private_ ## class *)0)->name) name)	\
+	     typeof(((struct __private_ ## class *)0)->name) name)	\
   {									\
     $.name = name;							\
   }
@@ -167,7 +167,7 @@ void	__call_class_super_dtor(Object * const);
 
 // get
 #define __new_user_axor_2(class, name, ...)                             \
-    __typeof__(((struct __private_ ## class *)0)->name) new_method(class, get_ ## name)
+    typeof(((struct __private_ ## class *)0)->name) new_method(class, get_ ## name)
 
 // set
 #define __new_user_axor_3(class, name, arg, ...)        \

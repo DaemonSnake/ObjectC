@@ -22,8 +22,8 @@
 #pragma once
 
 #define M(var, name, args...)						\
-    (((__typeof__(var))__tmp_pointer__((void *)var))                    \
-     ->_virtual->name(((__typeof__(var))__tmp_pointer__((void *)0x42))->this, ##args))
+    (((typeof(var))__tmp_pointer__((void *)var))                    \
+     ->_virtual->name(((typeof(var))__tmp_pointer__((void *)0x42))->this, ##args))
     
 typedef struct Object Object;
 

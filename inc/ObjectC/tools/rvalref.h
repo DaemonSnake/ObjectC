@@ -64,14 +64,14 @@ void		__protect_kill_stack(void *);
                                   }})), ##args),                \
      (type *)__get_front_var_list())
 
-#define stdmove(x) (*(__typeof__(x))__prevent_clean_up_var(x))
+#define stdmove(x) (*(typeof(x))__prevent_clean_up_var(x))
 
 #define retvalue(x)                                     \
     (__protect_kill_stack((char[1]){0}),                \
-         (__typeof__(x) *)                              \
+         (typeof(x) *)                              \
          __push_var((struct s_right_value_node[1])      \
          {{						\
-           (__typeof__(x)[1]){x},			\
+           (typeof(x)[1]){x},			\
                __get_return_dtor(),			\
                __get_current_level() + 1,		\
                (void *)0, (void *)0			\

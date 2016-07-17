@@ -40,22 +40,22 @@ int __yield_continue(void *);
 __attribute__((always_inline, no_instrument_function))
 inline void __yield_fgoto(generator *gen)
 {
-    __asm__("mov %0, %%rax":: "r"(gen->label));
-    __asm__("jmpq *%rax");
+    asm("mov %0, %%rax":: "r"(gen->label));
+    asm("jmpq *%rax");
 }
 #elif defined(__i386__)
 __attribute__((always_inline, no_instrument_function))
 inline void __yield_fgoto(generator *gen)
 {
-    __asm__("mov %0, %%eax":: "r"(gen->label));
-    __asm__("jmp *%eax");
+    asm("mov %0, %%eax":: "r"(gen->label));
+    asm("jmp *%eax");
 }
 #elif defined(__arm__) //NEEDS TO BE CHECKED
 __attribute__((always_inline, no_instrument_function))
 inline void __yield_fgoto(generator *gen)
 {
-    __asm__("ldr r3, %0" :: "r"(gen->label));
-    __asm__("mov pc, r3");
+    asm("ldr r3, %0" :: "r"(gen->label));
+    asm("mov pc, r3");
 }
 #else
 # error "System not yet suported"
@@ -64,7 +64,7 @@ inline void __yield_fgoto(generator *gen)
 /* MACROS */
 
 #define for_yield(ret, call)                                            \
-    for (__typeof__(call) ** const __holder__ =                         \
+    for (typeof(call) ** const __holder__ =                         \
              (void *)((generator*[3]){__yield_get_generator(), __yield_update_generator(((generator[1]){{0, __builtin_return_address(0), 42}})), NULL}), \
              ret = call;                                                \
          __yield_continue(__holder__);                                  \

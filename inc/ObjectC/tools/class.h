@@ -97,7 +97,7 @@
 
 #define new_method(type, name, args...)					\
     type ## _fake_ ## name();						\
-    __typeof__(type ## _fake_ ## name())                                \
+    typeof(type ## _fake_ ## name())                                \
     type ## _ ## name(struct __private_ ## type * const this,		\
                       ##args);                                          \
 									\
@@ -111,5 +111,5 @@
                                offsetof(struct __virtual_ ## type, name)); \
     }									\
 									\
-    __typeof__(type ## _fake_ ## name())                                \
+    typeof(type ## _fake_ ## name())                                \
     type ## _ ## name(struct __private_ ## type * const this, ##args)
