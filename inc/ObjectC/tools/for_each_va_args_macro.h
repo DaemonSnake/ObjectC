@@ -58,10 +58,6 @@
 #define ______VARARG(base, args...)                             \
     ______VARARG_IMPL(base, ______VA_NARGS(args), args)(args)
 
-//NEVER used ??
-#define ______VARARGP(base, args...)					\
-    (*______VARARG_IMPL(base, ______VA_NARGS(args), (*, ), args))(args)
-
 /*AXORS*/
 #define __axor_call_2(var, name, args...) M(var, get_ ## name)
 #define __axor_call_3(var, name, val) M(var, set_ ## name, val)
