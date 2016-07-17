@@ -25,13 +25,13 @@ typedef			struct Type
 {
     const char		*name;
     const struct Type	*super;
-    unsigned long		size;
-    unsigned long		nbMethods;
-    const char   		**methodsName;
+    unsigned long	size;
+    unsigned long	nbMethods;
+    const char   	**methodsName;
     unsigned		nbImplements;
     const struct Type	**implements;
-    unsigned long		*offsets;
-    void			(*dtor)(void *);
+    unsigned long	*offsets;
+    void		(*dtor)(void *);
 }			Type;
 
 void			*__tmp_pointer__(void *);

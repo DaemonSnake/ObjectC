@@ -36,8 +36,8 @@
 									\
     struct __interfaces_for_ ## name					\
     {									\
-        char _0[sizeof(struct __interfaces_for_ ## extends)];		\
-        char _1[______VA_NARGS(args)];                                  \
+        char _0[sizeof(struct __interfaces_for_ ## extends) +           \
+                ______VA_NARGS(args)];                                  \
     };									\
 									\
     struct __supers_data_ ## name                                       \

@@ -48,8 +48,8 @@ void	__call_class_super_dtor(Object * const);
       sizeof(struct __virtual_ ## name) / sizeof(void *),		\
       (const char *[sizeof(struct __virtual_ ## name) / sizeof(void *)]){0}, \
       sizeof(struct __interfaces_for_ ## name),				\
-      (const Type *[sizeof(struct __interfaces_for_ ## name)]){0},	\
-      (unsigned long [sizeof(struct __interfaces_for_ ## name)]){0},	\
+      (const Type *[sizeof(struct __interfaces_for_ ## name)+1]){0},	\
+      (unsigned long [sizeof(struct __interfaces_for_ ## name)+1]){0},	\
       (void *)name ## _ ## dtor						\
     };									\
 									\
