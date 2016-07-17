@@ -17,6 +17,7 @@ Ideas:
 	Limit everything to one time and use __isinstanceof
 	Maybe okay actually (for_arg/bad_arg/bad_arg/...)
 	See : methodNameChange.c
+    -Remove __interface_for_NameOfClass and replace it with a macro on the second preproc pass.
 
 To decide:
         -> Should static_cast from interface to Object work?
