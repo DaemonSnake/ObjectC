@@ -1,5 +1,5 @@
 Issues:
-    -To correct already defined __STDC__ for compiler => toImplement/compiler/gcc
+    -Correct everything to mangling type ## __ ## name, for type/method/function/macro, etc...
     -In instrument function add a return intercepter for Objects
     -add head based nodes mixed with stack based on killstask (for return cases ((removall of retvalue + scoped(pointer))) )
          or replace all stack based with heap based (@see ref_count)
