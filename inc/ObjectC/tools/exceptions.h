@@ -58,11 +58,11 @@ struct	       	__except_list_node
 	  if (setjmp(*__except_get_front()) == 0)
 
 #define catch(type, name)						\
-  else if (__except_catch_func(type ## _type_instance))			\
-    for (type *name __attribute__((unused)) = __except_get_data(); name != 0 ; name = 0)
+    else if (__except_catch_func(type ## __type_instance))              \
+        for (type *name __attribute__((unused)) = __except_get_data(); name != 0 ; name = 0)
 
 #define throw(type, ctor, args...)                              \
-    __except_throw_func(type ## _type_instance,                 \
+    __except_throw_func(type ## __type_instance,                \
                         new(type, ctor, ##args),                \
                         __FILE__, __FUNCTION__, __LINE__)
 

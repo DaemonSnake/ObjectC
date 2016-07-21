@@ -23,64 +23,64 @@
 
 #include <stddef.h>
 
-#define __virtualize__(name) struct __virtual_ ## name;
+#define __virtualize__(name) struct name ## __virtual;
 
 #define __true_end_decl(name)						\
-  struct __virtual_ ## name						\
+  struct name ## __virtual						\
   {									\
-    struct __supers_virtual_ ## name;					\
-    struct __weak_virtual_ ## name;					\
+      struct name ## __supers_virtual;					\
+      struct name ## __weak_virtual;					\
   };									\
 									\
   extern								\
-  const struct __virtual_ ## name * const __vtable_instance_ ## name;	\
+  const struct name ## __virtual * const name ## __vtable_instance;	\
   									\
-  struct __data_ ## name						\
+  struct name ## __data                                                 \
   {									\
-    struct __supers_data_ ## name;					\
-    char __private_ ## name[sizeof(struct __weak_data_ ## name)];	\
+      struct name ## __supers_data;					\
+      char name ## __private[sizeof(struct name ## __weak_data)];	\
   };									\
 									\
-  struct __private_ ## name						\
+  struct name ## __private						\
   {									\
     name *this;								\
-    const struct __virtual_ ## name *_virtual;				\
-    struct __supers_data_ ## name;					\
-    struct __weak_data_ ## name;					\
+    const struct name ## __virtual *_virtual;				\
+    struct name ## __supers_data;					\
+    struct name ## __weak_data;                                         \
   };									\
 									\
   struct name								\
   {									\
     name *this;								\
-    const struct __virtual_ ## name *_virtual;				\
-    struct __data_ ## name;						\
+    const struct name ## __virtual *_virtual;				\
+    struct name ## __data;						\
   };
 
 #define __thisify__(name)			\
-  name *this_ ## name;				\
-  name *__true_this_ ## name;			\
-  struct __virtual_ ## name *_virtual_ ## name;
+  name *name ## __this;				\
+  name *name ## __true_this;			\
+  struct name ## __virtual *name ## __virtual;
 
 #define __implements_in_ctor__(name)					\
-  this->this_ ## name = (void *)&this->__true_this_ ## name;		\
-  this->__true_this_ ## name = (void *)this;				\
-  if (42)								\
+    this->name ## __this = (void *)&this->name ## __true_this;		\
+    this->name ## __true_this = (void *)this;				\
+    if (42)								\
     {									\
       __attribute__((always_inline, no_instrument_function))		\
-      inline void *__offset__(struct __virtual_ ## name *tmp)		\
+      inline void *__offset__(struct name ## __virtual *tmp)		\
       {									\
 	return tmp;							\
       }									\
-      this->_virtual_ ## name = __offset__(this->_virtual);		\
+      this->name ## __virtual = __offset__(this->_virtual);		\
     }									\
 
 #define __interface_implements__(name, interface)			\
-  true_ ## name ## _type_instance.implements[i] = interface ## _type_instance; \
-  true_ ## name ## _type_instance.offsets[i++] = offsetof(name, __true_this_ ## interface)
+  name ## __true_type_instance.implements[i] = interface ## __type_instance; \
+  name ## __true_type_instance.offsets[i++] = offsetof(name, interface ## __true_this)
 
 /* AXORS METHODS DECL */
 
-#define __axor_get(type, name) type (*get_ ## name)(const void *);
+#define __axor_get(type, name) type (*get_ ## name)(void *);
 #define __axor_(type, name)
 #define __axor_set(type, name) void (*set_ ## name)(void *, type name);
 #define __launch_axor(type, name, x, y...) \

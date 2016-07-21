@@ -60,10 +60,10 @@ void		__call_class_super_dtor(Object * const this)
 {
   const Type	*super;
 
-  super = ((struct __private_Object * const)this)->__class_type->super;
+  super = ((struct Object__private * const)this)->__class_type->super;
   if (super == 0)
     return ;
-  ((struct __private_Object * const)this)->__class_type = super;
+  ((struct Object__private * const)this)->__class_type = super;
   super->dtor(this);
 }
 

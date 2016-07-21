@@ -24,50 +24,50 @@
 #define class(name, extends, args...)					\
     typedef struct name name;						\
 									\
-    extern const Type * const name ## _type_instance;			\
+    extern const Type * const name ## __type_instance;			\
 									\
-    struct __supers_virtual_ ## name					\
+    struct name ## __supers_virtual					\
     {									\
-        struct __virtual_ ## extends;					\
+        struct extends ## __virtual;                                    \
         APPLY_MACRO_VAR(__virtualize__, ##args);			\
     };									\
 									\
-    struct __private_ ## name;						\
+    struct name ## __private;						\
 									\
-    struct __interfaces_for_ ## name					\
+    struct name ## __interfaces                                         \
     {									\
-        char _0[sizeof(struct __interfaces_for_ ## extends) +           \
+        char _0[sizeof(struct extends ## __interfaces) +                \
                 ______VA_NARGS(args)];                                  \
     };									\
 									\
-    struct __supers_data_ ## name                                       \
+    struct name ## __supers_data                                        \
     {									\
-        struct __data_ ## extends;                                      \
-        name *this_ ## name;                                            \
+        struct extends ## __data;                                       \
+        name *name ## __this;                                           \
         APPLY_MACRO_VAR(__thisify__, ##args);                           \
     };									\
 									\
-    void	name ## _ctor(struct __private_ ## name *this);         \
-    void	name ## _dtor(struct __private_ ## name *this);         \
-    void	*__pre_ctor_ ## name(struct __private_ ## name *this);  \
+    void	name ## __ctor(struct name ## __private *this);         \
+    void	name ## __dtor(struct name ## __private *this);         \
+    void	*name ## __pre_ctor(struct name ## __private *this);    \
 									\
-    struct __weak_data_ ## name
+    struct name ## __weak_data
 
 #define interface(name)                                 \
     typedef struct name name;                           \
                                                         \
     extern const Type * const                           \
     __attribute__((weak))                               \
-         name ## _type_instance;                        \
+         name ## __type_instance;                       \
                                                         \
     struct	name                                    \
     {                                                   \
         Object	*this;                                  \
-        const struct __virtual_ ## name *_virtual;      \
+        const struct name ## __virtual *_virtual;       \
     };                                                  \
                                                         \
     const Type * const                                  \
-    name ## _type_instance = (Type[1])                  \
+    name ## __type_instance = (Type[1])                 \
     {                                                   \
         {                                               \
             #name,                                      \
@@ -82,10 +82,10 @@
         }                                               \
     };                                                  \
                                                         \
-    struct __virtual_ ## name
+    struct name ## __virtual
 
 #define virtual(name)				\
-    struct __weak_virtual_ ## name
+    struct name ## __weak_virtual
 
 #define end_decl(args...)                       \
     APPLY_MACRO_VAR(__true_end_decl, ##args)
@@ -93,23 +93,22 @@
 #define method(name) (*name)__ADD_THISP__
 
 #define new_tor(type, name, args...)					\
-    void type ## _ ## name(struct __private_ ## type * const this, ##args)
+    void type ## __ ## name(struct type ## __private * const this, ##args)
 
 #define new_method(type, name, args...)					\
-    type ## _fake_ ## name();						\
-    typeof(type ## _fake_ ## name())                                \
-    type ## _ ## name(struct __private_ ## type * const this,		\
-                      ##args);                                          \
+    type ## __fake_ ## name();                                          \
+    typeof(type ## __fake_ ## name())                                   \
+    type ## __ ## name(struct type ## __private * const this, ##args);  \
 									\
     __attribute__((constructor, no_instrument_function))                \
-    static inline void	_imp_ ## name()					\
+    static inline void	name ## __imp()					\
     {									\
-        void __implement_function_for_ ## type();                       \
-        __implement_function_for_ ## type();				\
-        void __push_method_ ## type(void *, const char *, size_t);      \
-        __push_method_ ## type(type ## _ ## name, #name,                \
-                               offsetof(struct __virtual_ ## type, name)); \
+        void type ## __implement_function();                            \
+        type ## __implement_function();                                 \
+        void type ## __push_method(void *, const char *, size_t);       \
+        type ## __push_method(type ## __ ## name, #name,                \
+                              offsetof(struct type ## __virtual, name)); \
     }									\
 									\
-    typeof(type ## _fake_ ## name())                                \
-    type ## _ ## name(struct __private_ ## type * const this, ##args)
+    typeof(type ## __fake_ ## name())                                   \
+    type ## __ ## name(struct type ## __private * const this, ##args)

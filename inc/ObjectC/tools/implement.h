@@ -27,111 +27,111 @@ void	__call_class_super_dtor(Object * const);
 #define implement(name, extends, args...)                               \
 									\
   __attribute__((no_instrument_function))				\
- void		*__pre_ctor_ ## name(struct __private_ ## name *this)	\
+  void		*name ## __pre_ctor(struct name ## __private *this)	\
   {									\
-    void	__pre_ctor_Object_child(const void *, const void *);	\
+    void	Object__pre_ctor_child(const void *, const void *);	\
 									\
-    __pre_ctor_ ## extends((void *)this);				\
-    __pre_ctor_Object_child(this, name ## _type_instance);		\
+    extends ## __pre_ctor((void *)this);				\
+    Object__pre_ctor_child(this, name ## __type_instance);		\
     this->this = (void *)this;						\
-    this->this_ ## name = (void *)this;                                 \
-    this->_virtual = __vtable_instance_ ## name;			\
+    this->name ## __this = (void *)this;                                \
+    this->_virtual = name ## __vtable_instance;                         \
     APPLY_MACRO_VAR(__implements_in_ctor__, ##args);                    \
     return this;							\
   }									\
     									\
-  static Type true_ ## name ## _type_instance =				\
+  static Type name ## __true_type_instance =				\
     {									\
       #name,								\
       0,								\
       sizeof(name),							\
-      sizeof(struct __virtual_ ## name) / sizeof(void *),		\
-      (const char *[sizeof(struct __virtual_ ## name) / sizeof(void *)]){0}, \
-      sizeof(struct __interfaces_for_ ## name),				\
-      (const Type *[sizeof(struct __interfaces_for_ ## name)+1]){0},	\
-      (unsigned long [sizeof(struct __interfaces_for_ ## name)+1]){0},	\
-      (void *)name ## _ ## dtor						\
+      sizeof(struct name ## __virtual) / sizeof(void *),		\
+      (const char *[sizeof(struct name ## __virtual) / sizeof(void *)]){0}, \
+      sizeof(struct name ## __interfaces),				\
+      (const Type *[sizeof(struct name ## __interfaces) + 1]){0},       \
+      (unsigned long [sizeof(struct name ## __interfaces) + 1]){0},	\
+      (void *)name ## __ ## dtor                                        \
     };									\
 									\
-  const Type * const name ## _type_instance =				\
-    &true_ ## name ## _type_instance;					\
+  const Type * const name ## __type_instance =				\
+    &name ## __true_type_instance;					\
   									\
-  static struct __virtual_ ## name __true_vtable_instance_ ## name = {0}; \
+  static struct name ## __virtual name ## __true_vtable_instance = {0}; \
 									\
-  const struct __virtual_ ## name * const __vtable_instance_ ## name =	\
-    &__true_vtable_instance_ ## name;					\
+  const struct name ## __virtual * const name ## __vtable_instance =	\
+      &name ## __true_vtable_instance;					\
 									\
-  static void __hidden_implement_function_for_ ## name();		\
-  void __implement_function_for_ ## extends();				\
+  static void name ## __hidden_implement_function();                    \
+  void extends ## __implement_function();				\
   									\
   __attribute__((constructor, no_instrument_function))		        \
-  void __implement_function_for_ ## name()				\
+  void name ## __implement_function()                                   \
   {									\
     static char implemented = 0;					\
     unsigned long i;							\
 									\
     if (implemented++ != 0)						\
       return ;								\
-    true_ ## name ## _type_instance.super = extends ## _type_instance;	\
-    __implement_function_for_ ## extends();				\
-    for (i = 0; i < sizeof(struct __virtual_ ## extends)		\
+    name ## __true_type_instance.super = extends ## __type_instance;	\
+    extends ## __implement_function();                                  \
+    for (i = 0; i < sizeof(struct extends ## __virtual)                 \
 	   / sizeof(void *); i++)					\
       {									\
-	((void **)&__true_vtable_instance_ ## name)[i] =		\
-	  ((void **)__vtable_instance_ ## extends)[i];			\
-	true_ ## name ## _type_instance.methodsName[i] =		\
-	  extends ## _type_instance->methodsName[i];			\
+          ((void **)&name ## __true_vtable_instance)[i] =		\
+              ((void **)extends ## __vtable_instance)[i];               \
+          name ## __true_type_instance.methodsName[i] =                 \
+	  extends ## __type_instance->methodsName[i];			\
       }									\
-    __true_vtable_instance_ ## name.dtor = (void *)name ## _ ## dtor;	\
-    for (i = 0; i < extends ## _type_instance->nbImplements; i++)	\
+    name ## __true_vtable_instance.dtor = (void *)name ## __ ## dtor;	\
+    for (i = 0; i < extends ## __type_instance->nbImplements; i++)	\
       {									\
-	true_ ## name ## _type_instance.implements[i] =			\
-	  extends ## _type_instance->implements[i];			\
-	true_ ## name ## _type_instance.offsets[i] =			\
-	  extends ## _type_instance->offsets[i];			\
+        name ## __true_type_instance.implements[i] =			\
+	  extends ## __type_instance->implements[i];			\
+        name ## __true_type_instance.offsets[i] =			\
+            extends ## __type_instance->offsets[i];			\
       }									\
     APPLY_MACRO_VAR_TWO(__interface_implements__, name, ##args);	\
   }									\
       									\
   __attribute__((no_instrument_function))				\
-  void		__push_method_ ## name(void *arg, const char *name_m,	\
-				       size_t offset)			\
+  void		name ## __push_method(void *arg, const char *name_m,	\
+                                      size_t offset)			\
   {									\
     int		__get_current_level();					\
     void		**member =					\
-      &((void **)&__true_vtable_instance_ ## name)			\
-      [offset / sizeof(void *)];					\
+        &((void **)&name ## __true_vtable_instance)			\
+        [offset / sizeof(void *)];					\
 									\
     if (__get_current_level() > 0)					\
       {									\
 	write(2, "[Error]Illegal call to __push_method\n", 37);		\
 	return ;							\
       }									\
-    if (offset < sizeof(struct __virtual_ ## extends) &&		\
+    if (offset < sizeof(struct extends ## __virtual) &&                 \
 	*member != 0 && *member !=					\
-	((void **)__vtable_instance_ ## extends)			\
+	((void **)extends ## __vtable_instance)                         \
 	[offset / sizeof(void *)])					\
       {									\
 	write(2, "[Error]Trying to override twice a method\n", 41);	\
 	return;								\
       }									\
     *member = arg;							\
-    ((void **)&__true_vtable_instance_ ## name)				\
+    ((void **)&name ## __true_vtable_instance)                          \
       [offset / sizeof(void *)] = arg;					\
-    true_ ## name ## _type_instance.methodsName				\
+    name ## __true_type_instance.methodsName				\
       [offset / sizeof(void *)] = name_m;				\
-    for (size_t i = 0; i < sizeof(struct __virtual_ ## name)		\
+    for (size_t i = 0; i < sizeof(struct name ## __virtual)		\
 	   / sizeof(void *); i++)					\
-      if (((void **)__vtable_instance_ ## name)[i] == 0)		\
-	return ;							\
-    __hidden_implement_function_for_ ## name();				\
+        if (((void **)name ## __vtable_instance)[i] == 0)		\
+            return ;							\
+    name ## __hidden_implement_function();				\
   }									\
 									\
   __attribute__((no_instrument_function))				\
-  static void __hidden_implement_function_for_ ## name()
+  static void name ## __hidden_implement_function()
 
 #define superCtor(type, name, args...)		\
-  type ## _ ## name((void *)this, ##args)
+  type ## __ ## name((void *)this, ##args)
 
 #define superDtor()				\
   __call_class_super_dtor((void *)this)
@@ -143,7 +143,7 @@ void	__call_class_super_dtor(Object * const);
 /* AXORS METHODS IMPL */
 
 #define __new_def_axor_get(class, name)			\
-  typeof(((struct __private_ ## class *)0)->name)	\
+  typeof(((struct class ## __private *)0)->name)	\
   new_method(class, get_ ## name)			\
   {							\
     return $.name;					\
@@ -152,7 +152,7 @@ void	__call_class_super_dtor(Object * const);
 #define __new_def_axor_set(class, name)					\
   void									\
   new_method(class, set_ ## name,					\
-	     typeof(((struct __private_ ## class *)0)->name) name)	\
+	     typeof(((struct class ## __private *)0)->name) name)	\
   {									\
     $.name = name;							\
   }
@@ -167,7 +167,7 @@ void	__call_class_super_dtor(Object * const);
 
 // get
 #define __new_user_axor_2(class, name, ...)                             \
-    typeof(((struct __private_ ## class *)0)->name) new_method(class, get_ ## name)
+    typeof(((struct class ## __private *)0)->name) new_method(class, get_ ## name)
 
 // set
 #define __new_user_axor_3(class, name, arg, ...)        \

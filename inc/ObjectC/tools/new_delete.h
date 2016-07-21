@@ -32,10 +32,10 @@ void	*__malloc(size_t);
         __attribute__((always_inline, no_instrument_function))  \
             inline type *__new__(type * const __new_this__)     \
         {                                                       \
-            type ## _ ## ctor((void *)__new_this__, ##args);    \
+            type ## __ ## ctor((void *)__new_this__, ##args);   \
             return __new_this__;                                \
         }                                                       \
-        __new__(__pre_ctor_ ## type(__malloc(sizeof(type))));   \
+        __new__(type ## __pre_ctor(__malloc(sizeof(type))));   \
     })
 
 #define newDef(type, args...) new(type, ctor, ##args)
@@ -45,12 +45,12 @@ void	*__malloc(size_t);
 #define _var(type, var, ctor, args...)                                  \
     * const var =                                                       \
         (__protect_kill_stack((char[1]){0}),                            \
-         type ## _ ## ctor						\
-         (__pre_ctor_ ## type                                           \
+         type ## __ ## ctor						\
+         (type ## __pre_ctor                                            \
           (__push_var((struct s_right_value_node[1])                    \
                       {{                                                \
                               ((*(void **)&var = (type[1]){{0}})),      \
-                                  (void *)type ## _dtor,                \
+                                  (void *)type ## __dtor,               \
                                   __get_current_level(),                \
                                   (void *)0, (void *)0                  \
                                   }})), ##args),                        \
@@ -60,23 +60,23 @@ void	*__malloc(size_t);
 
 #define Ginit(type, ctor, var, args...)                         \
     __attribute__((no_instrument_function, constructor))	\
-    static void	__global_ctor_ ## var()                         \
+    static void	var ## __global_ctor()                          \
     {                                                           \
         static                                                  \
             struct s_right_value_node	tmp =                   \
             {                                                   \
                 &var,						\
-                (void *)type ## _dtor,				\
+                (void *)type ## __dtor,				\
                 0,						\
                 (void *)0,					\
                 (void *)0					\
             };                                                  \
                                                                 \
         __protect_kill_stack((char[1]){0});			\
-        type ## _ ## ctor					\
-            (__pre_ctor_ ## type				\
+        type ## __ ## ctor					\
+            (type ## __pre_ctor                                 \
              (__push_var(&tmp)), ##args);                       \
     }                                                           \
                                                                 \
     __attribute__((no_instrument_function, constructor))	\
-    static void __user_code_gctor_ ## var()
+    static void var ## __user_code_gctor()

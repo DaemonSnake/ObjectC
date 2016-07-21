@@ -38,21 +38,21 @@ void			*__tmp_pointer__(void *);
 char			__is_same_kind_type(const Type *, const Type *);
 void     		*__dynamic_cast(const Type *, const Type *, void *);
 const void		*__typeGetMethod(const Type * const, const void * const * const, const char const *);
-const Type		*Object_getType(const void *);
+const Type		*Object__getType(const void *);
 
-# define	      	static_cast(type, var) ((var)->this_ ## type) //takes pointer
+# define	      	static_cast(type, var) ((var)->type ## __this)
 
-# define		as(type) ->this_ ## type //takes value
+# define		as(type) ->type ## __this
 
 # define	      	dynamic_cast(type, var)                         \
-    ((type *)__dynamic_cast(Object_getType(var), type ##_type_instance, var->this))
+    ((type *)__dynamic_cast(Object__getType(var), type ## __type_instance, var->this))
 
 # define		isInstanceOf(type, pointer)                     \
     (pointer != NULL &&							\
-     __is_same_kind_type(Object_getType(pointer), type ## _type_instance))
+     __is_same_kind_type(Object__getType(pointer), type ## __type_instance))
 
 # define		getMethod(obj, name)                            \
-    (__typeGetMethod(Object_getType(obj),                               \
+    (__typeGetMethod(Object__getType(obj),                              \
                      (const void *)(((const Object * const )obj)->this)->_virtual, name))
 
 # define		invoke(ret, obj, name, args...)                 \

@@ -27,47 +27,47 @@
     
 typedef struct Object Object;
 
-struct	__virtual_Object
+struct	Object__virtual
 {
   void	(*dtor)(void *);
   const char *(*toString)(const void *);
   const Type *(*getType)(const void *);
 };
 
-struct __interfaces_for_Object
+struct Object__interfaces
 {
 };
 
-struct	__data_weak_Object
+struct	Object__data_weak
 {
   const Type *__class_type;
 };
 
-struct	__data_Object
+struct	Object__data
 {
-  Object *this_Object;
-  char	__private_Object[sizeof(struct __data_weak_Object)];
+  Object *Object__this;
+  char	Object__private[sizeof(struct Object__data_weak)];
 };
 
-struct	__private_Object
+struct	Object__private
 {
   Object *this;
-  const struct __virtual_Object *_virtual;
-  Object *this_Object;
-  struct __data_weak_Object;
+  const struct Object__virtual *_virtual;
+  Object *Object__this;
+  struct Object__data_weak;
 };
 
 struct	Object
 {
   Object *this;
-  const struct __virtual_Object *_virtual;
-  struct __data_Object;
+  const struct Object__virtual *_virtual;
+  struct Object__data;
 };
 
-void	Object_dtor(void *);
-void	Object_ctor(void *);
+void	Object__dtor(void *);
+void	Object__ctor(void *);
 
-extern const Type * const Object_type_instance;
-extern const struct __virtual_Object * const __vtable_instance_Object;
+extern const Type * const Object__type_instance;
+extern const struct Object__virtual * const Object__vtable_instance;
 
-void	*__pre_ctor_Object(struct __private_Object *);
+void	*Object__pre_ctor(struct Object__private *);

@@ -41,11 +41,11 @@ void		__protect_kill_stack(void *);
 
 #define rvalue(type, ctor, args...)                             \
     (__protect_kill_stack((char[1]){0}),                        \
-     type ## _ ## ctor                                          \
-     (__pre_ctor_ ## type                                       \
+     type ## __ ## ctor                                         \
+     (type ## __pre_ctor                                        \
       (__push_var((struct s_right_value_node[1])                \
                   {{ (type[1]){},                               \
-                              (void *)type ## _dtor,            \
+                              (void *)type ## __dtor,           \
                                   __get_current_level(),        \
                                   (void *)0, (void *)0          \
                                   }})), ##args),                \
@@ -54,11 +54,11 @@ void		__protect_kill_stack(void *);
 
 #define function_rvalue(type, ctor, args...)                    \
     (__protect_kill_stack((char[1]){0}),                        \
-     type ## _ ## ctor                                          \
-     (__pre_ctor_ ## type                                       \
+     type ## __ ## ctor                                          \
+     (type ## __pre_ctor                                         \
       (__push_var((struct s_right_value_node[1])                \
                   {{ (type[1]){},                               \
-                              (void *)type ## _dtor,            \
+                              (void *)type ## __dtor,           \
                                   __get_current_level(),        \
                                   (void *)0, (void *)0          \
                                   }})), ##args),                \
@@ -68,10 +68,10 @@ void		__protect_kill_stack(void *);
 
 #define retvalue(x)                                     \
     (__protect_kill_stack((char[1]){0}),                \
-         (typeof(x) *)                              \
+     (typeof(x) *)                                      \
          __push_var((struct s_right_value_node[1])      \
          {{						\
-           (typeof(x)[1]){x},			\
+                 (typeof(x)[1]){x},			\
                __get_return_dtor(),			\
                __get_current_level() + 1,		\
                (void *)0, (void *)0			\
