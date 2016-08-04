@@ -1,0 +1,94 @@
+[Error]Trying to override twice a method
+!!! TRACE_BACK !!!
+	Dispatched in file 'main.c' in function 'trace_back_test' at line '161'
+	Comming from file 'main.c' in function 'trace_back_test' at line '162'
+Uncaught exception: (String): '(null)'
+Birth of 0x604740
+Debug Class type Operational!
+
+Birth of 0x7ffdee1cf090
+CAST::
+true:0x7ffdee1cf090
+This is 0x7ffdee1cf090 42
+Object:0x7ffdee1cf0c0
+B:0x7ffdee1cf090
+Object vtable 0x604818
+Start vtable 0x604800
+This is 0x7ffdee1cf090 42
+This is 0x7ffdee1cf090 42
+Death of 0x7ffdee1cf090
+
+STRING TEST::
+Hello
+
+YIELD::
+Birth of 0x7ffdee1cf020
+Yield2 : 'First yield'
+Yield2 : 'Second yield'
+Yield2 : 'Last yield'
+Death of 0x7ffdee1cf020
+
+EXCEPTIONS::
+Does not except!
+Is called anyway.
+Is going to be deleted : 0x7ffdee1ced70 of value 'Not a leak'
+
+TYPE::
+String
+Is a String
+
+INVOKE::
+Invoke print this
+BadInvoke : No such method
+Second invoke : Invoke print this
+
+LEFT REFERENCE VALUE::
+Birth of 0x7ffdee1cf090
+Debug object 0x7ffdee1cf090
+Death of 0x7ffdee1cf090
+
+RETURN OBJECT BY VALUE::
+Birth of 0x7ffdee1cefe0
+begining of returning function
+before return
+Get data 84
+Return object 0x7ffdee1cf090
+Death of 0x7ffdee1cf090
+
+RANGE TEST::
+range value 0
+range value 1
+range value 2
+range value 3
+range value 4
+range value 5
+range value 6
+range value 7
+range value 8
+range value 9
+
+Backward
+range value 10
+range value 9
+range value 8
+range value 7
+range value 6
+range value 5
+range value 4
+range value 3
+range value 2
+
+Birth of 0x7ffdee1cf090
+Death of 0x7ffdee1cf090
+Birth of 0x7ffdee1cf090
+Death of 0x7ffdee1cf090
+Birth of 0x7ffdee1cf090
+Death of 0x7ffdee1cf090
+Birth of 0x7ffdee1cf090
+Death of 0x7ffdee1cf090
+Birth of 0x7ffdee1cf090
+Death of 0x7ffdee1cf090
+
+TRACEBACK::
+traceback!
+Death of 0x604740
