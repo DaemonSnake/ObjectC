@@ -44,9 +44,12 @@ static void abort_if_bad(void *caller_id, const char *function_name)
     }
 }
 
+void __yield_switch();
+
 int __yield_setjmp(void *caller_id, const char *function_name)
 {
     abort_if_bad(caller_id, function_name);
+    __yield_switch();
     __gen__->label = __builtin_return_address(0);
     __gen__->stop = 0;
     return 42;
@@ -75,5 +78,6 @@ int __yield_continue(void *holder)
 {
     ((generator**)holder)[2] = __gen__;
     __gen__ = ((generator**)holder)[0];
+    __yield_switch();
     return ((((generator**)holder)[1])->label != 0 && !(((generator**)holder)[1])->stop);
 }

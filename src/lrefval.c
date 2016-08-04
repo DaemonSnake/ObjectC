@@ -86,6 +86,33 @@ void		*__push_var(struct s_node *new_node)
   return new_node->data;
 }
 
+static __thread char prevent_cleanup_vars = 0;
+
+void            __yield_switch()
+{
+    prevent_cleanup_vars ^= 42;
+}
+
+void            __pop_var(const void *var)
+{
+    struct s_node *prev = 0;
+
+    if (prevent_cleanup_vars)
+        return ;
+    for (struct s_node *node = __stack_list.front;
+         node != 0 && node->level == __stack_list.level;
+         prev = node, node = node->next)
+    {
+        if (node->data != *(void **)var)
+            continue ;
+        if (prev == 0)
+            __stack_list.front = node->next;
+        if (node->dtor != 0)
+            node->dtor(node->data);
+        return ;
+    }
+}
+
 void		*__get_front_var_list()
 {
   if (__stack_list.front == 0)

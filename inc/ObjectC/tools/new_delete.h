@@ -26,6 +26,7 @@
 
 void	__delete_func(const void *, ...);
 void	*__malloc(size_t);
+void    __pop_var(const void *);
 
 #define new(type, ctor, args...)                                \
     ({                                                          \
@@ -43,7 +44,7 @@ void	*__malloc(size_t);
 #define delete(obj, args...) __delete_func(obj, ##args, 0)
 
 #define _var(type, var, ctor, args...)                                  \
-    * const var =                                                       \
+    * const var __attribute__((cleanup(__pop_var))) =                   \
         (__protect_kill_stack((char[1]){0}),                            \
          type ## __ ## ctor						\
          (type ## __pre_ctor                                            \
