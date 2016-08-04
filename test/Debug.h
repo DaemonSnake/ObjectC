@@ -31,6 +31,7 @@ interface(I)
 class(Debug, Object, I)
 {
   int	var;
+  int   index;
 };
 
 virtual(Debug)

@@ -3,35 +3,35 @@
 	Dispatched in file 'main.c' in function 'trace_back_test' at line '161'
 	Comming from file 'main.c' in function 'trace_back_test' at line '162'
 Uncaught exception: (String): '(null)'
-Birth of 0x604740
+[Debug]Birth of 1
 Debug Class type Operational!
 
-Birth of 0x7ffdee1cf090
+[Debug]Birth of 2
 CAST::
-true:0x7ffdee1cf090
-This is 0x7ffdee1cf090 42
-Object:0x7ffdee1cf0c0
-B:0x7ffdee1cf090
-Object vtable 0x604818
-Start vtable 0x604800
-This is 0x7ffdee1cf090 42
-This is 0x7ffdee1cf090 42
-Death of 0x7ffdee1cf090
+true:0x7ffcb01f19c0
+This is 0x7ffcb01f19c0 42
+Object:0x7ffcb01f19f0
+B:0x7ffcb01f19c0
+Object vtable 0x604a98
+Start vtable 0x604a80
+This is 0x7ffcb01f19c0 42
+This is 0x7ffcb01f19c0 42
+[Debug]Death of 2
 
 STRING TEST::
 Hello
 
 YIELD::
-Birth of 0x7ffdee1cf020
+[Debug]Birth of 3
 Yield2 : 'First yield'
 Yield2 : 'Second yield'
 Yield2 : 'Last yield'
-Death of 0x7ffdee1cf020
+[Debug]Death of 3
 
 EXCEPTIONS::
 Does not except!
 Is called anyway.
-Is going to be deleted : 0x7ffdee1ced70 of value 'Not a leak'
+Is going to be deleted : 0x7ffcb01f16a0 of value 'Not a leak'
 
 TYPE::
 String
@@ -43,17 +43,17 @@ BadInvoke : No such method
 Second invoke : Invoke print this
 
 LEFT REFERENCE VALUE::
-Birth of 0x7ffdee1cf090
-Debug object 0x7ffdee1cf090
-Death of 0x7ffdee1cf090
+[Debug]Birth of 4
+Debug object 0x7ffcb01f19c0
+[Debug]Death of 4
 
 RETURN OBJECT BY VALUE::
-Birth of 0x7ffdee1cefe0
+[Debug]Birth of 5
 begining of returning function
 before return
 Get data 84
-Return object 0x7ffdee1cf090
-Death of 0x7ffdee1cf090
+Return object 0x7ffcb01f19c0
+[Debug]Death of 5
 
 RANGE TEST::
 range value 0
@@ -78,17 +78,23 @@ range value 4
 range value 3
 range value 2
 
-Birth of 0x7ffdee1cf090
-Death of 0x7ffdee1cf090
-Birth of 0x7ffdee1cf090
-Death of 0x7ffdee1cf090
-Birth of 0x7ffdee1cf090
-Death of 0x7ffdee1cf090
-Birth of 0x7ffdee1cf090
-Death of 0x7ffdee1cf090
-Birth of 0x7ffdee1cf090
-Death of 0x7ffdee1cf090
+[Debug]Birth of 6
+[Debug]Death of 6
+[Debug]Birth of 7
+[Debug]Death of 7
+[Debug]Birth of 8
+[Debug]Death of 8
+[Debug]Birth of 9
+[Debug]Death of 9
+[Debug]Birth of 10
+[Debug]Death of 10
+
+SCOPE TEST::
+begin of new scope
+[Debug]Birth of 11
+[Debug]Death of 11
+end of new scope
 
 TRACEBACK::
 traceback!
-Death of 0x604740
+[Debug]Death of 1

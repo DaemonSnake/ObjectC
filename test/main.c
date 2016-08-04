@@ -228,6 +228,17 @@ void	loop_init_test()
     }
 }
 
+void scope_test()
+{
+    printf("SCOPE TEST::\n");
+    printf("begin of new scope\n");
+    if (42)
+    {
+        Debug _def(Debug, tmp);
+    }
+    printf("end of new scope\n");
+}
+
 static Debug static_test;
 
 Ginit(Debug, ctor, static_test)
@@ -248,6 +259,7 @@ int	main()
         return_object_test,
         range_test,
         loop_init_test,
+        scope_test,
         trace_back_test
     };
 

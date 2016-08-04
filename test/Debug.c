@@ -22,17 +22,20 @@
 #include <stdio.h>
 #include "Debug.h"
 
+static __thread int index = 0;
+
 new_tor(Debug, ctor)
 {
   superCtor(Object, ctor);
-  printf("Birth of %p\n", this);
+  $.index = ++index;
+  printf("[Debug]Birth of %d\n", $.index);
   $.var = 42;
 }
 
 new_tor(Debug, dtor)
 {
   superDtor();
-  printf("Death of %p\n", this);
+  printf("[Debug]Death of %d\n", $.index);
 }
 
 void	new_method(Debug, print)
