@@ -136,7 +136,7 @@
 CLASS(private)
 
 //USING String = Std::tools::String;
-#define UString INF_GLUE(Std__, tools__, String)
+typedef INF_GLUE(Std__, tools__, String) UString;
 
 #define in(args...) NAMESPACE(INF_GLUE(args))
 #define in_root(args...) INF_GLUE(args)
