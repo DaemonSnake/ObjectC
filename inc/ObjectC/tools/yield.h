@@ -85,3 +85,9 @@ inline void __yield_fgoto(generator *gen)
         return val;                                                     \
     else                                                                \
         __yield_postjump();
+
+#define new_foreach(type, args...)                                      \
+    type ## __foreach(const struct type ## __private * const this, ##args)
+
+#define foreach(res, type, var)                 \
+    for_yield(res, type ## __foreach((void *)var))

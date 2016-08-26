@@ -239,6 +239,15 @@ void scope_test()
     printf("end of new scope\n");
 }
 
+void foreach_test()
+{
+    printf("FOREACH TEST::\n");
+    foreach(c, String, rvalue(String, ctorS, "Hello")) {
+        printf("%c", (c <= 'z' && c >= 'a' ? (c + 'A' - 'a') : c));
+    }
+    printf("\n");
+}
+
 static Debug static_test;
 
 Ginit(Debug, ctor, static_test)
@@ -260,6 +269,7 @@ int	main()
         range_test,
         loop_init_test,
         scope_test,
+        foreach_test,
         trace_back_test
     };
 

@@ -48,3 +48,10 @@ virtual(String)
 new_tor(String, ctorS, const char *);
 
 end_decl(String);
+
+yields(char) new_foreach(String)
+{
+    for (int i = 0; i < (int)$.length; i++)
+        yield($.c_str[i]);
+    yield_break(char);
+}
