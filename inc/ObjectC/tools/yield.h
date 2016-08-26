@@ -21,6 +21,12 @@
 */
 #pragma once
 
+/*
+  Optimization breaks yield's behaviour.
+  We will try to make it work, but for now optimization needs to be disabled.
+ */
+#pragma GCC optimize "0"
+
 /* TYPE */
 typedef struct
 {
