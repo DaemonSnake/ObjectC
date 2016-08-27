@@ -20,46 +20,103 @@
  * THE SOFTWARE.
  */
 
-struct __private_Debug
+/*
+ * Object.h example
+*/
+
+//vtable
+struct Object__virtual
 {
-    Debug *this;
-    const struct __virtual_Debug *_virtual;
-    struct __supers_data_Debug
+    void (*dtor)(void *);
+    const char *(*toString)(const void *);
+    const Type *(*getType)(const void *);
+};
+
+//private type
+struct Object__private
+{
+    Object *this;
+    const struct Object__virtual *_virtual;
+    Object *Object__this;
+    struct Object__data_weak
     {
-        struct __data_Object
-        {
-            Object *this_Object;
-            char __private_Object[sizeof(struct __data_weak_Object)];
-        };
-        Debug *this_Debug;
-        I *this_I;
-        I *__true_this_I;
-        struct __virtual_I *_virtual_I;
-    };
-    struct __weak_data_Debug
-    {
-        int var;
+        const Type *__class_type;
     };
 };
 
+//public type
+struct Object
+{
+    Object *this;
+    const struct Object__virtual *_virtual;
+    Object *Object__this;
+    struct Object__data
+    {
+        Object *Object__this;
+        char Object__private[sizeof(struct Object__data_weak)];
+    };
+};
+
+/*
+ * Debug.h example
+*/
+
+//I's vtable
+struct I__virtual
+{
+  void (*print)(void *);
+};
+
+//Debug's vtable
+struct Debug__virtual
+{
+    struct Debug__supers_virtual
+    {
+        struct Object__virtual;
+        struct I__virtual;
+    };
+    struct Debug__weak_virtual
+    {
+        void (*set_var)(void *, int var);
+        int (*get_var)(void *);;
+    };
+};
+
+//private type
+struct Debug__private
+{
+    Debug *this;
+    const struct Debug__virtual *_virtual;
+    struct Debug__supers_data
+    {
+        struct Object__data;
+        Debug *Debug__this;
+        I *I__this;
+        I *I__true_this;
+        struct I__virtual *I__virtual;
+    };
+    struct Debug__weak_data
+    {
+        int var;
+        int index;
+    };
+};
+
+//public type
 struct Debug
 {
     Debug *this;
-    const struct __virtual_Debug *_virtual;
-    struct __data_Debug
+    const struct Debug__virtual *_virtual;
+    struct Debug__data
     {
-        struct __supers_data_Debug
+        struct Debug__supers_data
         {
-            struct __data_Object
-            {
-                Object *this_Object;
-                char __private_Object[sizeof(struct __data_weak_Object)];
-            };
-            Debug *this_Debug;
-            I *this_I;
-            I *__true_this_I;
-            struct __virtual_I *_virtual_I;
-        };
-        char __private_Debug[sizeof(struct __weak_data_Debug)];
+            struct Object__data;
+            Debug *Debug__this;
+            I *I__this;
+            I *I__true_this;
+            struct I__virtual *I__virtual;
+        };    
+        char Debug__private[sizeof(struct Debug__weak_data)];
     };
 };
