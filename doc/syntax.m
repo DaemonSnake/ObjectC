@@ -105,8 +105,8 @@
 {
     type @_var(true_type, var_name, ctor, args...), ...;
     type @_def(true_type, var_name, args...), ...;
-    type *var_name = @new(type, ctor_name, args...);
-    type *var_name = @newDef(type, args...);
+    type var_name = @new(type, ctor_name, args...);
+    type var_name = @newDef(type, args...);
 
     @delete(var_name);
     @M(var_name, method_name, args...);
@@ -141,8 +141,8 @@
     }
 
     function_taking_object_pointer(..., @rvalue(type, ctor_name, args...), ...);
-    type *var_name = @function_rvalue(type, ctor_name, args...);
-    type *var_name = @retvalue(func_returning_object_copy());
+    type var_name = @function_rvalue(type, ctor_name, args...);
+    type var_name = @retvalue(func_returning_object_copy());
     return @stdmove(var_name); /* move the destruction of var_name from one function back */
 }
 

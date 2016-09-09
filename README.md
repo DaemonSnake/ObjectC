@@ -26,7 +26,7 @@ This project is a library to use as a superset of the C language.</br>
   ```
   -Introspection
   ```c++
-  Object *tmp = new(String, ctorS, "Hello") as(Object); // as only needed when casting from object to interface pointer
+  Object tmp = new(String, ctorS, "Hello") as(Object); // as only needed when casting from object to interface pointer
   isInstanceOf(String, tmp) // => true
   dynamic_cast(String, tmp)
   const char *method(toString) = getMethod(tmp, "toString");
