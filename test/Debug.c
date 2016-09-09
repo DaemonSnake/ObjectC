@@ -34,8 +34,8 @@ new_tor(Debug, ctor)
 
 new_tor(Debug, dtor)
 {
-  superDtor();
   printf("[Debug]Death of %d\n", $.index);
+  superDtor();
 }
 
 void	new_method(Debug, print)
@@ -47,8 +47,10 @@ new_def_axors(Debug, var, get);
 
 new_axor(Debug, var, int var)
 {
-    if (var != 0)
-        $.var = var;
+    if (var == 0)
+        return ;
+    printf("[Debug]Update value from %d to %d\n", $.var, var);
+    $.var = var;
 }
 
 implement(Debug, Object, I)

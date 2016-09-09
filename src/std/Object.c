@@ -36,7 +36,7 @@ const char	*Object__toString(void *this __attribute__((unused)))
 __attribute__((no_instrument_function))
 const Type	*Object__getType(const void *this)
 {
-  return ((struct Object__private *)((Object *)this)->this)->__class_type;
+  return ((struct Object__private *)((Object)this)->this)->__class_type;
 }
 
 static struct Object__virtual true_vtable_instance = {

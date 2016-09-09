@@ -64,7 +64,7 @@ struct	       	s_node
   char		caught;
   jmp_buf      	buff;
   const Type   	*type;
-  Object 	*obj;
+  Object 	obj;
   info_node    	*origin;
   int		level;
   List	       	*next;
@@ -119,7 +119,7 @@ static void    	trace_back(const char *file, const char *func, int line)
   exit(42);
 }
 
-void		__except_throw_func(const Type *type, Object *obj, const char *file, const char *func, int line)
+void		__except_throw_func(const Type *type, Object obj, const char *file, const char *func, int line)
 {
   info_node	*node;
 

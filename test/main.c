@@ -29,14 +29,14 @@ const char *new_method(String, toString) //Bad override
     return 0;
 }
 
-yields(String *) yieldList()
+yields(String) yieldList()
 {
     I _var(Debug, tmp, ctor) as(I);
 
     yield(new(String, ctorS, "First yield"));
     yield(new(String, ctorS, "Second yield"));
     yield(new(String, ctorS, "Last yield"));
-    yield_break(String *);
+    yield_break(String);
 }
 
 void		yieldTest()
@@ -51,7 +51,7 @@ void		yieldTest()
 
 void		type(void)
 {
-    Object	*tmp;
+    Object	tmp;
 
     printf("TYPE::\n");
     tmp = static_cast(Object, new(String, ctor));
@@ -67,8 +67,8 @@ void		type(void)
 
 void		new_delete(void)
 {
-    Object	*tmp;
-    I		*tmp2;
+    Object	tmp;
+    I		tmp2;
 
     printf("NEW DELETE::\n");
     delete(new(String, ctorS, "Hello"));
@@ -131,10 +131,10 @@ void		exceptions()
     }
 }
 
-void		dynamic_func(const I *tmp)
+void		dynamic_func(const I tmp)
 {
-    Debug      	*tmp2 = dynamic_cast(Debug, tmp);
-    Object	*tmp3 = static_cast(Object, tmp2);
+    Debug      	tmp2 = dynamic_cast(Debug, tmp);
+    Object	tmp3 = static_cast(Object, tmp2);
 
     ifIs(I, tmp3) {
         M(tmp3, print);
@@ -166,7 +166,7 @@ void	trace_back_test()
     }
 }
 
-void	debug_printer(Debug *tmp)
+void	debug_printer(Debug tmp)
 {
     printf("Debug object %p\n", tmp);
 }
@@ -175,23 +175,6 @@ void	rvalue_test()
 {
     printf("LEFT REFERENCE VALUE::\n");
     debug_printer(rvalue(Debug, ctor));
-}
-
-Debug	return_instance_debug()
-{
-    Debug	_def(Debug, tmp);
-
-    printf("begining of returning function\n");
-    printf("before return\n");
-    axM(tmp, var, 84);
-    printf("Get data %d\n", axM(tmp, var));
-    return stdmove(tmp);
-}
-
-void	return_object_test()
-{
-    printf("RETURN OBJECT BY VALUE::\n");
-    printf("Return object %p\n", retvalue(return_instance_debug()));
 }
 
 yields(int)	range(int begin, int end)
@@ -248,7 +231,7 @@ void foreach_test()
     printf("\n");
 }
 
-static Debug static_test;
+static struct Debug static_test;
 
 Ginit(Debug, ctor, static_test)
 {
@@ -265,7 +248,6 @@ int	main()
         type,
         invoke_test,
         rvalue_test,
-        return_object_test,
         range_test,
         loop_init_test,
         scope_test,

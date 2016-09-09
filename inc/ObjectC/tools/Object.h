@@ -25,7 +25,7 @@
     (((typeof(var))__tmp_pointer__((void *)var))                    \
      ->_virtual->name(((typeof(var))__tmp_pointer__((void *)0x42))->this, ##args))
     
-typedef struct Object Object;
+typedef struct Object *Object;
 
 struct	Object__virtual
 {
@@ -45,21 +45,21 @@ struct	Object__data_weak
 
 struct	Object__data
 {
-  Object *Object__this;
+  Object Object__this;
   char	Object__private[sizeof(struct Object__data_weak)];
 };
 
 struct	Object__private
 {
-  Object *this;
+  Object this;
   const struct Object__virtual *_virtual;
-  Object *Object__this;
+  Object Object__this;
   struct Object__data_weak;
 };
 
 struct	Object
 {
-  Object *this;
+  Object this;
   const struct Object__virtual *_virtual;
   struct Object__data;
 };

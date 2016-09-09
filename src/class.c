@@ -56,7 +56,7 @@ char		__is_same_kind_type(const Type * my, const Type *their)
   return (__dynamic_cast(my, their, (void *)0x42) ? 42 : 0);
 }
 
-void		__call_class_super_dtor(Object * const this)
+void		__call_class_super_dtor(Object this)
 {
   const Type	*super;
 

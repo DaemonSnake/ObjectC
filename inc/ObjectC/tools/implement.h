@@ -22,7 +22,7 @@
 #pragma once
 
 int	write(int, const char *, int);
-void	__call_class_super_dtor(Object * const);
+void	__call_class_super_dtor(Object const);
 
 #define implement(name, extends, args...)                               \
 									\

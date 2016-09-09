@@ -43,7 +43,7 @@
 									\
   struct name ## __private						\
   {									\
-    name *this;								\
+    name this;								\
     const struct name ## __virtual *_virtual;				\
     struct name ## __supers_data;					\
     struct name ## __weak_data;                                         \
@@ -51,14 +51,14 @@
 									\
   struct name								\
   {									\
-    name *this;								\
+    name this;								\
     const struct name ## __virtual *_virtual;				\
     struct name ## __data;						\
   };
 
 #define __thisify__(name)			\
-  name *name ## __this;				\
-  name *name ## __true_this;			\
+  name name ## __this;				\
+  name name ## __true_this;			\
   struct name ## __virtual *name ## __virtual;
 
 #define __implements_in_ctor__(name)					\
@@ -76,7 +76,7 @@
 
 #define __interface_implements__(name, interface)			\
   name ## __true_type_instance.implements[i] = interface ## __type_instance; \
-  name ## __true_type_instance.offsets[i++] = offsetof(name, interface ## __true_this)
+  name ## __true_type_instance.offsets[i++] = offsetof(typeof(*(name)0), interface ## __true_this)
 
 /* AXORS METHODS DECL */
 

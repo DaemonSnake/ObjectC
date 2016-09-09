@@ -33,7 +33,7 @@ void		*__malloc(size_t size)
 static void	__delete__(const void *obj)
 {
   void		(*dtor)(void *);
-  Object	*tmp;
+  Object	tmp;
 
   if (obj == 0)
     return ;

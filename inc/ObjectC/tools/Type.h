@@ -45,7 +45,7 @@ const Type		*Object__getType(const void *);
 # define		as(type) ->type ## __this
 
 # define	      	dynamic_cast(type, var)                         \
-    ((type *)__dynamic_cast(Object__getType(var), type ## __type_instance, var->this))
+    ((type)__dynamic_cast(Object__getType(var), type ## __type_instance, var->this))
 
 # define		isInstanceOf(type, pointer)                     \
     (pointer != NULL &&							\
@@ -53,14 +53,14 @@ const Type		*Object__getType(const void *);
 
 # define		getMethod(obj, name)                            \
     (__typeGetMethod(Object__getType(obj),                              \
-                     (const void *)(((const Object * const )obj)->this)->_virtual, name))
+                     (const void *)(((const Object)obj)->this)->_virtual, name))
 
 # define		invoke(ret, obj, name, args...)                 \
-    (((ret (*)(const void*, ...))getMethod(obj, name))((const void*)(((const Object * const)obj)->this), ##args))
+    (((ret (*)(const void*, ...))getMethod(obj, name))((const void*)(((const Object)obj)->this), ##args))
 
 # define		invokeM(method, obj, args...)                   \
-    (method)((void *)(((const Object * const)obj)->this), ##args)
+    (method)((void *)(((const Object)obj)->this), ##args)
 
 # define	       	ifIs(type, name, args...)                       \
     if (__tmp_pointer__(dynamic_cast(type, (name, ##args))))            \
-        for (type *name = __tmp_pointer__((void *)0x42); name != 0; name = 0)
+        for (type name = __tmp_pointer__((void *)0x42); name != 0; name = 0)

@@ -22,7 +22,7 @@
 #pragma once
 
 #define class(name, extends, args...)					\
-    typedef struct name name;						\
+    typedef struct name *name;						\
 									\
     extern const Type * const name ## __type_instance;			\
 									\
@@ -43,7 +43,7 @@
     struct name ## __supers_data                                        \
     {									\
         struct extends ## __data;                                       \
-        name *name ## __this;                                           \
+        name name ## __this;                                            \
         APPLY_MACRO_VAR(__thisify__, ##args);                           \
     };									\
 									\
@@ -54,7 +54,7 @@
     struct name ## __weak_data
 
 #define interface(name)                                 \
-    typedef struct name name;                           \
+    typedef struct name *name;                          \
                                                         \
     extern const Type * const                           \
     __attribute__((weak))                               \
@@ -62,7 +62,7 @@
                                                         \
     struct	name                                    \
     {                                                   \
-        Object	*this;                                  \
+        Object	 this;                                  \
         const struct name ## __virtual *_virtual;       \
     };                                                  \
                                                         \
