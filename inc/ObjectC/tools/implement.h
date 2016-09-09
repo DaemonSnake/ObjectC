@@ -93,9 +93,9 @@ void	__call_class_super_dtor(Object const);
     APPLY_MACRO_VAR_TWO(__interface_implements__, name, ##args);	\
   }									\
       									\
-  __attribute__((no_instrument_function))				\
-  void		name ## __push_method(void *arg, const char *name_m,	\
-                                      size_t offset)			\
+  __attribute__((no_instrument_function, unused))                       \
+  static void		name ## __push_method(void *arg, const char *name_m, \
+                                              size_t offset)            \
   {									\
     int		__get_current_level();					\
     void		**member =					\

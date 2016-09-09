@@ -99,13 +99,14 @@
     type ## __fake_ ## name();                                          \
     typeof(type ## __fake_ ## name())                                   \
     type ## __ ## name(struct type ## __private * const this, ##args);  \
-									\
+                                                                        \
+    static void type ## __push_method(void *, const char *, size_t);    \
+                                                                        \
     __attribute__((constructor, no_instrument_function))                \
-    static inline void	name ## __imp()					\
+    static void	type ## __ ## name ## __imp()                           \
     {									\
         void type ## __implement_function();                            \
         type ## __implement_function();                                 \
-        void type ## __push_method(void *, const char *, size_t);       \
         type ## __push_method(type ## __ ## name, #name,                \
                               offsetof(struct type ## __virtual, name)); \
     }									\

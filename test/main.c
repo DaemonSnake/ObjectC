@@ -23,12 +23,6 @@
 #include "Debug.h"
 #include "ObjectC.h"
 
-const char *new_method(String, toString) //Bad override
-{
-    (void)this;
-    return 0;
-}
-
 yields(String) yieldList()
 {
     I _var(Debug, tmp, ctor) as(I);
