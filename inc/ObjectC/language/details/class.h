@@ -28,6 +28,14 @@
 #define __axor_call_2(var, name, args...) M(var, get_ ## name)
 #define __axor_call_3(var, name, val) M(var, set_ ## name, val)
 
+/* AXORS METHODS DECL */
+#define __axor_get(type, name) type (*get_ ## name)(void *);
+#define __axor_(type, name)
+#define __axor_set(type, name) void (*set_ ## name)(void *, type name);
+#define __launch_axor(type, name, x, y...)      \
+    __axor_ ## x(type, name)                    \
+    __axor_ ## y(type, name)
+
 /* method() macro 
    Adds 'void *' at the front of an argument list
 */

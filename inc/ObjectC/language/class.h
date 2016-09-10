@@ -104,22 +104,3 @@
 
 #define new_tor(type, name, args...)					\
     void type ## __ ## name(struct type ## __private * const this, ##args)
-
-#define new_method(type, name, args...)					\
-    type ## __fake_ ## name();                                          \
-    typeof(type ## __fake_ ## name())                                   \
-    type ## __ ## name(struct type ## __private * const this, ##args);  \
-                                                                        \
-    static void type ## __push_method(void *, const char *, size_t);    \
-                                                                        \
-    __attribute__((constructor, no_instrument_function))                \
-    static void	type ## __ ## name ## __imp()                           \
-    {									\
-        void type ## __implement_function();                            \
-        type ## __implement_function();                                 \
-        type ## __push_method(type ## __ ## name, #name,                \
-                              offsetof(struct type ## __virtual, name)); \
-    }									\
-									\
-    typeof(type ## __fake_ ## name())                                   \
-    type ## __ ## name(struct type ## __private * const this, ##args)

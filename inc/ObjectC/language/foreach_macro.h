@@ -75,11 +75,3 @@
 #define __interface_implements__(name, interface)			\
   name ## __true_type_instance.implements[i] = interface ## __type_instance; \
   name ## __true_type_instance.offsets[i++] = offsetof(typeof(*(name)0), interface ## __true_this)
-
-/* AXORS METHODS DECL */
-#define __axor_get(type, name) type (*get_ ## name)(void *);
-#define __axor_(type, name)
-#define __axor_set(type, name) void (*set_ ## name)(void *, type name);
-#define __launch_axor(type, name, x, y...)      \
-    __axor_ ## x(type, name)                    \
-    __axor_ ## y(type, name)
