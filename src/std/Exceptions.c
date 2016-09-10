@@ -21,7 +21,7 @@
  */
 #include <string.h>
 #include <stdlib.h>
-#include "ObjectC/Exceptions.h"
+#include "ObjectC/std/Exceptions.h"
 
 const char	*new_method(Exception, what)
 {

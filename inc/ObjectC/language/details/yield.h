@@ -21,17 +21,27 @@
  */
 #pragma once
 
-#include <stddef.h>
-
-#include "ObjectC/macro_tools/foreach_macro.h"
-#include "ObjectC/language/foreach_macro.h"
-#include "ObjectC/language/class.h"
-#include "ObjectC/language/type.h"
-#include "ObjectC/std/Object.h"
-#include "ObjectC/language/implement.h"
-#include "ObjectC/language/new_delete.h"
-#include "ObjectC/language/exceptions.h"
-#include "ObjectC/language/rvalref.h"
-#include "ObjectC/language/yield.h"
-#include "ObjectC/std/Exceptions.h"
-#include "ObjectC/std/String.h"
+#if defined(__x86_64__)
+__attribute__((always_inline, no_instrument_function))
+inline void __yield_fgoto(generator *gen)
+{
+    asm("mov %0, %%rax":: "r"(gen->label));
+    asm("jmpq *%rax");
+}
+#elif defined(__i386__)
+__attribute__((always_inline, no_instrument_function))
+inline void __yield_fgoto(generator *gen)
+{
+    asm("mov %0, %%eax":: "r"(gen->label));
+    asm("jmp *%eax");
+}
+#elif defined(__arm__) //NEEDS TO BE CHECKED
+__attribute__((always_inline, no_instrument_function))
+inline void __yield_fgoto(generator *gen)
+{
+    asm("ldr r3, %0" :: "r"(gen->label));
+    asm("mov pc, r3");
+}
+#else
+# error "System not yet suported"
+#endif

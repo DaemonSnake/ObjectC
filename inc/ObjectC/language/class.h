@@ -21,6 +21,14 @@
  */
 #pragma once
 
+#include "details/class.h"
+
+#define M(var, name, args...)						\
+    (((typeof(var))__tmp_pointer__((void *)var))                        \
+     ->_virtual->name(((typeof(var))__tmp_pointer__((void *)0x42))->this, ##args))
+
+#define axM(this, name, args...) ______VARARG(__axor_call_, this, name, ##args)
+
 #define class(name, extends, args...)					\
     typedef struct name *name;						\
 									\
@@ -91,6 +99,8 @@
     APPLY_MACRO_VAR(__true_end_decl, ##args)
 
 #define method(name) (*name)__ADD_THISP__
+
+#define axors(type, name, args...)  __launch_axor(type, name, args)
 
 #define new_tor(type, name, args...)					\
     void type ## __ ## name(struct type ## __private * const this, ##args)

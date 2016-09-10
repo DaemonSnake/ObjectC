@@ -35,6 +35,8 @@ typedef struct
     int stop;
 }       generator;
 
+#include "details/yield.h"
+
 /* FUNCTIONS */
 int __yield_setjmp(void *, const char *);
 void __yield_postjump();
@@ -42,33 +44,7 @@ generator *__yield_get_generator();
 generator *__yield_update_generator(generator *);
 int __yield_continue(void *);
 
-#if defined(__x86_64__)
-__attribute__((always_inline, no_instrument_function))
-inline void __yield_fgoto(generator *gen)
-{
-    asm("mov %0, %%rax":: "r"(gen->label));
-    asm("jmpq *%rax");
-}
-#elif defined(__i386__)
-__attribute__((always_inline, no_instrument_function))
-inline void __yield_fgoto(generator *gen)
-{
-    asm("mov %0, %%eax":: "r"(gen->label));
-    asm("jmp *%eax");
-}
-#elif defined(__arm__) //NEEDS TO BE CHECKED
-__attribute__((always_inline, no_instrument_function))
-inline void __yield_fgoto(generator *gen)
-{
-    asm("ldr r3, %0" :: "r"(gen->label));
-    asm("mov pc, r3");
-}
-#else
-# error "System not yet suported"
-#endif
-
 /* MACROS */
-
 #define for_yield(ret, call)                                            \
     for (typeof(call) ** const __holder__ =                         \
              (void *)((generator*[3]){__yield_get_generator(), __yield_update_generator(((generator[1]){{0, __builtin_return_address(0), 42}})), NULL}), \

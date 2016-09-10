@@ -24,8 +24,9 @@
 #include <stdlib.h>
 #include <setjmp.h>
 #include <stdarg.h>
-#include "ObjectC/tools/Type.h"
-#include "ObjectC/tools/Object.h"
+#include "ObjectC/language/type.h"
+#include "ObjectC/std/Object.h"
+#include "ObjectC/language/class.h"
 
 void		__delete_func(void *, ...);
 int             __get_current_level();

@@ -21,8 +21,24 @@
  */
 #pragma once
 
+#include "details/implement.h"
+
 int	write(int, const char *, int);
 void	__call_class_super_dtor(Object const);
+
+#define superCtor(type, name, args...)		\
+  type ## __ ## name((void *)this, ##args)
+
+#define superDtor()				\
+  __call_class_super_dtor((void *)this)
+
+#define $ (*this)
+
+#define $$(method, args...) M(this, method, ##args)
+
+#define new_def_axors(class, name, x...) __launch_new_def_axors(class, name, x)
+
+#define new_axor(class, name, args...) ______VARARG(__new_user_axor_, class, name, ##args)
 
 #define implement(name, extends, args...)                               \
 									\
@@ -129,48 +145,3 @@ void	__call_class_super_dtor(Object const);
 									\
   __attribute__((no_instrument_function))				\
   static void name ## __hidden_implement_function()
-
-#define superCtor(type, name, args...)		\
-  type ## __ ## name((void *)this, ##args)
-
-#define superDtor()				\
-  __call_class_super_dtor((void *)this)
-
-#define $ (*this)
-
-#define $$(method, args...) M(this, method, ##args)
-
-/* AXORS METHODS IMPL */
-
-#define __new_def_axor_get(class, name)			\
-  typeof(((struct class ## __private *)0)->name)	\
-  new_method(class, get_ ## name)			\
-  {							\
-    return $.name;					\
-  }
-
-#define __new_def_axor_set(class, name)					\
-  void									\
-  new_method(class, set_ ## name,					\
-	     typeof(((struct class ## __private *)0)->name) name)	\
-  {									\
-    $.name = name;							\
-  }
-
-#define __new_def_axor_(class, name)
-
-#define __launch_new_def_axors(class, name, x, y...)	\
-    __new_def_axor_ ## x(class, name)			\
-    __new_def_axor_ ## y(class, name)
-
-#define new_def_axors(class, name, x...) __launch_new_def_axors(class, name, x)
-
-// get
-#define __new_user_axor_2(class, name, ...)                             \
-    typeof(((struct class ## __private *)0)->name) new_method(class, get_ ## name)
-
-// set
-#define __new_user_axor_3(class, name, arg, ...)        \
-    void new_method(class, set_ ## name, arg)
-
-#define new_axor(class, name, args...) ______VARARG(__new_user_axor_, class, name, ##args)

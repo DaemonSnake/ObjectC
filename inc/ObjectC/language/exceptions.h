@@ -22,7 +22,6 @@
 #pragma once
 
 #include <setjmp.h>
-#include "ObjectC/tools/new_delete.h"
 
 _Pragma("GCC diagnostic push");
 _Pragma("GCC diagnostic ignored \"-Wparentheses\"");

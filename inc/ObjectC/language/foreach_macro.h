@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#include <stddef.h>
-
 #define __virtualize__(name) struct name ## __virtual;
 
 #define __true_end_decl(name)						\
@@ -79,15 +77,9 @@
   name ## __true_type_instance.offsets[i++] = offsetof(typeof(*(name)0), interface ## __true_this)
 
 /* AXORS METHODS DECL */
-
 #define __axor_get(type, name) type (*get_ ## name)(void *);
 #define __axor_(type, name)
 #define __axor_set(type, name) void (*set_ ## name)(void *, type name);
-#define __launch_axor(type, name, x, y...) \
-  __axor_ ## x(type, name)		  \
-  __axor_ ## y(type, name)
-
-#define axors(type, name, args...)  __launch_axor(type, name, args)
-
-/**/
-#define __ADD_THISP__(args...) (void *, ##args)
+#define __launch_axor(type, name, x, y...)      \
+    __axor_ ## x(type, name)                    \
+    __axor_ ## y(type, name)

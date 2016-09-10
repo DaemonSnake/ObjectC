@@ -21,9 +21,6 @@
  */
 #pragma once
 
-#include <stddef.h>
-#include "ObjectC/tools/rvalref.h"
-
 void	__delete_func(const void *, ...);
 void	*__malloc(size_t);
 void    __pop_var(const void *);

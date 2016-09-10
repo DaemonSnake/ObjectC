@@ -21,13 +21,13 @@
  */
 #pragma once
 
-struct		s_right_value_node
+struct                  	s_right_value_node
 {
-  void		*data;
-  void		(*dtor)(void *);
-  int		level;
+  void                  	*data;
+  void                   	(*dtor)(void *);
+  int                   	level;
   struct s_right_value_node	*next;
-  void		*id;
+  void                  	*id;
 };
 
 int		__get_current_level();

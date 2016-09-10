@@ -21,53 +21,32 @@
  */
 #pragma once
 
-#define M(var, name, args...)						\
-    (((typeof(var))__tmp_pointer__((void *)var))                    \
-     ->_virtual->name(((typeof(var))__tmp_pointer__((void *)0x42))->this, ##args))
-    
-typedef struct Object *Object;
+/* AXORS METHODS IMPL */
+#define __new_def_axor_get(class, name)			\
+  typeof(((struct class ## __private *)0)->name)	\
+  new_method(class, get_ ## name)			\
+  {							\
+    return $.name;					\
+  }
 
-struct	Object__virtual
-{
-  void	(*dtor)(void *);
-  const char *(*toString)(const void *);
-  const Type *(*getType)(const void *);
-};
+#define __new_def_axor_set(class, name)					\
+  void									\
+  new_method(class, set_ ## name,					\
+	     typeof(((struct class ## __private *)0)->name) name)	\
+  {									\
+    $.name = name;							\
+  }
 
-struct Object__interfaces
-{
-};
+#define __new_def_axor_(class, name)
 
-struct	Object__data_weak
-{
-  const Type *__class_type;
-};
+#define __launch_new_def_axors(class, name, x, y...)	\
+    __new_def_axor_ ## x(class, name)			\
+    __new_def_axor_ ## y(class, name)
 
-struct	Object__data
-{
-  Object Object__this;
-  char	Object__private[sizeof(struct Object__data_weak)];
-};
+// get
+#define __new_user_axor_2(class, name, ...)                             \
+    typeof(((struct class ## __private *)0)->name) new_method(class, get_ ## name)
 
-struct	Object__private
-{
-  Object this;
-  const struct Object__virtual *_virtual;
-  Object Object__this;
-  struct Object__data_weak;
-};
-
-struct	Object
-{
-  Object this;
-  const struct Object__virtual *_virtual;
-  struct Object__data;
-};
-
-void	Object__dtor(void *);
-void	Object__ctor(void *);
-
-extern const Type * const Object__type_instance;
-extern const struct Object__virtual * const Object__vtable_instance;
-
-void	*Object__pre_ctor(struct Object__private *);
+// set
+#define __new_user_axor_3(class, name, arg, ...)        \
+    void new_method(class, set_ ## name, arg)

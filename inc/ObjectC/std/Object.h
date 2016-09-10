@@ -20,18 +20,50 @@
  * THE SOFTWARE.
  */
 #pragma once
+    
+typedef struct Object *Object;
 
-#include <stddef.h>
+struct	Object__virtual
+{
+  void	(*dtor)(void *);
+  const char *(*toString)(const void *);
+  const Type *(*getType)(const void *);
+};
 
-#include "ObjectC/macro_tools/foreach_macro.h"
-#include "ObjectC/language/foreach_macro.h"
-#include "ObjectC/language/class.h"
-#include "ObjectC/language/type.h"
-#include "ObjectC/std/Object.h"
-#include "ObjectC/language/implement.h"
-#include "ObjectC/language/new_delete.h"
-#include "ObjectC/language/exceptions.h"
-#include "ObjectC/language/rvalref.h"
-#include "ObjectC/language/yield.h"
-#include "ObjectC/std/Exceptions.h"
-#include "ObjectC/std/String.h"
+struct Object__interfaces
+{
+};
+
+struct	Object__data_weak
+{
+  const Type *__class_type;
+};
+
+struct	Object__data
+{
+  Object Object__this;
+  char	Object__private[sizeof(struct Object__data_weak)];
+};
+
+struct	Object__private
+{
+  Object this;
+  const struct Object__virtual *_virtual;
+  Object Object__this;
+  struct Object__data_weak;
+};
+
+struct	Object
+{
+  Object this;
+  const struct Object__virtual *_virtual;
+  struct Object__data;
+};
+
+void	Object__dtor(void *);
+void	Object__ctor(void *);
+
+extern const Type * const Object__type_instance;
+extern const struct Object__virtual * const Object__vtable_instance;
+
+void	*Object__pre_ctor(struct Object__private *);

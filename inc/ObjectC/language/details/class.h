@@ -21,17 +21,14 @@
  */
 #pragma once
 
-#include <stddef.h>
+/* axM() macro
+   if 2 argument are given -> getter
+   else -> setter
+*/
+#define __axor_call_2(var, name, args...) M(var, get_ ## name)
+#define __axor_call_3(var, name, val) M(var, set_ ## name, val)
 
-#include "ObjectC/macro_tools/foreach_macro.h"
-#include "ObjectC/language/foreach_macro.h"
-#include "ObjectC/language/class.h"
-#include "ObjectC/language/type.h"
-#include "ObjectC/std/Object.h"
-#include "ObjectC/language/implement.h"
-#include "ObjectC/language/new_delete.h"
-#include "ObjectC/language/exceptions.h"
-#include "ObjectC/language/rvalref.h"
-#include "ObjectC/language/yield.h"
-#include "ObjectC/std/Exceptions.h"
-#include "ObjectC/std/String.h"
+/* method() macro 
+   Adds 'void *' at the front of an argument list
+*/
+#define __ADD_THISP__(args...) (void *, ##args)

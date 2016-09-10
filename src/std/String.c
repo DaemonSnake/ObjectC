@@ -22,7 +22,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "ObjectC/String.h"
+#include "ObjectC/std/String.h"
 
 new_tor(String, ctor)
 {
