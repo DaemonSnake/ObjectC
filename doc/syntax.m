@@ -103,10 +103,8 @@
 
 @CODE()
 {
-    type @_var(true_type, var_name, ctor, args...), ...;
-    type @_def(true_type, var_name, args...), ...;
-    type var_name = @new(type, ctor_name, args...);
-    type var_name = @newDef(type, args...);
+    type @_var(true_type, var_name, ctor @optional, args...), ...;
+    type var_name = @new(type, ctor_name @optional, args...);
 
     @delete(var_name);
     @M(var_name, method_name, args...);

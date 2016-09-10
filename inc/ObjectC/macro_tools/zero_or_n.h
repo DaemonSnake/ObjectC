@@ -19,38 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include <stdio.h>
 
-__attribute__((no_instrument_function))
-void *alter_func(void *return_arg)
-{
-    printf("%p\n", return_arg);
-    return (void *)0x4242;
-}
+/*Details */
+#define __IMPLEMENT_COUNT__(_1, _2, N, ...) N
+#define __MACRO_ARGUMENT_COUNT_EXTRACT__(arg...) __IMPLEMENT_COUNT__(0, ##arg, N, 0)
 
-__attribute__((no_instrument_function))
-void __cyg_profile_func_exit(void *arg, void *arg2)
-{
-    void *return_arg;
-    (void)arg, (void)arg2;
-
-    asm("mov %%rbx, %0" : "=r"(return_arg));
-    return_arg = alter_func(return_arg);
-    //other code
-    asm("mov %0, %%rbx" :: "r"(return_arg));
-}
-
-void *return_ff()
-{
-    return (void *)0x523;
-}
-
-void *return_f()
-{
-    return return_ff();
-}
-
-int main()
-{
-    return_f();
-}
+/*Usefull macros*/
+#define ONE_OR_N(x, args...) __MACRO_ARGUMENT_COUNT_EXTRACT__(x)
+#define PASTE_TOKENS_2(x, y) x ## y
+#define PASTE_TOKENS(x, y) PASTE_TOKENS_2(x, y)
+#define CALL_ZERO_OR_N(name, args_list, args...) PASTE_TOKENS(name, ONE_OR_N args_list)(args)

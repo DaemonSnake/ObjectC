@@ -24,6 +24,7 @@
 #include <stddef.h>
 
 #include "ObjectC/macro_tools/foreach_macro.h"
+#include "ObjectC/macro_tools/zero_or_n.h"
 #include "ObjectC/language/foreach_macro.h"
 #include "ObjectC/language/class.h"
 #include "ObjectC/language/type.h"

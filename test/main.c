@@ -90,7 +90,7 @@ void		invoke_test(void)
 
 void	string_test()
 {
-    String _def(String, tmp1), _var(String, tmp, ctorS, "Hello");
+    String _var(String, tmp1), _var(String, tmp, ctorS, "Hello");
 
     printf("STRING TEST::\n");
     printf("%s\n", M(tmp, c_str));
@@ -142,7 +142,7 @@ void		dynamic_func(const I tmp)
 
 void	castTest()
 {
-    Debug _def(Debug, tmp);
+    Debug _var(Debug, tmp);
 
     printf("CAST::\n");
     printf("true:%p\n", tmp);
@@ -201,7 +201,7 @@ void	loop_init_test()
 {
     for (int i = 0; i < 5; i++)
     {
-        Object _def(Debug, tmp) as(Object);
+        Object _var(Debug, tmp) as(Object);
     }
 }
 
@@ -211,7 +211,7 @@ void scope_test()
     printf("begin of new scope\n");
     if (42)
     {
-        Debug _def(Debug, tmp);
+        Debug _var(Debug, tmp);
     }
     printf("end of new scope\n");
 }

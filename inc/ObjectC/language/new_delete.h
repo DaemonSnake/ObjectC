@@ -21,40 +21,19 @@
  */
 #pragma once
 
+#include "details/new_delete.h"
+
 void	__delete_func(const void *, ...);
 void	*__malloc(size_t);
 void    __pop_var(const void *);
 
-#define new(type, ctor, args...)                                \
-    ({                                                          \
-        __attribute__((always_inline, no_instrument_function))  \
-            inline type __new__(type const __new_this__)        \
-        {                                                       \
-            type ## __ ## ctor((void *)__new_this__, ##args);   \
-            return __new_this__;                                \
-        }                                                       \
-        __new__(type ## __pre_ctor(__malloc(sizeof(typeof(*(type)0))))); \
-    })
-
-#define newDef(type, args...) new(type, ctor, ##args)
+#define new(type, args...)                                      \
+    CALL_ZERO_OR_N(__new_call__, (args), type, ##args)
 
 #define delete(obj, args...) __delete_func(obj, ##args, 0)
 
-#define _var(type, var, ctor, args...)                                  \
-    var __attribute__((cleanup(__pop_var))) =                           \
-        (__protect_kill_stack((char[1]){0}),                            \
-         type ## __ ## ctor						\
-         (type ## __pre_ctor                                            \
-          (__push_var((struct s_right_value_node[1])                    \
-                      {{                                                \
-                              ((*(void **)&var = (typeof(*(type)0)[1]){{0}})), \
-                                  (void *)type ## __dtor,               \
-                                  __get_current_level(),                \
-                                  (void *)0, (void *)0                  \
-                                  }})), ##args),                        \
-         (type)var)
- 
-#define _def(type, var, args...) _var(type, var, ctor, ##args)
+#define _var(type, var, args...)                                \
+    CALL_ZERO_OR_N(__var_call__, (args), type, var, ##args)
 
 #define Ginit(type, ctor, var, args...)                         \
     __attribute__((no_instrument_function, constructor))	\
