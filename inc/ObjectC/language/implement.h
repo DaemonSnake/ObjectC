@@ -38,7 +38,8 @@ void	__call_class_super_dtor(Object const);
 
 #define new_def_axors(class, name, x...) __launch_new_def_axors(class, name, x)
 
-#define new_axor(class, name, args...) ______VARARG(__new_user_axor_, class, name, ##args)
+#define new_axor(class, name, args...)                                  \
+    CALL_ZERO_OR_N(__new_user_axor_, (args), class, name, ##args)
 
 #define implement(name, extends, args...)                               \
 									\

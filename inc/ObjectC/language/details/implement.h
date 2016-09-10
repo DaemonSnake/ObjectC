@@ -44,9 +44,9 @@
     __new_def_axor_ ## y(class, name)
 
 // get
-#define __new_user_axor_2(class, name, ...)                             \
+#define __new_user_axor_0(class, name)                             \
     typeof(((struct class ## __private *)0)->name) new_method(class, get_ ## name)
 
 // set
-#define __new_user_axor_3(class, name, arg, ...)        \
-    void new_method(class, set_ ## name, arg)
+#define __new_user_axor_N(class, name, args...)         \
+    void new_method(class, set_ ## name, ##args)

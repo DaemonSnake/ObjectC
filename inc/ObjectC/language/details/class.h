@@ -31,7 +31,7 @@
 /* AXORS METHODS DECL */
 #define __axor_get(type, name) type (*get_ ## name)(void *);
 #define __axor_(type, name)
-#define __axor_set(type, name) void (*set_ ## name)(void *, type name);
+#define __axor_set(type, name) void (*set_ ## name)(void *, type name, ...);
 #define __launch_axor(type, name, x, y...)      \
     __axor_ ## x(type, name)                    \
     __axor_ ## y(type, name)
