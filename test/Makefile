@@ -5,10 +5,10 @@
 ## Login   <penava_b@epitech.net>
 ## 
 ## Started on  Sun Dec 13 01:18:43 2015 penava_b
-## Last update Thu Aug  4 23:26:41 2016 penava_b
+## Last update Sat Sep 10 03:19:35 2016 penava_b
 ##
 
-CC =		../Future/toImplement/compiler/gcc-ObjectC
+CC =		../compiler/gcc-ObjectC
 
 RM =		rm -f
 
