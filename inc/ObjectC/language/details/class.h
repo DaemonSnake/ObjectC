@@ -25,8 +25,8 @@
    if 2 argument are given -> getter
    else -> setter
 */
-#define __axor_call_2(var, name, args...) M(var, get_ ## name)
-#define __axor_call_3(var, name, val) M(var, set_ ## name, val)
+#define __axor_call_0(var, name) M(var, get_ ## name)
+#define __axor_call_N(var, name, args...) M(var, set_ ## name, ##args)
 
 /* AXORS METHODS DECL */
 #define __axor_get(type, name) type (*get_ ## name)(void *);

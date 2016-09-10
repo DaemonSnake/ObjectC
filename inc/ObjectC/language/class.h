@@ -27,7 +27,7 @@
     (((typeof(var))__tmp_pointer__((void *)var))                        \
      ->_virtual->name(((typeof(var))__tmp_pointer__((void *)0x42))->this, ##args))
 
-#define axM(this, name, args...) ______VARARG(__axor_call_, this, name, ##args)
+#define axM(this, name, args...) CALL_ZERO_OR_N(__axor_call_, (args), this, name, ##args)
 
 #define class(name, extends, args...)					\
     typedef struct name *name;						\
