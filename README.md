@@ -2,7 +2,8 @@
 This project is a library to use as a superset of the C language.</br>
 <h3>It offers the following :</h3>
 </br>
-  -Exceptions handling (try catch finally)</br>
+  -Exceptions handling (try catch finally)
+  
   ```java
   try {
    ...
@@ -12,7 +13,8 @@ This project is a library to use as a superset of the C language.</br>
    ...
   }
   ```
-  -Classes, interfaces with Java like inheritance</br>
+  -Classes, interfaces with Java like inheritance
+  
   ```c++
   class(Name, BaseClass, Interfaces...)
   {
